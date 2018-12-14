@@ -1,11 +1,19 @@
 ﻿@page
 @{
+    Layout = "Shared/_BaseLayout";
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<partial name="_ArticleList" />
-
-<i class="fas fa-igloo"></i>
-
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">IMAGE GOES HERE</h1>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2>New Articles</h2>
+            <vc:page-list recent-count="3"></vc:page-list>
+        </div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+</div>

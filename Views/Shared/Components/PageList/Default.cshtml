@@ -1,0 +1,8 @@
+﻿@model IEnumerable<EtAndHkIde.Models.Page>
+
+<ul class="list-group">
+    @foreach (var myPage in Model)
+    {
+        <li class="list-group-item"><a asp-page="@myPage.Path">@myPage.Title</a></li>
+    }
+</ul>

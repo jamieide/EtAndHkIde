@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using EtAndHkIde.Models;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -13,6 +14,8 @@ namespace EtAndHkIde
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
             services.AddAntiforgery();
+
+            services.AddSingleton<ISiteRepository, InMemorySiteRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

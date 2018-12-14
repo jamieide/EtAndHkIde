@@ -1,20 +1,9 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="History, photographs, ephemera and more about E. T. & H. K. Ide and the Ide family in Vermont." />
-    <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/lib/twitter-bootstrap/css/bootstrap.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/site.css" asp-append-version="true" />
-    <script src="~/lib/jquery/jquery.slim.min.js" asp-append-version="true"></script>
-    <script src="~/lib/twitter-bootstrap/js/bootstrap.min.js" asp-append-version="true"></script>
-    @RenderSection("Head", false)
-</head>
-<body>
-    <div class="container">
-        @RenderBody()
-    </div>
-</body>
-</html>
+﻿@{
+    Layout = "_BaseLayout";
+}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" asp-page="Index">E. T. & H. K. Ide</a>
+</nav>
+<div class="container">
+    @RenderBody()
+</div>
