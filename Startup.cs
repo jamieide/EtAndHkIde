@@ -28,7 +28,7 @@ namespace EtAndHkIde
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc();
         }
     }
 }
