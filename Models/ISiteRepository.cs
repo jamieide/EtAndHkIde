@@ -7,5 +7,6 @@ namespace EtAndHkIde.Models
     {
         IEnumerable<Page> GetPages();
         IEnumerable<Page> GetRecentPages(int count);
+        ImageCollection GetImageCollection(string name);
     }
 }

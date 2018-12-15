@@ -6,7 +6,7 @@ namespace EtAndHkIde.Models
 {
     public class InMemorySiteRepository : ISiteRepository
     {
-        private readonly IEnumerable<Page> _getPages = new List<Page> {
+        private readonly IEnumerable<Page> _pages = new List<Page> {
             new Page("RandallArmorPhotos", "Randall Armor Photos", new DateTime(2018, 12, 15), Tags.Places.StJohnsbury),
             new Page("LettersFromFlorida/Savannah", "Savannah", new DateTime(2018, 12, 14)),
             new Page("LettersFromFlorida/Woodland1", "Woodland 1", new DateTime(2018, 12, 14)),
@@ -14,14 +14,32 @@ namespace EtAndHkIde.Models
             new Page("LettersFromFlorida/Woodland3", "Woodland 3", new DateTime(2018, 12, 14))
         };
 
+        private readonly IEnumerable<ImageCollection> _imageCollections = new List<ImageCollection>()
+        {
+            new ImageCollection("Randall Armor Photos")
+            {
+                Images = new []
+                {
+                    new Image("RandallArmor/armor_101231-6151.jpg", "Randall Armor 1", new DateTime(2018, 12, 15)),
+                    new Image("RandallArmor/armor_101231-6230.jpg", "Randall Armor 2", new DateTime(2018, 12, 15)),
+                    new Image("RandallArmor/armor_101231-6243.jpg", "Randall Armor 3", new DateTime(2018, 12, 15)),
+                }
+            }
+        };
+
         public IEnumerable<Page> GetPages()
         {
-            return _getPages;
+            return _pages;
         }
 
         public IEnumerable<Page> GetRecentPages(int count)
         {
             return GetPages().OrderByDescending(x => x.PublishDate).Take(count).ToList();
+        }
+
+        public ImageCollection GetImageCollection(string name)
+        {
+            return _imageCollections.SingleOrDefault(x => x.Name == name);
         }
     }
 }
