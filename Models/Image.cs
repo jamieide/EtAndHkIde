@@ -2,9 +2,9 @@
 
 namespace EtAndHkIde.Models
 {
-    public class Page : IAsset
+    public class Image : IAsset
     {
-        public Page(string path, string title, DateTime publishDate, params string[] tags)
+        public Image(string path, string title, DateTime publishDate, params string[] tags)
         {
             Path = path;
             Title = title;

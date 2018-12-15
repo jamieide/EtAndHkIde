@@ -7,6 +7,7 @@ namespace EtAndHkIde.Models
     public class InMemorySiteRepository : ISiteRepository
     {
         private readonly IEnumerable<Page> _getPages = new List<Page> {
+            new Page("RandallArmorPhotos", "Randall Armor Photos", new DateTime(2018, 12, 15), Tags.Places.StJohnsbury),
             new Page("LettersFromFlorida/Savannah", "Savannah", new DateTime(2018, 12, 14)),
             new Page("LettersFromFlorida/Woodland1", "Woodland 1", new DateTime(2018, 12, 14)),
             new Page("LettersFromFlorida/Woodland2", "Woodland 2", new DateTime(2018, 12, 14)),

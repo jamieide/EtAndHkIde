@@ -14,4 +14,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\images\RandallArmor\armor_101231-6151.jpg" />
+    <None Include="wwwroot\images\RandallArmor\armor_101231-6230.jpg" />
+    <None Include="wwwroot\images\RandallArmor\armor_101231-6243.jpg" />
+  </ItemGroup>
+
 </Project>
