@@ -11,7 +11,8 @@ namespace EtAndHkIde.Models
             new Page("LettersFromFlorida/Savannah", "Savannah", new DateTime(2018, 12, 14)),
             new Page("LettersFromFlorida/Woodland1", "Woodland 1", new DateTime(2018, 12, 14)),
             new Page("LettersFromFlorida/Woodland2", "Woodland 2", new DateTime(2018, 12, 14)),
-            new Page("LettersFromFlorida/Woodland3", "Woodland 3", new DateTime(2018, 12, 14))
+            new Page("LettersFromFlorida/Woodland3", "Woodland 3", new DateTime(2018, 12, 14)),
+            new Page("PassumpsicMillPhotos", "Passumpsic Mill Photos", new DateTime(2018, 12, 16))
         };
 
         private readonly IEnumerable<ImageCollection> _imageCollections = new List<ImageCollection>()
@@ -23,6 +24,15 @@ namespace EtAndHkIde.Models
                     new Image("RandallArmor/armor_101231-6151.jpg", "Randall Armor 1", new DateTime(2018, 12, 15)),
                     new Image("RandallArmor/armor_101231-6230.jpg", "Randall Armor 2", new DateTime(2018, 12, 15)),
                     new Image("RandallArmor/armor_101231-6243.jpg", "Randall Armor 3", new DateTime(2018, 12, 15)),
+                }
+            },
+            new ImageCollection("Passumpsic Mill Photos")
+            {
+                Images = new []
+                {
+                    new Image("Passumpsic/First-Passumpsic-Mill-edit.jpg", "First Passumpsic Mill", new DateTime(2018, 12, 16)),
+                    new Image("Passumpsic/Ide's-Mill-postcard-18xx-edit.jpg", "Ide's Mill Postcard", new DateTime(2018, 12, 16)),
+                    new Image("Passumpsic/Second-Passumpsic-Mill-1884-edit.jpg", "Second Passumpsic Mill 1884", new DateTime(2018, 12, 16)),
                 }
             }
         };

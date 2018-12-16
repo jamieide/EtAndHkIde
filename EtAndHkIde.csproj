@@ -20,4 +20,9 @@
     <None Include="wwwroot\images\RandallArmor\armor_101231-6243.jpg" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\Home\" />
+    <Folder Include="wwwroot\images\Passumpsic\" />
+  </ItemGroup>
+
 </Project>
