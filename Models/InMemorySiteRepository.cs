@@ -18,7 +18,8 @@ namespace EtAndHkIde.Models
             new Page("Recollections", "Recollections", new DateTime(2018, 12, 17)),
             new Page("MyGrandfather", "My Grandfather: A Biographical Sketch", new DateTime(2018, 12, 17)),
             new Page("ThisShould404", "This should 404 but it doesn't", new DateTime(2019, 1, 18)),
-            new Page("ETIdeInIndiana", "E. T. Ide in Indiana", new DateTime(2018, 12, 17))
+            new Page("ETIdeInIndiana", "E. T. Ide in Indiana", new DateTime(2018, 12, 17)),
+            new Page("InMemoryOfCompanionHoraceKnightIde", "In Memory Of Companion Horace Knight Ide", new DateTime(2018, 12, 17))
         };
 
         private readonly IEnumerable<ImageCollection> _imageCollections = new List<ImageCollection>()
