@@ -15,7 +15,9 @@ namespace EtAndHkIde.Models
             new Page("PassumpsicMillPhotos", "Passumpsic Mill Photos", new DateTime(2018, 12, 16)),
             new Page("VermontMillingDynasty", "A Vermont Milling Dynasty", new DateTime(2018, 12, 17)),
             new Page("MillersForFiveGenerations", "Millers For Five Generations", new DateTime(2018, 12, 17)),
-            new Page("Recollections", "Recollections", new DateTime(2018, 12, 17))
+            new Page("Recollections", "Recollections", new DateTime(2018, 12, 17)),
+            new Page("MyGrandfather", "My Grandfather: A Biographical Sketch", new DateTime(2018, 12, 17)),
+            new Page("ThisShould404", "This should 404 but it doesn't", new DateTime(2019, 1, 18))
         };
 
         private readonly IEnumerable<ImageCollection> _imageCollections = new List<ImageCollection>()
