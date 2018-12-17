@@ -12,7 +12,8 @@ namespace EtAndHkIde.Models
             new Page("LettersFromFlorida/Woodland1", "Woodland 1", new DateTime(2018, 12, 14)),
             new Page("LettersFromFlorida/Woodland2", "Woodland 2", new DateTime(2018, 12, 14)),
             new Page("LettersFromFlorida/Woodland3", "Woodland 3", new DateTime(2018, 12, 14)),
-            new Page("PassumpsicMillPhotos", "Passumpsic Mill Photos", new DateTime(2018, 12, 16))
+            new Page("PassumpsicMillPhotos", "Passumpsic Mill Photos", new DateTime(2018, 12, 16)),
+            new Page("VermontMillingDynasty", "A Vermont Milling Dynasty", new DateTime(2018, 12, 17))
         };
 
         private readonly IEnumerable<ImageCollection> _imageCollections = new List<ImageCollection>()

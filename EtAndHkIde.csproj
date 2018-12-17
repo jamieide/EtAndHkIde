@@ -15,14 +15,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\images\RandallArmor\armor_101231-6151.jpg" />
-    <None Include="wwwroot\images\RandallArmor\armor_101231-6230.jpg" />
-    <None Include="wwwroot\images\RandallArmor\armor_101231-6243.jpg" />
+    <None Include="wwwroot\content\RandallArmor\armor_101231-6151.jpg" />
+    <None Include="wwwroot\content\RandallArmor\armor_101231-6230.jpg" />
+    <None Include="wwwroot\content\RandallArmor\armor_101231-6243.jpg" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\Home\" />
-    <Folder Include="wwwroot\images\Passumpsic\" />
+    <Folder Include="wwwroot\content\VermontMillingDynasty\" />
+    <Folder Include="wwwroot\content\Passumpsic\" />
   </ItemGroup>
 
 </Project>
