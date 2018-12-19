@@ -24,6 +24,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\content\MillersForFiveGenerations\" />
     <Folder Include="wwwroot\content\ETIdeInIndiana\" />
+    <Folder Include="wwwroot\content\MillersForACentury\" />
     <Folder Include="wwwroot\content\Recollections\" />
     <Folder Include="wwwroot\content\VermontMillingDynasty\" />
     <Folder Include="wwwroot\content\Passumpsic\" />
