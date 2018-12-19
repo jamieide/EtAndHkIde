@@ -3,6 +3,6 @@
 <ul class="list-group">
     @foreach (var myPage in Model)
     {
-        <li class="list-group-item"><a asp-page="@myPage.Path">@myPage.Title</a></li>
+        <li class="list-group-item"><a asp-page="/@myPage.Path">@myPage.Title</a></li>
     }
 </ul>

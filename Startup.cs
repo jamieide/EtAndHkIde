@@ -22,6 +22,7 @@ namespace EtAndHkIde
         {
             if (env.IsDevelopment())
             {
+                app.UseStatusCodePages();
                 app.UseDeveloperExceptionPage();
             }
             else
