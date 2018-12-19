@@ -19,7 +19,8 @@ namespace EtAndHkIde.Models
             new Page("MyGrandfather", "My Grandfather: A Biographical Sketch", new DateTime(2018, 12, 17)),
             new Page("ETIdeInIndiana", "E. T. Ide in Indiana", new DateTime(2018, 12, 17)),
             new Page("InMemoryOfCompanionHoraceKnightIde", "In Memory Of Companion Horace Knight Ide", new DateTime(2018, 12, 17)),
-            new Page("MillersForACentury", "Millers For A Century", new DateTime(2018, 12, 19))
+            new Page("MillersForACentury", "Millers For A Century", new DateTime(2018, 12, 19)),
+            new Page("VermontLifeWinter1977", "Vermont Life Winter 1977", new DateTime(2018, 12, 19))
         };
 
         private readonly IEnumerable<ImageCollection> _imageCollections = new List<ImageCollection>()
