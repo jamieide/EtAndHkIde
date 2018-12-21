@@ -1,4 +1,5 @@
-﻿using EtAndHkIde.Models;
+﻿using EtAndHkIde.Infrastructure;
+using EtAndHkIde.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,10 @@ namespace EtAndHkIde
             services.AddAntiforgery();
 
             services.AddSingleton<ISiteRepository, InMemorySiteRepository>();
+            services.AddSingleton<IContentsRepository, InMemoryContentsRepository>();
+            // scoped for debugging only!
+            //services.AddScoped<IContentsRepository, InMemoryContentsRepository>();
+
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

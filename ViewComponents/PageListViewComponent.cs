@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using EtAndHkIde.Infrastructure;
 using EtAndHkIde.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,23 +8,23 @@ namespace EtAndHkIde.ViewComponents
 {
     public class PageListViewComponent : ViewComponent
     {
-        private readonly ISiteRepository _siteRepository;
+        private readonly IContentsRepository _contentsRepository;
 
-        public PageListViewComponent(ISiteRepository siteRepository)
+        public PageListViewComponent(IContentsRepository contentsRepository)
         {
-            _siteRepository = siteRepository;
+            _contentsRepository = contentsRepository;
         }
 
         public IViewComponentResult Invoke(int recentCount = 0)
         {
-            IEnumerable<Page> pages;
+            IEnumerable<ContentItem> pages;
             if (recentCount > 0)
             {
-                pages = _siteRepository.GetRecentPages(recentCount);
+                pages = _contentsRepository.GetRecentPages(recentCount);
             }
             else
             {
-                pages = _siteRepository.GetPages();
+                pages = _contentsRepository.GetPages();
             }
 
             return View(pages);
