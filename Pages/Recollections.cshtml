@@ -1,13 +1,14 @@
 ﻿@page
+@model RecollectionsModel
 @{
-    ViewData["Title"] = "Recollections";
+    ViewData["Title"] = Model.Title;
 }
 
 <div class="alert alert-info">
     <p>William Adams Ide's Recollections were compiled and published in 1951 as a booklet by his great nephew Donald Powell. They provide a tremendous insight into the history and the people behind the business. <a href="content/Recollections/Recollections.pdf" target="_blank"><i class="fa fa-file-pdf"></i> Download a PDF of the original</a>.</p>
 </div>
 
-<h1>Recollections</h1>
+<h1>@Model.Title</h1>
 <h1 class="small">by William Adams Ide</h1>
 
 <div class="row">
@@ -25,7 +26,6 @@
         <img src="~/content/Recollections/recollections-001.jpg" alt="William A. Ide" />
     </div>
 </div>
-
 
 <h2><a id="preface">Preface: Some Words About These Recollections</a></h2>
 <p>William Adams Ide served as President of E.T. &amp; H.K. Ide, Inc., for thirty-four years, 1923 - 1957. During that time, he served both the Company and the Ide family faithfully and well. He led the business through the Great Depression with acumen, and he left it soundly positioned, physically and financially, for future growth and success. He wrote, "If any word of praise is given to me (for my service), 'He built well,' will be sufficient." It is said.</p>

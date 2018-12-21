@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using Microsoft.Extensions.FileProviders;
 
 namespace EtAndHkIde.Infrastructure
 {
@@ -41,14 +40,15 @@ namespace EtAndHkIde.Infrastructure
                 .ToList();
 
             var contentItems = new List<ContentItem>();
+            const string pattern = "^EtAndHkIde.Pages.(.+)Model$";
+            var regex = new Regex(pattern);
             foreach (var page in pages)
             {
                 // Pages must have parameterless ctor
                 // This will be a problem if I need to DI into a PageModel
                 if (Activator.CreateInstance(page) is IContent contentPage && contentPage.PublishDate.HasValue)
                 {
-                    const string pattern = "^EtAndHkIde.Pages.(.+)Model$";
-                    var match = Regex.Match(page.FullName, pattern);
+                    var match = regex.Match(page.FullName);
                     if (match.Success)
                     {
                         var path = match.Groups[1].Value.Replace(".", "/");

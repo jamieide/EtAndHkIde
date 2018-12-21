@@ -16,7 +16,6 @@ namespace EtAndHkIde
             services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
             services.AddAntiforgery();
 
-            services.AddSingleton<ISiteRepository, InMemorySiteRepository>();
             services.AddSingleton<IContentsRepository, InMemoryContentsRepository>();
             // scoped for debugging only!
             //services.AddScoped<IContentsRepository, InMemoryContentsRepository>();
