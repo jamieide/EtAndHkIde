@@ -1,8 +1,0 @@
-﻿@model IEnumerable<EtAndHkIde.Infrastructure.ContentItem>
-
-<ul class="list-group">
-    @foreach (var contentItem in Model)
-    {
-        <li class="list-group-item"><a asp-page="/@contentItem.Path">@contentItem.Title</a></li>
-    }
-</ul>

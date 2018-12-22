@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.FileProviders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,27 +14,41 @@ namespace EtAndHkIde.Infrastructure
     /// </summary>
     public class InMemoryContentsRepository : IContentsRepository
     {
-        private readonly Lazy<IList<ContentItem>> _contents;
+        private readonly Lazy<IList<ContentItem>> _pages;
 
         public InMemoryContentsRepository(IHostingEnvironment hostingEnvironment)
         {
             //BuildImageList(hostingEnvironment.WebRootFileProvider);
-            _contents = new Lazy<IList<ContentItem>>(BuildContentItems);
+            BuildImageCollections(hostingEnvironment.WebRootFileProvider);
+            _pages = new Lazy<IList<ContentItem>>(LoadPages);
         }
 
-        public IEnumerable<ContentItem> GetPages()
+        public IEnumerable<ContentItem> GetPages(int? count = null)
         {
-            return _contents.Value;
+            var query = _pages.Value
+                .OrderByDescending(x => x.PublishDate);
+            if (count.HasValue && count.Value > 0)
+            {
+                return query.Take(count.Value);
+            }
+            return _pages.Value;
         }
 
-        public IEnumerable<ContentItem> GetRecentPages(int count)
+        public IEnumerable<ContentItem> GetHighlightPages(int? count)
         {
-            return _contents.Value.
-                OrderByDescending(x => x.PublishDate)
-                .Take(count);
+            var highlightPagePaths = new[] {"MillersForACentury", "Recollections", "MillersForFiveGenerations"};
+            var query = _pages.Value
+                .Where(x => highlightPagePaths.Contains(x.Path))
+                .OrderByDescending(x => x.PublishDate);
+            if (count.HasValue && count.Value > 0)
+            {
+                return query.Take(count.Value);
+            }
+
+            return query;
         }
 
-        private static IList<ContentItem> BuildContentItems()
+        private static IList<ContentItem> LoadPages()
         {
             var pages = Assembly.GetExecutingAssembly().GetTypes()
                 .Where(x => typeof(PageModel).IsAssignableFrom(x) && typeof(IContent).IsAssignableFrom(x))
@@ -61,27 +76,78 @@ namespace EtAndHkIde.Infrastructure
             return contentItems;
         }
 
-        //private void BuildImageList(IFileProvider fileProvider)
-        //{
-        //    var imageExtensions = new[] {"jpg"};
-        //    var fileNames = new List<string>();
-        //    void EnumerateImages(IDirectoryContents directoryContents)
-        //    {
-        //        foreach (var directoryContent in directoryContents)
-        //        {
-        //            if (directoryContent.IsDirectory)
-        //            {
-        //                EnumerateImages(fileProvider.GetDirectoryContents(directoryContent.Name));
-        //            }
-        //            else
-        //            {
-        //                var file = fileProvider.GetFileInfo(directoryContent.Name);
-        //                fileNames.Add(file.Name);
-        //            }
-        //        }
-        //    }
+        private void BuildImageList(IFileProvider webRootFileProvider)
+        {
+            var imageExtensions = new[] { "jpg" };
+            var fileNames = new List<string>();
+            var imageCollections = new Dictionary<string, List<string>>();
 
-        //    EnumerateImages(fileProvider.GetDirectoryContents("content"));
-        //}
+            //void EnumerateImages(IDirectoryContents directoryContents)
+            //{
+            //    foreach (var directoryContent in directoryContents)
+            //    {
+            //        if (directoryContent.IsDirectory)
+            //        {
+            //            var fileProvider = new PhysicalFileProvider(directoryContent.PhysicalPath);
+            //            EnumerateImages(fileProvider.GetDirectoryContents(""));
+            //        }
+            //        else
+            //        {
+            //            if (imageExtensions.Contains(directoryContent.))
+            //            {
+
+            //            }
+            //            var fileName = directoryContent.Name;
+            //            fileNames.Add(fileName);
+            //        }
+            //    }
+            //}
+
+            void EnumerateImages2(string parent, IFileProvider fileProvider)
+            {
+                var contents = fileProvider.GetDirectoryContents("");
+                foreach (var content in contents)
+                {
+                    if (content.IsDirectory)
+                    {
+                        var subFileProvider = new PhysicalFileProvider(content.PhysicalPath);
+                        imageCollections.Add(content.Name, new List<string>());
+                        EnumerateImages2(content.Name, subFileProvider);
+                    }
+                    else
+                    {
+                        var fileInfo = fileProvider.GetFileInfo(content.Name);
+                        if (fileInfo.Name.EndsWith(".jpg"))
+                        {
+                            imageCollections[parent].Add(fileInfo.Name);
+                            fileNames.Add(fileInfo.Name);
+                        }
+                    }
+                }
+            }
+
+            
+
+            var contentFileInfo = webRootFileProvider.GetFileInfo("content");
+            EnumerateImages2(null, new PhysicalFileProvider(contentFileInfo.PhysicalPath));
+
+            //EnumerateImages(webRootFileProvider.GetDirectoryContents("content"));
+        }
+
+        private void BuildImageCollections(IFileProvider webRootFileProvider)
+        {
+            // easier to just recurse?
+            var fileCollections = new Dictionary<string, List<string>>();
+            var subDirectories = webRootFileProvider.GetDirectoryContents("content").Where(x => x.IsDirectory);
+            foreach (var subDirectory in subDirectories)
+            {
+                var subFileProvider = new PhysicalFileProvider(subDirectory.PhysicalPath);
+                var files = subFileProvider
+                    .GetDirectoryContents("").Where(x => !x.IsDirectory)
+                    .Select(x => $"content/{subDirectory.Name}/{x.Name}");
+                fileCollections.Add(subDirectory.Name, files.ToList());
+
+            }
+        }
     }
 }

@@ -21,6 +21,9 @@
                 margin: auto;
             }
 
+        .card-title {
+            color: #DA4453;
+        }
     </style>
 }
 <div id="logo">
@@ -39,13 +42,17 @@
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container mt-3">
     <div class="row">
-        <div class="col">
-            <h2>New Articles</h2>
-            <vc:page-list recent-count="20"></vc:page-list>
+        <div class="col-md">
+            <vc:page-list-card title="Recent additions" count="5" highlights="false"></vc:page-list-card>
         </div>
-        <div class="col"></div>
-        <div class="col"></div>
+        <div class="col-md">
+            <vc:page-list-card title="Highlights" count="5" highlights="true"></vc:page-list-card>
+        </div>
+    </div>
+    <div class="row">
+        <h2>Photo highlights</h2>
+
     </div>
 </div>

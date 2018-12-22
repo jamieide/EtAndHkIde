@@ -1,0 +1,19 @@
+﻿@model EtAndHkIde.ViewComponents.PageListCardViewModel
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">@Model.Title</h4>
+        <div class="list-group list-group-flush">
+            @foreach (var contentPage in Model.Pages)
+            {
+                <a asp-page="@contentPage.Path" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">@contentPage.Title</h5>
+                        <small>@contentPage.PublishDate.ToShortDateString()</small>
+                    </div>
+                    <p class="mb-1">@contentPage.Description</p>
+                </a>
+            }
+        </div>
+    </div>
+</div>

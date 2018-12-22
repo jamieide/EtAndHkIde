@@ -4,7 +4,7 @@ namespace EtAndHkIde.Infrastructure
 {
     public interface IContentsRepository
     {
-        IEnumerable<ContentItem> GetPages();
-        IEnumerable<ContentItem> GetRecentPages(int count);
+        IEnumerable<ContentItem> GetPages(int? count);
+        IEnumerable<ContentItem> GetHighlightPages(int? count);
     }
 }
