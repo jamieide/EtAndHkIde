@@ -12,9 +12,11 @@ namespace EtAndHkIde.Pages
             _contentsRepository = contentsRepository;
         }
 
+        public int ImageCount { get; set; }
+
         public void OnGet()
         {
-
+            ImageCount = _contentsRepository.ImageCount();
         }
 
     }

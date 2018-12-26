@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using ExifLib;
 
 namespace EtAndHkIde.Infrastructure
 {
@@ -15,11 +16,12 @@ namespace EtAndHkIde.Infrastructure
     public class InMemoryContentsRepository : IContentsRepository
     {
         private readonly Lazy<IList<ContentItem>> _pages;
+        private int _imageCount;
 
         public InMemoryContentsRepository(IHostingEnvironment hostingEnvironment)
         {
-            //BuildImageList(hostingEnvironment.WebRootFileProvider);
-            BuildImageCollections(hostingEnvironment.WebRootFileProvider);
+            BuildImageList(hostingEnvironment.WebRootFileProvider);
+            //BuildImageCollections(hostingEnvironment.WebRootFileProvider);
             _pages = new Lazy<IList<ContentItem>>(LoadPages);
         }
 
@@ -47,6 +49,8 @@ namespace EtAndHkIde.Infrastructure
 
             return query;
         }
+
+        public int ImageCount() => _imageCount;
 
         private static IList<ContentItem> LoadPages()
         {
@@ -103,6 +107,17 @@ namespace EtAndHkIde.Infrastructure
             //    }
             //}
 
+            string GetImageMetadata(ExifReader exifReader, ExifTags exifTag)
+            {
+                if (exifReader.GetTagValue<string>(exifTag, out var result))
+                {
+                    return result;
+                }
+
+                return "";
+            }
+
+            var imageList = new Dictionary<string, ImageInfo>();
             void EnumerateImages2(string parent, IFileProvider fileProvider)
             {
                 var contents = fileProvider.GetDirectoryContents("");
@@ -111,7 +126,6 @@ namespace EtAndHkIde.Infrastructure
                     if (content.IsDirectory)
                     {
                         var subFileProvider = new PhysicalFileProvider(content.PhysicalPath);
-                        imageCollections.Add(content.Name, new List<string>());
                         EnumerateImages2(content.Name, subFileProvider);
                     }
                     else
@@ -119,14 +133,30 @@ namespace EtAndHkIde.Infrastructure
                         var fileInfo = fileProvider.GetFileInfo(content.Name);
                         if (fileInfo.Name.EndsWith(".jpg"))
                         {
-                            imageCollections[parent].Add(fileInfo.Name);
-                            fileNames.Add(fileInfo.Name);
+                            try
+                            {
+                                using (var exifReader = new ExifReader(fileInfo.PhysicalPath))
+                                {
+                                    imageList.Add(fileInfo.PhysicalPath, new ImageInfo()
+                                    {
+                                        Path = fileInfo.PhysicalPath,
+                                        Title = GetImageMetadata(exifReader, ExifTags.XPTitle),
+                                        Description = GetImageMetadata(exifReader, ExifTags.XPComment),
+                                        Copyright = GetImageMetadata(exifReader, ExifTags.Copyright)
+                                    });
+                                }
+                            }
+                            catch (ExifLibException)
+                            {
+                                // swallow the exception that occurs when there is no EXIF data
+                                imageList.Add(fileInfo.PhysicalPath, new ImageInfo());
+                            }
                         }
                     }
                 }
-            }
 
-            
+                _imageCount = imageList.Count;
+            }           
 
             var contentFileInfo = webRootFileProvider.GetFileInfo("content");
             EnumerateImages2(null, new PhysicalFileProvider(contentFileInfo.PhysicalPath));
@@ -148,6 +178,14 @@ namespace EtAndHkIde.Infrastructure
                 fileCollections.Add(subDirectory.Name, files.ToList());
 
             }
+        }
+
+        private class ImageInfo
+        {
+            public string Path { get; set; }
+            public string Title { get; set; }
+            public string Description { get; set; }
+            public string Copyright { get; set; }
         }
     }
 }

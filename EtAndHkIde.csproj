@@ -11,8 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="exiflib.standard" Version="1.7.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="microsoft.aspnetcore.razor.design" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
   </ItemGroup>
 

@@ -6,5 +6,6 @@ namespace EtAndHkIde.Infrastructure
     {
         IEnumerable<ContentItem> GetPages(int? count);
         IEnumerable<ContentItem> GetHighlightPages(int? count);
+        int ImageCount();
     }
 }

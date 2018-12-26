@@ -7,9 +7,9 @@
 @section Head
     {
     <style>
-        body {
+        /*body {
             background-color: gainsboro;
-        }
+        }*/
 
         div#logo {
             margin-top: 20px;
@@ -43,6 +43,11 @@
     </div>
 </div>
 <div class="container mt-3">
+    <div class="jumbotron">
+        <h1 class="display-4">The Mill</h1>
+        <p class="lead">Seven generations of the Ide family worked at the milling trade since 1813. It served us well and we served the hill farmers of Vermont's Northeast Kingdom well for nearly two hundred years.</p>
+        <p>The mill was central to our lives and livelihood, and the brightly lit sign was a St. Johnsbury landmark. Not far away in New Hampshire's Franconia Notch, the Old Man of the Mountain, first discovered by white settlers in 1805, inevitably fell from its precarious perch in 2003. The Mill and the Old Man were contemporaries and a stark reminder that whether built by man or nature, nothing lasts forever. The purpose of this site is to chronicle the remarkable history of E.T. &amp; H. K. Ide and the Ide family in Vermont with the goal of keeping the memories alive a little while longer.</p>
+    </div>
     <div class="row">
         <div class="col-md">
             <vc:page-list-card title="Recent additions" count="5" highlights="false"></vc:page-list-card>
@@ -52,7 +57,9 @@
         </div>
     </div>
     <div class="row">
-        <h2>Photo highlights</h2>
-
+        <div class="col">
+            <h2>Photo highlights</h2>
+            <h3>Image count: @Model.ImageCount</h3>
+        </div>
     </div>
 </div>
