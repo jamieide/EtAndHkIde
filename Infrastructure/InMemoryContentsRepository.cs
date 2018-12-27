@@ -22,6 +22,8 @@ namespace EtAndHkIde.Infrastructure
             SetContentPages(hostingEnvironment);
         }
 
+        public ContentPageCollection GetContentPages() => _contentPages;
+
         public IEnumerable<ContentPage> GetPublishedContentPages(int? count, ContentPageType type)
         {
             var query = _contentPages
@@ -32,16 +34,6 @@ namespace EtAndHkIde.Infrastructure
             }
 
             return query.OrderByDescending(x => x.PublishDate).ToList();
-        }
-
-        public IEnumerable<ContentItem> GetContentItemsForPage(string path)
-        {
-            if (_contentPages.TryGetValue(path, out var contentPage))
-            {
-                return contentPage.ContentItems;
-            }
-
-            return Enumerable.Empty<ContentItem>();
         }
 
         public IEnumerable<ContentItem> GetImages(string path)
@@ -121,11 +113,13 @@ namespace EtAndHkIde.Infrastructure
                     PublishDate = contentPageModelInstance.PublishDate
                 };
 
-                // get assets
+                // get content items
                 foreach (var directoryContent in contentsDirectory.GetDirectoryContents(contentPage.Path))
                 {
                     // todo could optimize getting the relative path
-                    var relativePath = directoryContent.PhysicalPath.Substring(directoryContent.PhysicalPath.IndexOf("wwwroot", StringComparison.OrdinalIgnoreCase) + 7).Replace("\\", "/");
+                    // nested wwwroot on azure https://github.com/aspnet/AspNetCore/issues/1636
+                    var wwwrootIndex = directoryContent.PhysicalPath.LastIndexOf("wwwroot", StringComparison.OrdinalIgnoreCase);
+                    var relativePath = directoryContent.PhysicalPath.Substring(wwwrootIndex + 7).Replace("\\", "/");
 
                     if (directoryContent.Name.EndsWith(".jpg"))
                     {
