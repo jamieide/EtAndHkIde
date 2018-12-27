@@ -1,6 +1,5 @@
 ﻿using ExifLib;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.FileProviders;
 using System;
 using System.Collections.Generic;
@@ -33,6 +32,23 @@ namespace EtAndHkIde.Infrastructure
             }
 
             return query.OrderByDescending(x => x.PublishDate).ToList();
+        }
+
+        public IEnumerable<ContentItem> GetContentItemsForPage(string path)
+        {
+            var contentPage = _contentPages.SingleOrDefault(x => x.Path == path);
+            if (contentPage == null)
+            {
+                return Enumerable.Empty<ContentItem>();
+            }
+
+            return contentPage.ContentItems;
+        }
+
+        public ContentItem GetImage(string pagePath, string imageFileName)
+        {
+            var contentPage = _contentPages.SingleOrDefault(x => string.Equals(x.Path, pagePath, StringComparison.OrdinalIgnoreCase));
+            return contentPage?.ContentItems.SingleOrDefault(x => string.Equals(x.FileName, imageFileName, StringComparison.OrdinalIgnoreCase));
         }
 
         string GetImageMetadata(ExifReader exifReader, ExifTags exifTag)
@@ -82,7 +98,7 @@ namespace EtAndHkIde.Infrastructure
                 {
 
                     ContentPageType = type,
-                    Path = match.Groups[1].Value.Replace(".", "/"),
+                    Path = "/" + match.Groups[1].Value.Replace(".", "/"),
                     Title = contentPageModelInstance.Title,
                     Description = contentPageModelInstance.Description,
                     PublishDate = contentPageModelInstance.PublishDate
@@ -98,27 +114,26 @@ namespace EtAndHkIde.Infrastructure
 
                     if (directoryContent.Name.EndsWith(".jpg"))
                     {
+                        var contentItem = new ContentItem()
+                        {
+                            FileName = directoryContent.Name,
+                            Path = relativePath
+                        };
                         try
                         {
                             using (var exifReader = new ExifReader(directoryContent.PhysicalPath))
                             {
-                                contentItems.Add(new ContentItem()
-                                {
-                                    Path = relativePath,
-                                    Title = GetImageMetadata(exifReader, ExifTags.XPTitle),
-                                    Description = GetImageMetadata(exifReader, ExifTags.XPComment),
-                                    Copyright = GetImageMetadata(exifReader, ExifTags.Copyright),
-                                });
+                                contentItem.Title = GetImageMetadata(exifReader, ExifTags.XPTitle);
+                                contentItem.Description = GetImageMetadata(exifReader, ExifTags.XPComment);
+                                contentItem.Copyright = GetImageMetadata(exifReader, ExifTags.Copyright);
                             }
                         }
                         catch (ExifLibException)
                         {
                             // swallow the exception that occurs when there is no EXIF data
-                            contentItems.Add(new ContentItem()
-                            {
-                                Path = relativePath
-                            });
+
                         }
+                        contentItems.Add(contentItem);
                     }
                 }
 
