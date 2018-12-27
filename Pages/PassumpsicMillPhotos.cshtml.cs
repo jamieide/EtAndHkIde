@@ -1,13 +1,15 @@
-﻿using System;
-using EtAndHkIde.Infrastructure;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using EtAndHkIde.Infrastructure;
+using System;
 
 namespace EtAndHkIde.Pages
 {
-    public class PassumpsicMillPhotosModel : PageModel, IContentPage
+    public class PassumpsicMillPhotosModel : GalleryPageModel
     {
-        public string Title => "Passumpsic Mill Photos";
-        public string Description => "A collection of photographs of the original and rebuilt mills in Passumpsic";
-        public DateTime? PublishDate => new DateTime(2018, 12, 16);
+        public PassumpsicMillPhotosModel()
+        {
+            Title = "Passumpsic Mill Photos";
+            Description = "A collection of photographs of the original and rebuilt mills in Passumpsic";
+            PublishDate = new DateTime(2018, 12, 16);
+        }
     }
 }

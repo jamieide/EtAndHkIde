@@ -1,13 +1,15 @@
-﻿using System;
-using EtAndHkIde.Infrastructure;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using EtAndHkIde.Infrastructure;
+using System;
 
 namespace EtAndHkIde.Pages
 {
-    public class MillersForFiveGenerationsModel : PageModel, IContentPage
+    public class MillersForFiveGenerationsModel : ArticlePageModel
     {
-        public string Title => "Millers For Five Generations";
-        public string Description => "A booklet published in 1953 on the occasion of the company's 140th anniversary.";
-        public DateTime? PublishDate => new DateTime(2018, 12, 17);
+        public MillersForFiveGenerationsModel()
+        {
+            Title = "Millers For Five Generations";
+            Description = "A booklet published in 1953 on the occasion of the company's 140th anniversary.";
+            PublishDate = new DateTime(2018, 12, 17);
+        }
     }
 }

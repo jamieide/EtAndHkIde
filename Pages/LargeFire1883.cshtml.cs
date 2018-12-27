@@ -1,13 +1,15 @@
-﻿using System;
-using EtAndHkIde.Infrastructure;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using EtAndHkIde.Infrastructure;
+using System;
 
 namespace EtAndHkIde.Pages
 {
-    public class LargeFire1883Model : PageModel, IContentPage
+    public class LargeFire1883Model : ArticlePageModel
     {
-        public string Title => "Large Fire 1883";
-        public string Description => "A newspaper article describing the fire that consumed the original Passumpsic mill in 1883";
-        public DateTime? PublishDate => new DateTime(2018, 12, 21);
+        public LargeFire1883Model()
+        {
+            Title = "Large Fire 1883";
+            Description = "A newspaper article describing the fire that consumed the original Passumpsic mill in 1883";
+            PublishDate = new DateTime(2018, 12, 21);
+        }
     }
 }

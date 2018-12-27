@@ -1,13 +1,15 @@
-﻿using System;
-using EtAndHkIde.Infrastructure;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using EtAndHkIde.Infrastructure;
+using System;
 
 namespace EtAndHkIde.Pages
 {
-    public class RecollectionsModel : PageModel, IContentPage
+    public class RecollectionsModel : ArticlePageModel
     {
-        public string Title => "Recollections";
-        public string Description => "William Adams Ide's Recollections, compiled and published in 1951.";
-        public DateTime? PublishDate => new DateTime(2018, 12, 17);
+        public RecollectionsModel()
+        {
+            Title = "Recollections";
+            Description = "William Adams Ide's Recollections, compiled and published in 1951.";
+            PublishDate = new DateTime(2018, 12, 17);
+        }
     }
 }

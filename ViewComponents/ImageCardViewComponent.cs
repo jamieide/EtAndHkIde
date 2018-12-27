@@ -1,4 +1,5 @@
-﻿using EtAndHkIde.Infrastructure;
+﻿using System;
+using EtAndHkIde.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EtAndHkIde.ViewComponents
@@ -14,8 +15,9 @@ namespace EtAndHkIde.ViewComponents
 
         public IViewComponentResult Invoke(string path)
         {
-            var image = _contentsRepository.GetImage(path);
-            return View(image);
+            throw new NotImplementedException();
+            //var image = _contentsRepository.GetImage(path);
+            //return View(image);
         }
     }
 }

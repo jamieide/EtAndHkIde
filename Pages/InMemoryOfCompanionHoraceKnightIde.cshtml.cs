@@ -1,13 +1,15 @@
-﻿using System;
-using EtAndHkIde.Infrastructure;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using EtAndHkIde.Infrastructure;
+using System;
 
 namespace EtAndHkIde.Pages
 {
-    public class InMemoryOfCompanionHoraceKnightIdeModel : PageModel, IContentPage
+    public class InMemoryOfCompanionHoraceKnightIdeModel : ArticlePageModel
     {
-        public string Title => "In Memory Of Companion Horace Knight Ide";
-        public string Description => "A memorial to H. K. Ide published by the Military Order of the Loyal Legion of the United States in 1897.";
-        public DateTime? PublishDate => new DateTime(2018, 12, 17);
+        public InMemoryOfCompanionHoraceKnightIdeModel()
+        {
+            Title = "In Memory Of Companion Horace Knight Ide";
+            Description = "A memorial to H. K. Ide published by the Military Order of the Loyal Legion of the United States in 1897.";
+            PublishDate = new DateTime(2018, 12, 17);
+        }
     }
 }

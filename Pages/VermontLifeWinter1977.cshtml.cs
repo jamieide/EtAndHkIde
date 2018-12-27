@@ -1,13 +1,12 @@
 ﻿using EtAndHkIde.Infrastructure;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
 
 namespace EtAndHkIde.Pages
 {
-    public class VermontLifeWinter1977Model : PageModel, IContentPage
+    public class VermontLifeWinter1977Model : ArticlePageModel
     {
-        public string Title { get; }
-        public string Description { get; }
-        public DateTime? PublishDate { get; }
+        public VermontLifeWinter1977Model()
+        {
+            Title = "Vermont Life Winter 1977";
+        }
     }
 }

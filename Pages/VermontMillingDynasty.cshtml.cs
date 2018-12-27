@@ -1,13 +1,15 @@
-﻿using System;
-using EtAndHkIde.Infrastructure;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using EtAndHkIde.Infrastructure;
+using System;
 
 namespace EtAndHkIde.Pages
 {
-    public class VermontMillingDynastyModel : PageModel, IContentPage
+    public class VermontMillingDynastyModel : ArticlePageModel
     {
-        public string Title => "A Vermont Milling Dynasty";
-        public string Description => "An article from the September 1958 issue of Eastern Feed Merchant.";
-        public DateTime? PublishDate => new DateTime(2018, 12, 17);
+        public VermontMillingDynastyModel()
+        {
+            Title = "A Vermont Milling Dynasty";
+            Description = "An article from the September 1958 issue of Eastern Feed Merchant.";
+            PublishDate = new DateTime(2018, 12, 17);
+        }
     }
 }
