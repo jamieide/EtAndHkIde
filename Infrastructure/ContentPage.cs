@@ -11,6 +11,6 @@ namespace EtAndHkIde.Infrastructure
         public string Description { get; set; }
         public DateTime? PublishDate { get; set; }
 
-        public IEnumerable<ContentItem> ContentItems { get; set; }
+        public ContentItemCollection ContentItems { get; set; } = new ContentItemCollection();
     }
 }

@@ -1,15 +1,29 @@
 ﻿@using EtAndHkIde.Infrastructure
 @model EtAndHkIde.Infrastructure.ContentItem
 
-<div class="card">
-    <figure>
-        <img class="card-img-top" src="@Model.Path" alt="@Model.Title" />
-        <div class="card-body">
-            <p class="card-text small">@Model.Description</p>
-            @if (Model.Copyright.HasValue())
-            {
-                <p><cite>@Model.Copyright</cite></p>
-            }
+@if (Model == null)
+{
+    <div class="card">
+        <div class="card-img-top text-center text-warning">
+            <i class="fa fa-question fa-5x p-4"></i>
         </div>
-    </figure>
-</div>
+        <div class="card-body">
+            <p class="card-text small">The requested image was not found.</p>
+        </div>
+    </div>
+}
+else
+{
+    <div class="card">
+        <figure>
+            <img class="card-img-top" src="@Model.Path" alt="@Model.Title" />
+            <div class="card-body">
+                <p class="card-text small">@Model.Description</p>
+                @if (Model.Copyright.HasValue())
+                {
+                    <p><cite>@Model.Copyright</cite></p>
+                }
+            </div>
+        </figure>
+    </div>
+}

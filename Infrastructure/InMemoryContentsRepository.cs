@@ -15,7 +15,7 @@ namespace EtAndHkIde.Infrastructure
     /// </summary>
     public class InMemoryContentsRepository : IContentsRepository
     {
-        private IList<ContentPage> _contentPages;
+        private ContentPageCollection _contentPages;
 
         public InMemoryContentsRepository(IHostingEnvironment hostingEnvironment)
         {
@@ -36,19 +36,25 @@ namespace EtAndHkIde.Infrastructure
 
         public IEnumerable<ContentItem> GetContentItemsForPage(string path)
         {
-            var contentPage = _contentPages.SingleOrDefault(x => x.Path == path);
-            if (contentPage == null)
+            if (_contentPages.TryGetValue(path, out var contentPage))
             {
-                return Enumerable.Empty<ContentItem>();
+                return contentPage.ContentItems;
             }
 
-            return contentPage.ContentItems;
+            return Enumerable.Empty<ContentItem>();
         }
 
-        public ContentItem GetImage(string pagePath, string imageFileName)
+        public ContentItem GetImage(string path, string imageFileName)
         {
-            var contentPage = _contentPages.SingleOrDefault(x => string.Equals(x.Path, pagePath, StringComparison.OrdinalIgnoreCase));
-            return contentPage?.ContentItems.SingleOrDefault(x => string.Equals(x.FileName, imageFileName, StringComparison.OrdinalIgnoreCase));
+            if (_contentPages.TryGetValue(path, out var contentPage))
+            {
+                if (contentPage.ContentItems.TryGetValue(imageFileName, out var contentItem))
+                {
+                    return contentItem;
+                }
+            }
+
+            return null;
         }
 
         string GetImageMetadata(ExifReader exifReader, ExifTags exifTag)
@@ -63,12 +69,13 @@ namespace EtAndHkIde.Infrastructure
 
         private void SetContentPages(IHostingEnvironment hostingEnvironment)
         {
+            _contentPages = new ContentPageCollection();
+
             var contentsDirectory = new PhysicalFileProvider(Path.Combine(hostingEnvironment.WebRootPath, "content"));
 
             const string pattern = "^EtAndHkIde.Pages.(.+)Model$";
             var regex = new Regex(pattern);
 
-            var contentPages = new List<ContentPage>();
             var contentPageModels = Assembly.GetExecutingAssembly().GetTypes()
                 .Where(x => typeof(ContentPageModel).IsAssignableFrom(x))
                 .ToList();
@@ -103,10 +110,8 @@ namespace EtAndHkIde.Infrastructure
                     Description = contentPageModelInstance.Description,
                     PublishDate = contentPageModelInstance.PublishDate
                 };
-                contentPages.Add(contentPage);
 
                 // get assets
-                var contentItems = new List<ContentItem>();
                 foreach (var directoryContent in contentsDirectory.GetDirectoryContents(contentPage.Path))
                 {
                     // todo could optimize getting the relative path
@@ -133,14 +138,12 @@ namespace EtAndHkIde.Infrastructure
                             // swallow the exception that occurs when there is no EXIF data
 
                         }
-                        contentItems.Add(contentItem);
+                        contentPage.ContentItems.Add(contentItem);
                     }
                 }
 
-                contentPage.ContentItems = contentItems;
+                _contentPages.Add(contentPage);
             }
-
-            _contentPages = contentPages;
         }
     }
 }
