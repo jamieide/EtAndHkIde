@@ -9,7 +9,10 @@
                 <a asp-page="@contentPage.Path" class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">@contentPage.Title</h5>
-                        <small>@contentPage.PublishDate.ToShortDateString()</small>
+                        @if (contentPage.PublishDate.HasValue)
+                        {
+                            <small>@contentPage.PublishDate.Value.ToShortDateString()</small>
+                        }
                     </div>
                     <p class="mb-1">@contentPage.Description</p>
                 </a>

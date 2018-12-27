@@ -19,9 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\content\RandallArmor\armor_101231-6151.jpg" />
-    <None Include="wwwroot\content\RandallArmor\armor_101231-6230.jpg" />
-    <None Include="wwwroot\content\RandallArmor\armor_101231-6243.jpg" />
+    <None Include="wwwroot\content\RandallArmorPhotos\armor_101231-6151.jpg" />
+    <None Include="wwwroot\content\RandallArmorPhotos\armor_101231-6230.jpg" />
+    <None Include="wwwroot\content\RandallArmorPhotos\armor_101231-6243.jpg" />
   </ItemGroup>
 
   <ItemGroup>

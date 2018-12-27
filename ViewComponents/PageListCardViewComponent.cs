@@ -15,15 +15,17 @@ namespace EtAndHkIde.ViewComponents
 
         public IViewComponentResult Invoke(string title, int? count, bool highlights)
         {
-            IEnumerable<ContentItem> pages;
-            if (highlights)
-            {
-                pages = _contentsRepository.GetHighlightPages(count);
-            }
-            else
-            {
-                pages = _contentsRepository.GetPages(count);
-            }
+            var pages = _contentsRepository.GetPublishedContentPages(count, ContentPageType.Article);
+
+            // todo
+            //if (highlights)
+            //{
+            //    pages = _contentsRepository.GetHighlightPages(count);
+            //}
+            //else
+            //{
+            //    pages = _contentsRepository.GetPages(count);
+            //}
             var vm = new PageListCardViewModel()
             {
                 Title = title,

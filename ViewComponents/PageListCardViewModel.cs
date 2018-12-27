@@ -6,6 +6,6 @@ namespace EtAndHkIde.ViewComponents
     public class PageListCardViewModel
     {
         public string Title { get; set; }
-        public IEnumerable<ContentItem> Pages { get; set; }
+        public IEnumerable<ContentPage> Pages { get; set; }
     }
 }
