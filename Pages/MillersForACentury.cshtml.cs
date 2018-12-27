@@ -4,7 +4,7 @@ using System;
 
 namespace EtAndHkIde.Pages
 {
-    public class MillersForACenturyModel : PageModel, IContent
+    public class MillersForACenturyModel : PageModel, IContentPage
     {
         public string Title => "Millers For A Century";
         public string Description => "A long newspaper article from The Caledonian published on the occasion of the 100th anniversary in 1913";

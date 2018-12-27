@@ -4,17 +4,10 @@ namespace EtAndHkIde.Infrastructure
 {
     public class ContentItem
     {
-        public ContentItem(string path, IContent content)
-        {
-            Path = path;
-            Title = content.Title;
-            Description = content.Description;
-            PublishDate = content.PublishDate.GetValueOrDefault();
-        }
-
-        public string Path { get; }
-        public string Title { get; }
-        public string Description { get; }
-        public DateTime PublishDate { get; }
+        public string Path { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Copyright { get; set; }
+        public DateTime PublishDate { get; set; }
     }
 }

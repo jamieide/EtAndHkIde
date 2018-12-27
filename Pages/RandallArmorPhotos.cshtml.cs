@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EtAndHkIde.Pages
 {
-    public class RandallArmorPhotosModel : PageModel, IContent
+    public class RandallArmorPhotosModel : PageModel, IContentPage
     {
         public string Title => "Randall Armor Photographs";
         public string Description => "A series of photographs of the St. Johnsbury mill taken by Randall Armor on New Year's Eve 2010.";

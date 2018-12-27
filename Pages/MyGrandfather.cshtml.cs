@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EtAndHkIde.Pages
 {
-    public class MyGrandfatherModel : PageModel, IContent
+    public class MyGrandfatherModel : PageModel, IContentPage
     {
         public string Title => "My Grandfather";
         public string Description => "A biographical sketch of Elmore T. Ide.";

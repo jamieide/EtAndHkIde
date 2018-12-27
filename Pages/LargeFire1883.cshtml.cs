@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EtAndHkIde.Pages
 {
-    public class LargeFire1883Model : PageModel, IContent
+    public class LargeFire1883Model : PageModel, IContentPage
     {
         public string Title => "Large Fire 1883";
         public string Description => "A newspaper article describing the fire that consumed the original Passumpsic mill in 1883";

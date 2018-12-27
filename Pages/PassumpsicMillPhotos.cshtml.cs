@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EtAndHkIde.Pages
 {
-    public class PassumpsicMillPhotosModel : PageModel, IContent
+    public class PassumpsicMillPhotosModel : PageModel, IContentPage
     {
         public string Title => "Passumpsic Mill Photos";
         public string Description => "A collection of photographs of the original and rebuilt mills in Passumpsic";

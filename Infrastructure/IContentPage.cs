@@ -2,7 +2,7 @@
 
 namespace EtAndHkIde.Infrastructure
 {
-    public interface IContent
+    public interface IContentPage
     {
         string Title { get; }
         string Description { get; }

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EtAndHkIde.Pages
 {
-    public class RecollectionsModel : PageModel, IContent
+    public class RecollectionsModel : PageModel, IContentPage
     {
         public string Title => "Recollections";
         public string Description => "William Adams Ide's Recollections, compiled and published in 1951.";

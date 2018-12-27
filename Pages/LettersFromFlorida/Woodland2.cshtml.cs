@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EtAndHkIde.Pages.LettersFromFlorida
 {
-    public class Woodland2Model : PageModel, IContent
+    public class Woodland2Model : PageModel, IContentPage
     {
         public string Title => "Woodland 2";
         public string Description => "Correspondence from Horace K. Ide to The Caledonian newspaper in 1876.";

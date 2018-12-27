@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EtAndHkIde.Pages.LettersFromFlorida
 {
-    public class SavannahModel : PageModel, IContent
+    public class SavannahModel : PageModel, IContentPage
     {
         public string Title => "Savannah";
         public string Description => "Correspondence from Horace K. Ide to The Caledonian newspaper in 1876.";

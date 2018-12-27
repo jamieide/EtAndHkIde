@@ -4,7 +4,7 @@ using System;
 
 namespace EtAndHkIde.Pages.LettersFromFlorida
 {
-    public class Woodland1Model : PageModel, IContent
+    public class Woodland1Model : PageModel, IContentPage
     {
         public string Title => "Woodland 1";
         public string Description => "Correspondence from Horace K. Ide to The Caledonian newspaper in 1876.";

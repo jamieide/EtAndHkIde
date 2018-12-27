@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EtAndHkIde.Pages
 {
-    public class MillersForFiveGenerationsModel : PageModel, IContent
+    public class MillersForFiveGenerationsModel : PageModel, IContentPage
     {
         public string Title => "Millers For Five Generations";
         public string Description => "A booklet published in 1953 on the occasion of the company's 140th anniversary.";

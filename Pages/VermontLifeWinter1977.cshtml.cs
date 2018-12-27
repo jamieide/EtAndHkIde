@@ -4,7 +4,7 @@ using System;
 
 namespace EtAndHkIde.Pages
 {
-    public class VermontLifeWinter1977Model : PageModel, IContent
+    public class VermontLifeWinter1977Model : PageModel, IContentPage
     {
         public string Title { get; }
         public string Description { get; }
