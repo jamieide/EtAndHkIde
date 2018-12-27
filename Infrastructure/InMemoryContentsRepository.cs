@@ -44,6 +44,16 @@ namespace EtAndHkIde.Infrastructure
             return Enumerable.Empty<ContentItem>();
         }
 
+        public IEnumerable<ContentItem> GetImages(string path)
+        {
+            if (_contentPages.TryGetValue(path, out var contentPage))
+            {
+                return contentPage.ContentItems;
+            }
+
+            return Enumerable.Empty<ContentItem>();
+        }
+
         public ContentItem GetImage(string path, string imageFileName)
         {
             if (_contentPages.TryGetValue(path, out var contentPage))
@@ -115,7 +125,7 @@ namespace EtAndHkIde.Infrastructure
                 foreach (var directoryContent in contentsDirectory.GetDirectoryContents(contentPage.Path))
                 {
                     // todo could optimize getting the relative path
-                    var relativePath = directoryContent.PhysicalPath.Substring(directoryContent.PhysicalPath.IndexOf("wwwroot\\", StringComparison.OrdinalIgnoreCase) + 8).Replace("\\", "/");
+                    var relativePath = directoryContent.PhysicalPath.Substring(directoryContent.PhysicalPath.IndexOf("wwwroot", StringComparison.OrdinalIgnoreCase) + 7).Replace("\\", "/");
 
                     if (directoryContent.Name.EndsWith(".jpg"))
                     {

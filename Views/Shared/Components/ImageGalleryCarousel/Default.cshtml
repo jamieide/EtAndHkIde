@@ -1,7 +1,7 @@
-﻿@*@model EtAndHkIde.Models.ImageCollection
+﻿@model IEnumerable<EtAndHkIde.Infrastructure.ContentItem>
 @{
-    var carouselId = $"{Model.Name.ToLowerInvariant().Replace(" ", "")}-carousel";
-    var imageCount = Model.Images.Length;
+    var carouselId = Guid.NewGuid();
+    var imageCount = Model.Count();
 }
 
 <div id="@carouselId" class="carousel slide" data-ride="carousel">
@@ -12,10 +12,10 @@
         }
     </ol>
     <div class="carousel-inner">
-        @for (var i = 0; i < imageCount; i++)
+        @foreach (var image in Model)
         {
-            <div class="carousel-item @(i == 0 ? "active" : "")">
-                <img class="d-block img-fluid w-100" src="~/content/@Model.Images[i].Path" />
+            <div class="carousel-item @(image == Model.First() ? "active" : "")">
+                <img class="d-block img-fluid w-100" src="@image.Path" />
             </div>
         }
     </div>
@@ -25,4 +25,4 @@
     <a class="carousel-control-next" href="#@carouselId" data-slide="next">
         <span class="carousel-control-next-icon"></span>
     </a>
-</div>*@
+</div>
