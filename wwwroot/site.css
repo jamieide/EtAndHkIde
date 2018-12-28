@@ -1,9 +1,17 @@
 ﻿body {
     font-family: "Archivo", sans-serif;
+    background-color: #d8d8d8;
 }
 
+div#body {
+    background-color: white;
+    margin-top: 2rem;
+    padding: 3rem;
+}
+
+
 h1 {
-    color: #dA4453;
+    color: #ce2029;
 }
 
 img {
@@ -13,7 +21,7 @@ img {
 
 /* Bootstrap overrides */
 .card {
-    border-color: #da4453;
+    border-color: #ce2029;
 }
 .card-body {
     padding: 0.5rem 1rem;
