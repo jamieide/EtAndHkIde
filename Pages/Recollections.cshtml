@@ -1,18 +1,17 @@
 ﻿@page
-@model RecollectionsModel
 @{
-    ViewData["Title"] = Model.Title;
+    ViewData["Title"] = "Recollections";
 }
 
 <div class="alert alert-info">
     <p>William Adams Ide's Recollections were compiled and published in 1951 as a booklet by his great nephew Donald Powell. They provide a tremendous insight into the history and the people behind the business. <a href="content/Recollections/Recollections.pdf" target="_blank"><i class="fa fa-file-pdf"></i> Download a PDF of the original</a>.</p>
 </div>
 
-<h1>@Model.Title</h1>
+<h1>Recollections</h1>
 <h1 class="small">by William Adams Ide</h1>
 
-<div class="row">
-    <div class="col-8">
+<div class="row mb-3">
+    <div class="col-md-6">
         <ul>
             <li><a href="#preface">Preface: Some Words About These Recollections</a></li>
             <li><a href="#family-tree">Directory: An Abbreviated Family Tree</a></li>
@@ -22,8 +21,8 @@
             <li><a href="#associates">Associates</a></li>
         </ul>
     </div>
-    <div class="col-4">
-        <img src="~/content/Recollections/recollections-001.jpg" alt="William A. Ide" />
+    <div class="col-md-6">
+        <img src="/content/Recollections/recollections-001.jpg" alt="William A. Ide" />
     </div>
 </div>
 
@@ -43,7 +42,11 @@
 <p>Thoughtfully prepared by Donald G. Powell, Secretary, E.T. &amp; H.K. Ide, Inc., and William A. Ide's great nephew.</p>
 
 <h2><a id="family-tree">The Directory: An Abbreviated Family Tree</a></h2>
-<img src="content/Recollections/recollections-002.jpg" alt="An abbreviated family tree" />
+<div class="row mb-3">
+    <div class="col-8 offset-2">
+        <img src="/content/Recollections/recollections-002.jpg" alt="An abbreviated family tree" />
+    </div>
+</div>
 
 <h2><a id="succession">Ide Company Presidential Succession</a></h2>
 <table class="table table-sm">

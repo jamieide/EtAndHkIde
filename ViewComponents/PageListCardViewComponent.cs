@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using EtAndHkIde.Infrastructure;
+﻿using EtAndHkIde.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EtAndHkIde.ViewComponents
@@ -15,17 +14,7 @@ namespace EtAndHkIde.ViewComponents
 
         public IViewComponentResult Invoke(string title, int? count, bool highlights)
         {
-            var pages = _contentsRepository.GetPublishedContentPages(count, ContentPageType.Article);
-
-            // todo
-            //if (highlights)
-            //{
-            //    pages = _contentsRepository.GetHighlightPages(count);
-            //}
-            //else
-            //{
-            //    pages = _contentsRepository.GetPages(count);
-            //}
+            var pages = highlights ? _contentsRepository.GetHighlightPages(count) : _contentsRepository.GetPages(count);
             var vm = new PageListCardViewModel()
             {
                 Title = title,

@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using EtAndHkIde.Pages;
 
 namespace EtAndHkIde.Infrastructure
 {
@@ -24,16 +25,28 @@ namespace EtAndHkIde.Infrastructure
 
         public ContentPageCollection GetContentPages() => _contentPages;
 
-        public IEnumerable<ContentPage> GetPublishedContentPages(int? count, ContentPageType type)
+        public IEnumerable<ContentPage> GetPages(int? count)
         {
             var query = _contentPages
-                .Where(x => x.PublishDate.HasValue && x.ContentPageType == type);
+                .Where(x => x.PublishDate.HasValue);
             if (count.HasValue)
             {
                 query = query.Take(count.Value);
             }
 
             return query.OrderByDescending(x => x.PublishDate).ToList();
+        }
+
+        public IEnumerable<ContentPage> GetHighlightPages(int? count)
+        {
+            var highlights = new[] {"/MillersForACentury", "/MillersForFiveGenerations", "/Recollections"};
+            var query = _contentPages.Where(x => highlights.Contains(x.Path));
+            if (count.HasValue)
+            {
+                query = query.Take(count.Value);
+            }
+
+            return query;
         }
 
         public IEnumerable<ContentItem> GetImages(string path)
