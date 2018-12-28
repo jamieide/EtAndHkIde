@@ -18,9 +18,9 @@ namespace EtAndHkIde
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddSingleton<IContentsRepository, InMemoryContentsRepository>();
-            // scoped for debugging only!
-            //services.AddScoped<IContentsRepository, InMemoryContentsRepository>();
+            // todo switch for prod or provide method to refresh
+            services.AddScoped<IContentsRepository, InMemoryContentsRepository>();
+            //services.AddSingleton<IContentsRepository, InMemoryContentsRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

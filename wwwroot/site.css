@@ -3,10 +3,22 @@
 }
 
 h1 {
-    color: #DA4453;
+    color: #dA4453;
 }
 
 img {
     max-width: 100%;
     height: auto;
+}
+
+/* Bootstrap overrides */
+.card {
+    border-color: #da4453;
+}
+.card-body {
+    padding: 0.5rem 1rem;
+}
+
+.card-body p:last-of-type {
+    margin-bottom: 0;
 }

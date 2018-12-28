@@ -15,15 +15,13 @@
 else
 {
     <div class="card">
-        <figure>
-            <img class="card-img-top" src="@Model.Path" alt="@Model.Title" />
-            <div class="card-body">
-                <p class="card-text small">@Model.Description</p>
-                @if (Model.Copyright.HasValue())
-                {
-                    <p><cite>@Model.Copyright</cite></p>
-                }
-            </div>
-        </figure>
+        <img class="card-img-top" src="@Model.Path" alt="@Model.Title" />
+        <div class="card-body">
+            <p class="card-text small">@Model.Description</p>
+            @if (Model.Copyright.HasValue())
+            {
+                <p class="small text-right"><cite>@Model.Copyright</cite></p>
+            }
+        </div>
     </div>
 }
