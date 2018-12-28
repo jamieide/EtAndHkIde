@@ -31,7 +31,6 @@
     <Folder Include="wwwroot\content\VermontLifeWinter1977\" />
     <Folder Include="wwwroot\content\Recollections\" />
     <Folder Include="wwwroot\content\VermontMillingDynasty\" />
-    <Folder Include="wwwroot\content\PassumpsicMillPhotos\" />
   </ItemGroup>
 
 </Project>
