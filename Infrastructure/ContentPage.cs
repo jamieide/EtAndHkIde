@@ -10,6 +10,7 @@ namespace EtAndHkIde.Infrastructure
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime? PublishDate { get; set; }
+        public bool IsHighlight { get; set; }
 
         public ContentItemCollection ContentItems { get; set; } = new ContentItemCollection();
     }

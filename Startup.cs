@@ -1,4 +1,5 @@
-﻿using EtAndHkIde.Infrastructure;
+﻿using System.IO;
+using EtAndHkIde.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -18,9 +19,13 @@ namespace EtAndHkIde
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            // todo switch for prod or provide method to refresh
-            services.AddScoped<IContentsRepository, InMemoryContentsRepository>();
-            //services.AddSingleton<IContentsRepository, InMemoryContentsRepository>();
+            services.AddSingleton<IContentsRepository, InMemoryContentsRepository>();
+            services.AddSingleton<ContentPageCollectionFactory>(x =>
+            {
+                var hostingEnvironment = x.GetRequiredService<IHostingEnvironment>();
+                var contentsPath = Path.Combine(hostingEnvironment.WebRootPath, "content");
+                return new ContentPageCollectionFactory(contentsPath);
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
