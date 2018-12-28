@@ -9,7 +9,5 @@ namespace EtAndHkIde.Infrastructure
         public string Title { get; set; }
         public string Description { get; set; }
         public string Copyright { get; set; }
-        [Obsolete]
-        public DateTime PublishDate { get; set; }
     }
 }

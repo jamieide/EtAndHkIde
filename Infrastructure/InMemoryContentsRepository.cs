@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace EtAndHkIde.Infrastructure
@@ -9,11 +10,12 @@ namespace EtAndHkIde.Infrastructure
     public class InMemoryContentsRepository : IContentsRepository
     {
         private readonly ContentPageCollection _contentPages;
+        private readonly ContentItemCollection _contentItems;
 
         public InMemoryContentsRepository(ContentPageCollectionFactory factory)
         {
-            _contentPages = factory.Build();
-            //SetContentPages(hostingEnvironment);
+            _contentPages = factory.BuildContentPageCollection();
+            _contentItems = factory.BuildContentItemCollection();
         }
 
         public IEnumerable<ContentPage> GetPages(int? count)
@@ -41,22 +43,14 @@ namespace EtAndHkIde.Infrastructure
 
         public IEnumerable<ContentItem> GetImages(string path)
         {
-            if (_contentPages.TryGetValue(path, out var contentPage))
-            {
-                return contentPage.ContentItems;
-            }
-
-            return Enumerable.Empty<ContentItem>();
+            return _contentItems.Where(x => x.Path.StartsWith($"/content{path}", StringComparison.OrdinalIgnoreCase));
         }
 
-        public ContentItem GetImage(string path, string imageFileName)
+        public ContentItem GetImage(string path, string name)
         {
-            if (_contentPages.TryGetValue(path, out var contentPage))
+            if (_contentItems.TryGetValue($"/content{path}/{name}", out var contentItem))
             {
-                if (contentPage.ContentItems.TryGetValue(imageFileName, out var contentItem))
-                {
-                    return contentItem;
-                }
+                return contentItem;
             }
 
             return null;

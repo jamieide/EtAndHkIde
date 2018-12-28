@@ -10,7 +10,7 @@ namespace EtAndHkIde.Infrastructure
 
         protected override string GetKeyForItem(ContentItem item)
         {
-            return item.FileName;
+            return item.Path;
         }
     }
 }

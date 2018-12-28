@@ -8,6 +8,6 @@ namespace EtAndHkIde.Infrastructure
         IEnumerable<ContentPage> GetHighlightPages(int? count);
 
         IEnumerable<ContentItem> GetImages(string path);
-        ContentItem GetImage(string path, string imageFileName);
+        ContentItem GetImage(string path, string name);
     }
 }

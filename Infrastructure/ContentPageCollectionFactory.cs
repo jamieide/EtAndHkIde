@@ -16,19 +16,8 @@ namespace EtAndHkIde.Infrastructure
             _contentsPath = contentsPath;
         }
 
-        string GetImageMetadata(ExifReader exifReader, ExifTags exifTag)
+        public ContentPageCollection BuildContentPageCollection()
         {
-            if (exifReader.GetTagValue<string>(exifTag, out var result))
-            {
-                return result;
-            }
-
-            return "";
-        }
-
-        public ContentPageCollection Build()
-        {
-            var contentsDirectory = new PhysicalFileProvider(_contentsPath);
             var contentPages = new ContentPageCollection();
 
             const string pagesNamespace = "EtAndHkIde.Pages";
@@ -37,27 +26,66 @@ namespace EtAndHkIde.Infrastructure
             // Get all pages that extend ContentPageModel
             var contentPageModels = Assembly.GetExecutingAssembly().GetTypes()
                 .Where(x => typeof(ContentPageModel).IsAssignableFrom(x) && x.Namespace.StartsWith(pagesNamespace))
-                .Select(x => (type: x, path: regex.Replace(x.FullName, "$1").Replace('.', '/')))
-                .ToList();
+                .Select(x => new
+                {
+                    Type = x,
+                    Path = regex.Replace(x.FullName, "$1").Replace('.', '/')
+                }).ToList();
 
             foreach (var contentPageModel in contentPageModels)
             {
-                var contentPage = BuildContentPage(contentPageModel);
-
-                // get content items
-                foreach (var directoryContent in contentsDirectory.GetDirectoryContents(contentPage.Path))
+                // get page
+                var contentPageModelInstance = (ContentPageModel)Activator.CreateInstance(contentPageModel.Type);
+                var type = ContentPageType.Undefined;
+                if (contentPageModelInstance is ArticlePageModel)
                 {
-                    // todo could optimize getting the relative path
-                    // nested wwwroot on azure https://github.com/aspnet/AspNetCore/issues/1636
-                    var wwwrootIndex = directoryContent.PhysicalPath.LastIndexOf("wwwroot", StringComparison.OrdinalIgnoreCase);
-                    var relativePath = directoryContent.PhysicalPath.Substring(wwwrootIndex + 7).Replace("\\", "/");
+                    type = ContentPageType.Article;
+                }
+                else if (contentPageModelInstance is GalleryPageModel)
+                {
+                    type = ContentPageType.Gallery;
+                }
 
+                var contentPage = new ContentPage()
+                {
+                    ContentPageType = type,
+                    Path = contentPageModel.Path,
+                    Title = contentPageModelInstance.Title,
+                    Description = contentPageModelInstance.Description,
+                    PublishDate = contentPageModelInstance.PublishDate,
+                    IsHighlight = contentPageModelInstance.IsHighlight
+                };
+                contentPages.Add(contentPage);
+            }
+
+            return contentPages;
+        }
+
+        public ContentItemCollection BuildContentItemCollection()
+        {
+            var contentItems = new ContentItemCollection();
+            var pathStartIndex = _contentsPath.LastIndexOf("wwwroot", StringComparison.OrdinalIgnoreCase) + 7;
+            PopulateContentItemCollection(_contentsPath, contentItems, pathStartIndex);
+            return contentItems;
+        }
+
+        private static void PopulateContentItemCollection(string physicalPath, ContentItemCollection contentItemCollection, int pathStartIndex)
+        {
+            var fileProvider = new PhysicalFileProvider(physicalPath);
+            foreach (var directoryContent in fileProvider.GetDirectoryContents(""))
+            {
+                if (directoryContent.IsDirectory)
+                {
+                    PopulateContentItemCollection(directoryContent.PhysicalPath, contentItemCollection, pathStartIndex);
+                }
+                else
+                {
                     if (directoryContent.Name.EndsWith(".jpg"))
                     {
                         var contentItem = new ContentItem()
                         {
                             FileName = directoryContent.Name,
-                            Path = relativePath
+                            Path = directoryContent.PhysicalPath.Substring(pathStartIndex).Replace('\\', '/')
                         };
                         try
                         {
@@ -71,45 +99,18 @@ namespace EtAndHkIde.Infrastructure
                         catch (ExifLibException)
                         {
                             // swallow the exception that occurs when there is no EXIF data
-
                         }
-                        contentPage.ContentItems.Add(contentItem);
+                        contentItemCollection.Add(contentItem);
                     }
                 }
-
-                contentPages.Add(contentPage);
             }
-
-            return contentPages;
         }
-
-        private static ContentPage BuildContentPage((Type type, string path) page)
-        {
-            //var regex = new Regex("^EtAndHkIde.Pages(..+)Model$");
-            //var match = regex.Match(contentPageModel.FullName);
-
-            // get page
-            var contentPageModelInstance = (ContentPageModel)Activator.CreateInstance(page.type);
-            var type = ContentPageType.Undefined;
-            if (contentPageModelInstance is ArticlePageModel)
+            private static string GetImageMetadata(ExifReader exifReader, ExifTags exifTag)
             {
-                type = ContentPageType.Article;
-            }
-            else if (contentPageModelInstance is GalleryPageModel)
-            {
-                type = ContentPageType.Gallery;
+                return exifReader.GetTagValue<string>(exifTag, out var result) ? result : "";
             }
 
-            var contentPage = new ContentPage()
-            {
-                ContentPageType = type,
-                Path = page.path, //.Groups[1].Value.Replace(".", "/"),
-                Title = contentPageModelInstance.Title,
-                Description = contentPageModelInstance.Description,
-                PublishDate = contentPageModelInstance.PublishDate,
-                IsHighlight = contentPageModelInstance.IsHighlight
-            };
-            return contentPage;
-        }
+
+
     }
 }
