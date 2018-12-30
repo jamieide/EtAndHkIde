@@ -1,5 +1,4 @@
 ﻿body {
-    font-family: "Archivo", sans-serif;
     background-color: #d8d8d8;
 }
 
@@ -8,7 +7,6 @@ div#body {
     margin-top: 2rem;
     padding: 3rem;
 }
-
 
 h1 {
     color: #ce2029;
@@ -19,10 +17,6 @@ img {
     height: auto;
 }
 
-/* Bootstrap overrides */
-.card {
-    border-color: #ce2029;
-}
 .card-body {
     padding: 0.5rem 1rem;
 }
