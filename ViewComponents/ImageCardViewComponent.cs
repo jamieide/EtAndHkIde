@@ -8,18 +8,18 @@ namespace EtAndHkIde.ViewComponents
     public class ImageCardViewComponent : ViewComponent
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IContentsRepository _contentsRepository;
+        private readonly IMetadataRepository _metadataRepository;
 
-        public ImageCardViewComponent(IHttpContextAccessor httpContextAccessor, IContentsRepository contentsRepository)
+        public ImageCardViewComponent(IHttpContextAccessor httpContextAccessor, IMetadataRepository metadataRepository)
         {
             _httpContextAccessor = httpContextAccessor;
-            _contentsRepository = contentsRepository;
+            _metadataRepository = metadataRepository;
         }
 
         public IViewComponentResult Invoke(string name)
         {
             var path = _httpContextAccessor.HttpContext.Request.Path;
-            var image = _contentsRepository.GetImage(path, name);
+            var image = _metadataRepository.GetImage(path, name);
             return View(image);
         }
     }

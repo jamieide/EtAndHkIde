@@ -19,12 +19,12 @@ namespace EtAndHkIde
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddSingleton<IContentsRepository, InMemoryContentsRepository>();
-            services.AddSingleton<ContentPageCollectionFactory>(x =>
+            services.AddSingleton<IMetadataRepository, InMemoryMetadataRepository>();
+            services.AddSingleton<MetadataFactory>(x =>
             {
                 var hostingEnvironment = x.GetRequiredService<IHostingEnvironment>();
                 var contentsPath = Path.Combine(hostingEnvironment.WebRootPath, "content");
-                return new ContentPageCollectionFactory(contentsPath);
+                return new MetadataFactory(contentsPath);
             });
         }
 

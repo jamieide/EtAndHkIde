@@ -3,7 +3,7 @@ using System;
 
 namespace EtAndHkIde.Pages
 {
-    public class MyGrandfatherModel : ArticlePageModel
+    public class MyGrandfatherModel : SitePageModel
     {
         public MyGrandfatherModel()
         {

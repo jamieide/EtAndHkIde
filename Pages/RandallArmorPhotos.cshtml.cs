@@ -3,7 +3,7 @@ using System;
 
 namespace EtAndHkIde.Pages
 {
-    public class RandallArmorPhotosModel : GalleryPageModel
+    public class RandallArmorPhotosModel : SitePageModel
     {
         public RandallArmorPhotosModel()
         {

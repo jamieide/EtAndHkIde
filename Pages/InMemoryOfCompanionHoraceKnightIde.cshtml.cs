@@ -3,7 +3,7 @@ using System;
 
 namespace EtAndHkIde.Pages
 {
-    public class InMemoryOfCompanionHoraceKnightIdeModel : ArticlePageModel
+    public class InMemoryOfCompanionHoraceKnightIdeModel : SitePageModel
     {
         public InMemoryOfCompanionHoraceKnightIdeModel()
         {

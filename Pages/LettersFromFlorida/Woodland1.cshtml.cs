@@ -3,7 +3,7 @@ using System;
 
 namespace EtAndHkIde.Pages.LettersFromFlorida
 {
-    public class Woodland1Model : ArticlePageModel
+    public class Woodland1Model : SitePageModel
     {
         public Woodland1Model()
         {

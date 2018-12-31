@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EtAndHkIde.Infrastructure
 {
-    public abstract class ContentPageModel : PageModel
+    public class SitePageModel : PageModel
     {
         public string Title { get; set; }
         public string Description { get; set; }

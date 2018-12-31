@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EtAndHkIde.Pages.LettersFromFlorida
 {
-    public class SavannahModel : ArticlePageModel
+    public class SavannahModel : SitePageModel
     {
         public SavannahModel()
         {

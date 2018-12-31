@@ -3,7 +3,7 @@ using System;
 
 namespace EtAndHkIde.Pages
 {
-    public class LargeFire1883Model : ArticlePageModel
+    public class LargeFire1883Model : SitePageModel
     {
         public LargeFire1883Model()
         {

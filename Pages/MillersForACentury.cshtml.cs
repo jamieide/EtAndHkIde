@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace EtAndHkIde.Pages
 {
-    public class MillersForACenturyModel : ArticlePageModel
+    public class MillersForACenturyModel : SitePageModel
     {
         public MillersForACenturyModel()
         {

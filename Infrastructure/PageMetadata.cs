@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace EtAndHkIde.Infrastructure
 {
-    public class ContentPage
+    public class PageMetadata
     {
-        public ContentPageType ContentPageType { get; set; }
         public string Path { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }

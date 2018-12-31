@@ -3,7 +3,7 @@ using System;
 
 namespace EtAndHkIde.Pages
 {
-    public class RecollectionsModel : ArticlePageModel
+    public class RecollectionsModel : SitePageModel
     {
         public RecollectionsModel()
         {

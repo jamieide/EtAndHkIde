@@ -2,7 +2,7 @@
 
 namespace EtAndHkIde.Pages
 {
-    public class VermontLifeWinter1977Model : ArticlePageModel
+    public class VermontLifeWinter1977Model : SitePageModel
     {
         public VermontLifeWinter1977Model()
         {

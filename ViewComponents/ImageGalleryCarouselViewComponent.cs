@@ -8,18 +8,18 @@ namespace EtAndHkIde.ViewComponents
     public class ImageGalleryCarouselViewComponent : ViewComponent
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IContentsRepository _contentsRepository;
+        private readonly IMetadataRepository _metadataRepository;
 
-        public ImageGalleryCarouselViewComponent(IHttpContextAccessor httpContextAccessor, IContentsRepository contentsRepository)
+        public ImageGalleryCarouselViewComponent(IHttpContextAccessor httpContextAccessor, IMetadataRepository metadataRepository)
         {
             _httpContextAccessor = httpContextAccessor;
-            _contentsRepository = contentsRepository;
+            _metadataRepository = metadataRepository;
         }
 
         public IViewComponentResult Invoke()
         {
             var path = _httpContextAccessor.HttpContext.Request.Path;
-            var images = _contentsRepository.GetImages(path);
+            var images = _metadataRepository.GetImages(path);
             return View(images);
         }
     }

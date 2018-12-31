@@ -3,7 +3,7 @@ using System;
 
 namespace EtAndHkIde.Pages
 {
-    public class PassumpsicMillPhotosModel : GalleryPageModel
+    public class PassumpsicMillPhotosModel : SitePageModel
     {
         public PassumpsicMillPhotosModel()
         {

@@ -2,7 +2,7 @@
 
 namespace EtAndHkIde.Infrastructure
 {
-    public class ContentItem
+    public class FileMetadata
     {
         public string FileName { get; set; }
         public string Path { get; set; }

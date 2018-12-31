@@ -5,16 +5,16 @@ namespace EtAndHkIde.ViewComponents
 {
     public class PageListCardViewComponent : ViewComponent
     {
-        private readonly IContentsRepository _contentsRepository;
+        private readonly IMetadataRepository _metadataRepository;
 
-        public PageListCardViewComponent(IContentsRepository contentsRepository)
+        public PageListCardViewComponent(IMetadataRepository metadataRepository)
         {
-            _contentsRepository = contentsRepository;
+            _metadataRepository = metadataRepository;
         }
 
         public IViewComponentResult Invoke(string title, int? count, bool highlights)
         {
-            var pages = highlights ? _contentsRepository.GetHighlightPages(count) : _contentsRepository.GetPages(count);
+            var pages = highlights ? _metadataRepository.GetHighlightPageMetadatas(count) : _metadataRepository.GetPageMetadatas(count);
             var vm = new PageListCardViewModel()
             {
                 Title = title,
