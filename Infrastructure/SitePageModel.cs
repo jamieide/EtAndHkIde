@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace EtAndHkIde.Infrastructure
 {
-    public class SitePageModel : PageModel
+    public abstract class SitePageModel : PageModel
     {
         public string Title { get; set; } = "";
         public string Description { get; set; } = "";

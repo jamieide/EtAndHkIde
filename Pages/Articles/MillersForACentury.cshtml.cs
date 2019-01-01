@@ -11,7 +11,7 @@ namespace EtAndHkIde.Pages.Articles
             Description = "A long newspaper article from The Caledonian published on the occasion of the 100th anniversary in 1913";
             PublishDate = new DateTime(2018, 12, 19);
             IsHighlight = true;
-            Tags = new[] { Tag.TimothyIde, Tag.JacobIde, Tag.ElmoreIde, Tag.Passumpsic, Tag.StJohnsbury };
+            Tags = new[] { Tag.TimothyIde, Tag.JacobIde, Tag.ElmoreIde, Tag.HoraceIde, Tag.WilliamIde, Tag.Passumpsic, Tag.StJohnsbury };
         }
     }
 }

@@ -23,10 +23,6 @@ namespace EtAndHkIde.Infrastructure
         {
             var pageMetadataCollection = new PageMetadataCollection();
 
-            // todo remove hard dependency on namespace
-            const string pagesNamespace = "EtAndHkIde.Pages";
-            var regex = new Regex("^EtAndHkIde.Pages(..+)Model$", RegexOptions.Compiled);
-
             string GetSitePagePath(string fullName)
             {
                 var pagesIndex = fullName.LastIndexOf("Pages", StringComparison.OrdinalIgnoreCase) + 5;
@@ -36,7 +32,7 @@ namespace EtAndHkIde.Infrastructure
 
             // Get all pages that extend ContentPageModel
             var sitePageModels = Assembly.GetExecutingAssembly().GetTypes()
-                .Where(x => typeof(SitePageModel).IsAssignableFrom(x) && x.Namespace.StartsWith(pagesNamespace))
+                .Where(x => typeof(SitePageModel).IsAssignableFrom(x) && !x.IsAbstract)
                 .Select(x => new
                 {
                     Type = x,

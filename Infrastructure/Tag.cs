@@ -27,6 +27,7 @@ namespace EtAndHkIde.Infrastructure
         public static Tag WilliamIde = new Tag("William Ide", "William Ide", TagType.Person);
         public static Tag RichardIde = new Tag("Richard Ide", "Richard Ide", TagType.Person);
         public static Tag TimIde = new Tag("Tim Ide", "Tim Ide", TagType.Person);
+        public static Tag GeorgeGray = new Tag("George Gray", "George Gray", TagType.Person);
 
         // Places
         public static Tag StJohnsbury = new Tag("St. Johnsbury", "St. Johnsbury, Vermont", TagType.Place);

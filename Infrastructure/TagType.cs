@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity;
 
 namespace EtAndHkIde.Infrastructure
 {
@@ -11,12 +10,13 @@ namespace EtAndHkIde.Infrastructure
             Icon = icon;
         }
 
-        public string Name { get;  }
-        public string Icon { get;  }
+        public string Name { get; }
+        public string Icon { get; }
 
-        public static TagType Person = new TagType("Person", "fas fa-user-friends");
+        public static TagType Person = new TagType("Person", "fas fa-user");
         public static TagType Place = new TagType("Place", "fas fa-map-pin");
+        public static TagType Era = new TagType("Era", "fas fa-calendar-week");
 
-        public static IEnumerable<TagType> AllTagTypes { get; } = new[] {Person, Place};
+        public static IEnumerable<TagType> AllTagTypes { get; } = new[] { Person, Place, Era };
     }
 }
