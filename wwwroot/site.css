@@ -30,10 +30,14 @@ i.tag-type {
     color: #ce2029;
 }
 
+.fas.fa-star {
+    color: #ffd700;
+}
+
 .card-body {
     padding: 0.5rem 1rem;
 }
 
-.card-body p:last-of-type {
-    margin-bottom: 0;
-}
+    .card-body p:last-of-type {
+        margin-bottom: 0;
+    }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Hosting;
 
@@ -109,12 +110,23 @@ namespace EtAndHkIde.Infrastructure
             return exifReader.GetTagValue<string>(exifTag, out var result) ? result : "";
         }
 
+        public IEnumerable<TagType> GetTagTypes()
+        {
+            return typeof(TagType)
+                .GetFields(BindingFlags.Public | BindingFlags.Static)
+                .Where(x => x.FieldType == typeof(TagType))
+                .Select(x => (TagType)x.GetValue(null))
+                .OrderBy(x => x.Name)
+                .ToList();
+        }
+
         public IEnumerable<Tag> GetTags()
         {
             return typeof(Tag)
                 .GetFields(BindingFlags.Public | BindingFlags.Static)
                 .Where(x => x.FieldType == typeof(Tag))
                 .Select(x => (Tag)x.GetValue(null))
+                .OrderBy(x => x.TagType.Name).ThenBy(x => x.Name)
                 .ToList();
         }
     }

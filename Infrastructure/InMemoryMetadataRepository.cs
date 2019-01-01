@@ -11,12 +11,14 @@ namespace EtAndHkIde.Infrastructure
     {
         private readonly PageMetadataCollection _pageMetadataCollection;
         private readonly FileMetadataCollection _fileMetadataCollection;
+        private readonly IEnumerable<TagType> _tagTypes;
         private readonly IEnumerable<Tag> _tags;
 
         public InMemoryMetadataRepository(MetadataFactory factory)
         {
             _pageMetadataCollection = factory.BuildPageMetadataCollection();
             _fileMetadataCollection = factory.BuildFileMetadataCollection();
+            _tagTypes = factory.GetTagTypes();
             _tags = factory.GetTags();
         }
 
@@ -41,6 +43,19 @@ namespace EtAndHkIde.Infrastructure
             }
 
             return query;
+        }
+
+        public IDictionary<Tag, IEnumerable<PageMetadata>> GetPagesByTag()
+        {
+            return (from p in _pageMetadataCollection
+                    from t in p.Tags
+                    select new
+                    {
+                        Page = p,
+                        Tag = t
+                    }).GroupBy(k => k.Tag)
+                .ToDictionary(k => k.Key, v => v.Select(x => x.Page));
+
         }
 
         public IEnumerable<PageMetadata> GetPageMetadatasForTag(Tag tag)
@@ -72,6 +87,8 @@ namespace EtAndHkIde.Infrastructure
 
             return null;
         }
+
+        public IEnumerable<TagType> GetTagTypes() => _tagTypes;
 
         public IEnumerable<Tag> GetTags() => _tags;
     }

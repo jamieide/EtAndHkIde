@@ -1,60 +1,51 @@
 ﻿@page
-@using EtAndHkIde.Infrastructure
+@using EtAndHkIde.ViewComponents
 @model EtAndHkIde.Pages.TagsModel
 @{
+    Layout = "Shared/_BaseLayout";
     ViewData["Title"] = "Tags";
 }
 
-<h1>Tags</h1>
+<div class="container">
+    <h1>Tags</h1>
 
-@foreach (var tagType in TagType.AllTagTypes)
-{
-    var tagGroupId = tagType.Name.ToLowerInvariant();
-    if (!Model.TagsByType.ContainsKey(tagType))
-    {
-        continue;
-    }
-    <section>
-        <h2><i class="@tagType.Icon mr-1"></i>@tagType.Name</h2>
-        <div class="row">
-            <div class="col-4">
-                <div class="list-group" id="@tagGroupId-tag">
-                    @foreach (var tag in Model.TagsByType[tagType])
-                    {
-                        <a class="list-group-item d-flex justify-content-between align-items-center" data-toggle="list" href="#list-@tag.NormalizedName">
-                            @tag.Name
-                            <span class="badge badge-primary badge-pill">@(Model.PagesByTag.ContainsKey(tag) ? Model.PagesByTag[tag].Count() : 0)</span>
-                        </a>
+    <div class="row">
+        <div class="col-4">
+            <div class="list-group">
+                @foreach (var tag in Model.Tags)
+                {
+                    var pageCount = 0;
+                    if (Model.PagesByTag.TryGetValue(tag, out var pageMetadatas))
+                     {
+                         pageCount = pageMetadatas.Count();
+                     }
 
-                    }
-                </div>
+                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-toggle="list" href="#@tag.NormalizedName">
+                        <span>
+                            <i class="@tag.TagType.Icon tag-type mr-1"></i>@tag.Name
+                        </span>
+                        <span class="badge badge-primary badge-pill">@pageCount</span>
+                    </a>
+                }
             </div>
-            <div class="col-8">
-                <div class="tab-content" id="@tagGroupId-content">
-                    @foreach (var tag in Model.TagsByType[tagType])
-                    {
-                        if (Model.PagesByTag.ContainsKey(tag))
+        </div>
+        <div class="col-8">
+            <div class="tab-content">
+                @foreach (var tag in Model.Tags)
+                {
+                    <div class="tab-pane fade" id="@tag.NormalizedName">
+                        @if (Model.PagesByTag.TryGetValue(tag, out var pageMetadatas))
                         {
-                            <div class="tab-pane fade" id="list-@tag.NormalizedName">
-                                @foreach (var sitePage in Model.PagesByTag[tag])
-                                {
-                                    <div>
-                                        <p>
-                                            <a asp-page="@sitePage.Path">@sitePage.Title</a><br /><span class="small">@sitePage.Description</span>
-                                        </p>
-                                    </div>
-                                }
-                            </div>
+                            var model = new PageListCardViewModel { Pages = pageMetadatas };
+                            <partial name="_PageListCard" model="model" />
                         }
                         else
                         {
-                            <div class="tab-pane fade">
-                                <p class="alert alert-info">There are no pages with this tag.</p>
-                            </div>
+                            <p>There are no pages with this tag.</p>
                         }
-                    }
-                </div>
+                    </div>
+                }
             </div>
         </div>
-    </section>
-}
+    </div>
+</div>
