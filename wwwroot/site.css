@@ -26,6 +26,13 @@ img {
     height: auto;
 }
 
+blockquote, .blockquote {
+    margin-left: 3rem;
+    margin-right: 3rem;
+    font-size: 1rem;
+    font-style: italic;
+}
+
 i.tag-type {
     color: #ce2029;
 }

@@ -14,9 +14,11 @@
         <ul class="list-group list-group-flush">
             @foreach (var tag in Model.Tags)
             {
-            <li class="list-group-item">
-                <i class="@tag.TagType.Icon mr-1 tag-type"></i>@tag.Name
-            </li>
+                <li class="list-group-item">
+                    <a asp-page="/Tags" asp-route-tag="@tag.NormalizedName">
+                        <i class="@tag.TagType.Icon mr-1 tag-type"></i>@tag.Name
+                    </a>
+                </li>
             }
         </ul>
     </div>

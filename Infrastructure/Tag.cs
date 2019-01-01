@@ -7,7 +7,7 @@ namespace EtAndHkIde.Infrastructure
         private Tag(string name, string description, TagType tagType, [CallerMemberName] string caller = null)
         {
             Name = name;
-            NormalizedName = caller;
+            NormalizedName = caller?.ToLowerInvariant();
             Description = description;
             TagType = tagType;
         }

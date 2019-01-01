@@ -1,9 +1,10 @@
 ﻿@page
 @model EtAndHkIde.Pages.SiteIndexModel
 @{
-    ViewData["Title"] = "SiteIndex";
+    Layout = "Shared/_NoSidebarLayout";
+    ViewData["Title"] = "Site Index";
 }
 
-<h1>SiteIndex</h1>
+<h1>@ViewData["Title"]</h1>
 
 <vc:page-list-card title="All pages" count="null" highlights="false"></vc:page-list-card>

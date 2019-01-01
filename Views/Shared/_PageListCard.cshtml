@@ -12,7 +12,13 @@
             {
                 <a asp-page="@pageMetadata.Path" class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">@pageMetadata.Title</h5>
+                        <h5 class="mb-1">
+                            @if (pageMetadata.IsHighlight)
+                            {
+                                <i class="fas fa-star mr-1" title="Highlight page"></i>
+                            }
+                            @pageMetadata.Title
+                        </h5>
                         @if (pageMetadata.PublishDate.HasValue)
                         {
                             <small>@pageMetadata.PublishDate.Value.ToShortDateString()</small>
