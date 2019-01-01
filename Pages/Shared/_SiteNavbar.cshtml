@@ -1,18 +1,57 @@
-﻿<nav class="navbar navbar-expand-lg navbar-light bg-light">
+﻿<nav class="navbar navbar-expand-sm navbar-light bg-light">
     <a class="navbar-brand" asp-page="/Index">E. T. & H. K. Ide</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbar-links">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav ml-auto mr-5">
             <li class="nav-item">
-                <a class="nav-link" asp-page="/SiteIndex">Index</a>
+                <a class="nav-link" asp-page="/Index" title="Home">
+                    <span class="fa-stack fa-2x">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fas fa-home fa-inverse fa-stack-1x"></i>
+                    </span>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" asp-page="/Tags">Tags</a>
+                <a class="nav-link" asp-page="/Recent" title="Recently added">
+                    <span class="fa-stack fa-2x">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fas fa-calendar-day fa-inverse fa-stack-1x"></i>
+                    </span>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" asp-page="/About">About</a>
+                <a class="nav-link" asp-page="/Highlights" title="Highlights">
+                    <span class="fa-stack fa-2x">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fas fa-star fa-inverse fa-stack-1x"></i>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-page="/SiteIndex" title="Site Index List">
+                    <span class="fa-stack fa-2x">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fas fa-list fa-inverse fa-stack-1x"></i>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-page="/Tags" title="Site Index by Tag">
+                    <span class="fa-stack fa-2x">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fas fa-tag fa-inverse fa-stack-1x"></i>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-page="/About" title="About the Site">
+                    <span class="fa-stack fa-2x">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fas fa-question fa-inverse fa-stack-1x"></i>
+                    </span>
+                </a>
             </li>
         </ul>
     </div>
