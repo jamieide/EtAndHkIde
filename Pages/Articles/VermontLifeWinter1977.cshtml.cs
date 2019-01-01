@@ -1,6 +1,6 @@
 ﻿using EtAndHkIde.Infrastructure;
 
-namespace EtAndHkIde.Pages
+namespace EtAndHkIde.Pages.Articles
 {
     public class VermontLifeWinter1977Model : SitePageModel
     {

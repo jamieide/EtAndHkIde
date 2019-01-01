@@ -1,7 +1,7 @@
-﻿using EtAndHkIde.Infrastructure;
-using System;
+﻿using System;
+using EtAndHkIde.Infrastructure;
 
-namespace EtAndHkIde.Pages
+namespace EtAndHkIde.Pages.Articles
 {
     public class InMemoryOfCompanionHoraceKnightIdeModel : SitePageModel
     {

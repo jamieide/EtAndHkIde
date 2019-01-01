@@ -2,9 +2,11 @@
 using Microsoft.Extensions.FileProviders;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Hosting;
 
 namespace EtAndHkIde.Infrastructure
 {
@@ -12,9 +14,9 @@ namespace EtAndHkIde.Infrastructure
     {
         private readonly string _contentsPath;
 
-        public MetadataFactory(string contentsPath)
+        public MetadataFactory(IHostingEnvironment hostingEnvironment)
         {
-            _contentsPath = contentsPath;
+            _contentsPath = Path.Combine(hostingEnvironment.WebRootPath, "articles");
         }
 
         public PageMetadataCollection BuildPageMetadataCollection()
@@ -25,13 +27,20 @@ namespace EtAndHkIde.Infrastructure
             const string pagesNamespace = "EtAndHkIde.Pages";
             var regex = new Regex("^EtAndHkIde.Pages(..+)Model$", RegexOptions.Compiled);
 
+            string GetSitePagePath(string fullName)
+            {
+                var pagesIndex = fullName.LastIndexOf("Pages", StringComparison.OrdinalIgnoreCase) + 5;
+                var modelIndex = fullName.LastIndexOf("Model", StringComparison.OrdinalIgnoreCase);
+                return fullName.Remove(modelIndex).Substring(pagesIndex).Replace('.', '/');
+            }
+
             // Get all pages that extend ContentPageModel
             var sitePageModels = Assembly.GetExecutingAssembly().GetTypes()
                 .Where(x => typeof(SitePageModel).IsAssignableFrom(x) && x.Namespace.StartsWith(pagesNamespace))
                 .Select(x => new
                 {
                     Type = x,
-                    Path = regex.Replace(x.FullName, "$1").Replace('.', '/')
+                    Path = GetSitePagePath(x.FullName)
                 }).ToList();
 
             foreach (var sitePageModel in sitePageModels)

@@ -1,8 +1,7 @@
 using System;
 using EtAndHkIde.Infrastructure;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace EtAndHkIde.Pages.LettersFromFlorida
+namespace EtAndHkIde.Pages.Articles.LettersFromFlorida
 {
     public class SavannahModel : SitePageModel
     {

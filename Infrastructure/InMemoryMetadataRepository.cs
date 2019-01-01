@@ -60,12 +60,12 @@ namespace EtAndHkIde.Infrastructure
 
         public IEnumerable<FileMetadata> GetImages(string path)
         {
-            return _fileMetadataCollection.Where(x => x.Path.StartsWith($"/content{path}", StringComparison.OrdinalIgnoreCase));
+            return _fileMetadataCollection.Where(x => x.Path.StartsWith(path, StringComparison.OrdinalIgnoreCase));
         }
 
         public FileMetadata GetImage(string path, string name)
         {
-            if (_fileMetadataCollection.TryGetValue($"/content{path}/{name}", out var contentItem))
+            if (_fileMetadataCollection.TryGetValue($"{path}/{name}", out var contentItem))
             {
                 return contentItem;
             }

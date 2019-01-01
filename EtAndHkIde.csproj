@@ -19,18 +19,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\content\RandallArmorPhotos\armor_101231-6151.jpg" />
-    <None Include="wwwroot\content\RandallArmorPhotos\armor_101231-6230.jpg" />
-    <None Include="wwwroot\content\RandallArmorPhotos\armor_101231-6243.jpg" />
+    <None Include="wwwroot\articles\RandallArmorPhotos\armor_101231-6151.jpg" />
+    <None Include="wwwroot\articles\RandallArmorPhotos\armor_101231-6230.jpg" />
+    <None Include="wwwroot\articles\RandallArmorPhotos\armor_101231-6243.jpg" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\content\MillersForFiveGenerations\" />
-    <Folder Include="wwwroot\content\ETIdeInIndiana\" />
-    <Folder Include="wwwroot\content\MillersForACentury\" />
-    <Folder Include="wwwroot\content\VermontLifeWinter1977\" />
-    <Folder Include="wwwroot\content\Recollections\" />
-    <Folder Include="wwwroot\content\VermontMillingDynasty\" />
+    <Folder Include="wwwroot\articles\VermontLifeWinter1977\" />
   </ItemGroup>
 
 </Project>

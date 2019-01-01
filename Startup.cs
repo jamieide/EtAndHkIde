@@ -1,5 +1,4 @@
-﻿using System.IO;
-using EtAndHkIde.Infrastructure;
+﻿using EtAndHkIde.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -20,12 +19,7 @@ namespace EtAndHkIde
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddSingleton<IMetadataRepository, InMemoryMetadataRepository>();
-            services.AddSingleton<MetadataFactory>(x =>
-            {
-                var hostingEnvironment = x.GetRequiredService<IHostingEnvironment>();
-                var contentsPath = Path.Combine(hostingEnvironment.WebRootPath, "content");
-                return new MetadataFactory(contentsPath);
-            });
+            services.AddSingleton<MetadataFactory>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
