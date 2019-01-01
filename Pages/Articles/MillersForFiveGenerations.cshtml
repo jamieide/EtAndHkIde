@@ -3,9 +3,10 @@
     ViewData["Title"] = "Millers For Five Generations";
 }
 
-<div class="alert alert-info">
-    <p>This booklet was published in 1953 on the occasion of the company's 140th anniversary. Download a <a href="/articles/VermontMillingDynasty/A-Vermont-Milling-Dynasty.pdf" target="_blank"><i class="fa fa-file-pdf"></i> PDF version of the original.</a></p>
-</div>
+@section Sidebar
+    {
+    <partial name="_PdfLink" model=@("/articles/MillersForFiveGenerations/Millers-for-Five-Generations.pdf") />
+}
 
 <div class="row mb-3">
     <div class="col-12">
