@@ -1,6 +1,7 @@
 ﻿using ExifLib;
 using Microsoft.Extensions.FileProviders;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -20,6 +21,7 @@ namespace EtAndHkIde.Infrastructure
         {
             var pageMetadataCollection = new PageMetadataCollection();
 
+            // todo remove hard dependency on namespace
             const string pagesNamespace = "EtAndHkIde.Pages";
             var regex = new Regex("^EtAndHkIde.Pages(..+)Model$", RegexOptions.Compiled);
 
@@ -42,7 +44,8 @@ namespace EtAndHkIde.Infrastructure
                     Title = sitePageModelInstance.Title,
                     Description = sitePageModelInstance.Description,
                     PublishDate = sitePageModelInstance.PublishDate,
-                    IsHighlight = sitePageModelInstance.IsHighlight
+                    IsHighlight = sitePageModelInstance.IsHighlight,
+                    Tags = sitePageModelInstance.Tags
                 };
                 pageMetadataCollection.Add(pageMetadata);
             }
@@ -99,6 +102,15 @@ namespace EtAndHkIde.Infrastructure
         private static string GetImageMetadata(ExifReader exifReader, ExifTags exifTag)
         {
             return exifReader.GetTagValue<string>(exifTag, out var result) ? result : "";
+        }
+
+        public IEnumerable<Tag> GetTags()
+        {
+            return typeof(Tag)
+                .GetFields(BindingFlags.Public | BindingFlags.Static)
+                .Where(x => x.FieldType == typeof(Tag))
+                .Select(x => (Tag)x.GetValue(null))
+                .ToList();
         }
     }
 }

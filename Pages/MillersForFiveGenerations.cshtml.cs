@@ -11,6 +11,16 @@ namespace EtAndHkIde.Pages
             Description = "A booklet published in 1953 on the occasion of the company's 140th anniversary.";
             PublishDate = new DateTime(2018, 12, 17);
             IsHighlight = true;
+            Tags = new[]
+            {
+                Tag.TimothyIde,
+                Tag.JacobIde,
+                Tag.ElmoreIde,
+                Tag.WilliamIde,
+                Tag.RichardIde,
+                Tag.Passumpsic,
+                Tag.StJohnsbury
+            };
         }
     }
 }

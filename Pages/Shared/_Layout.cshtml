@@ -15,7 +15,14 @@
     </div>
 </nav>
 <div class="container">
-    <div id="body">
-        @RenderBody()
+    <div class="row">
+        <div class="col-3">
+            <vc:page-tags></vc:page-tags>
+        </div>
+        <div class="col-9">
+            <div id="body">
+                @RenderBody()
+            </div>
+        </div>
     </div>
 </div>

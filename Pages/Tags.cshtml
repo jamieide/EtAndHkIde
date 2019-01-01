@@ -1,0 +1,60 @@
+﻿@page
+@using EtAndHkIde.Infrastructure
+@model EtAndHkIde.Pages.TagsModel
+@{
+    ViewData["Title"] = "Tags";
+}
+
+<h1>Tags</h1>
+
+@foreach (var tagType in TagType.AllTagTypes)
+{
+    var tagGroupId = tagType.Name.ToLowerInvariant();
+    if (!Model.TagsByType.ContainsKey(tagType))
+    {
+        continue;
+    }
+    <section>
+        <h2><i class="@tagType.Icon mr-1"></i>@tagType.Name</h2>
+        <div class="row">
+            <div class="col-4">
+                <div class="list-group" id="@tagGroupId-tag">
+                    @foreach (var tag in Model.TagsByType[tagType])
+                    {
+                        <a class="list-group-item d-flex justify-content-between align-items-center" data-toggle="list" href="#list-@tag.NormalizedName">
+                            @tag.Name
+                            <span class="badge badge-primary badge-pill">@(Model.PagesByTag.ContainsKey(tag) ? Model.PagesByTag[tag].Count() : 0)</span>
+                        </a>
+
+                    }
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="tab-content" id="@tagGroupId-content">
+                    @foreach (var tag in Model.TagsByType[tagType])
+                    {
+                        if (Model.PagesByTag.ContainsKey(tag))
+                        {
+                            <div class="tab-pane fade" id="list-@tag.NormalizedName">
+                                @foreach (var sitePage in Model.PagesByTag[tag])
+                                {
+                                    <div>
+                                        <p>
+                                            <a asp-page="@sitePage.Path">@sitePage.Title</a><br /><span class="small">@sitePage.Description</span>
+                                        </p>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="tab-pane fade">
+                                <p class="alert alert-info">There are no pages with this tag.</p>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+}

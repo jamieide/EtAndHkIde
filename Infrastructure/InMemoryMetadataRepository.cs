@@ -11,11 +11,13 @@ namespace EtAndHkIde.Infrastructure
     {
         private readonly PageMetadataCollection _pageMetadataCollection;
         private readonly FileMetadataCollection _fileMetadataCollection;
+        private readonly IEnumerable<Tag> _tags;
 
         public InMemoryMetadataRepository(MetadataFactory factory)
         {
             _pageMetadataCollection = factory.BuildPageMetadataCollection();
             _fileMetadataCollection = factory.BuildFileMetadataCollection();
+            _tags = factory.GetTags();
         }
 
         public IEnumerable<PageMetadata> GetPageMetadatas(int? count)
@@ -41,6 +43,21 @@ namespace EtAndHkIde.Infrastructure
             return query;
         }
 
+        public IEnumerable<PageMetadata> GetPageMetadatasForTag(Tag tag)
+        {
+            return _pageMetadataCollection.Where(x => x.Tags.Contains(tag));
+        }
+
+        public PageMetadata GetPageMetadata(string path)
+        {
+            if (_pageMetadataCollection.TryGetValue(path, out var pageMetadata))
+            {
+                return pageMetadata;
+            }
+
+            return null;
+        }
+
         public IEnumerable<FileMetadata> GetImages(string path)
         {
             return _fileMetadataCollection.Where(x => x.Path.StartsWith($"/content{path}", StringComparison.OrdinalIgnoreCase));
@@ -55,5 +72,7 @@ namespace EtAndHkIde.Infrastructure
 
             return null;
         }
+
+        public IEnumerable<Tag> GetTags() => _tags;
     }
 }
