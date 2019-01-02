@@ -1,0 +1,21 @@
+﻿@model SidebarCitationViewModel
+
+<p>
+    <a href="@Model.Url" target="_blank">
+        @switch (Model.Type)
+        {
+            case SidebarCitationViewModel.CitationType.Book:
+                @: <i class="fas fa-book mr-2"></i>
+                break;
+            case SidebarCitationViewModel.CitationType.Magazine:
+                @: <i class="fas fa-book-open mr-2"></i>
+                break;
+            case SidebarCitationViewModel.CitationType.Newspaper:
+                @: <i class="far fa-newspaper mr-2"></i>
+                break;
+            default:
+                break;
+        }
+        @Html.Raw(Model.LinkText)
+    </a>
+</p>

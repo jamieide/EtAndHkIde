@@ -1,6 +1,15 @@
 ﻿@page
+@using EtAndHkIde.Pages.Shared
 @{
     ViewData["Title"] = "E.T. Ide In Indiana";
+}
+
+@section Sidebar
+{
+    <partial name="_SidebarCitation" model="@(new SidebarCitationViewModel(SidebarCitationViewModel.CitationType.Magazine, "https://books.google.com/books?id=eso0AQAAMAAJ&amp;pg=PA110#v=onepage&amp;q&amp;f=false", "American Miller<br/>February 1914"))"/>
+    <p>
+        <a href="https://books.google.com/books?id=eso0AQAAMAAJ&amp;pg=PA110#v=onepage&amp;q&amp;f=false" target="_blank"><i class="fas fa-book-open mr-2"></i>American Miller<br/>February 1914</a>
+    </p>
 }
 
 <h1>E.T. Ide In Indiana</h1>
