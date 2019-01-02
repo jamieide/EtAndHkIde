@@ -6,7 +6,9 @@
 <nav id="site-navbar" class="navbar navbar-expand-sm navbar-light bg-light">
     @if (!isHomePage)
     {
-        <a class="navbar-brand" asp-page="/Index">E. T. & H. K. Ide</a>
+        <a asp-page="/Index" class="navbar-brand ml-5">
+            <img src="/images/logo-sm.jpg" alt="E.T. & H.K. Ide"/>
+        </a>
     }
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links">
         <span class="navbar-toggler-icon"></span>
