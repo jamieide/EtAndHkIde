@@ -1,56 +1,73 @@
-﻿<nav class="navbar navbar-expand-sm navbar-light bg-light">
-    <a class="navbar-brand" asp-page="/Index">E. T. & H. K. Ide</a>
+﻿@model bool
+@{
+    var isHomePage = Model;
+    var ulClass = isHomePage ? "justify-content-center d-flex flex-fill" : "ml-auto mr-5";
+}
+<nav id="site-navbar" class="navbar navbar-expand-sm navbar-light bg-light">
+    @if (!isHomePage)
+    {
+        <a class="navbar-brand" asp-page="/Index">E. T. & H. K. Ide</a>
+    }
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbar-links">
-        <ul class="navbar-nav ml-auto mr-5">
+        <ul class="navbar-nav @ulClass">
+            @if (!isHomePage)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Index" title="Home">
+                        <span class="fa-stack fa-2x">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fas fa-home fa-inverse fa-stack-1x"></i>
+                        </span>
+                        <span class="caption">Home</span>
+                    </a>
+                </li>
+            }
             <li class="nav-item">
-                <a class="nav-link" asp-page="/Index" title="Home">
-                    <span class="fa-stack fa-2x">
-                        <i class="fas fa-circle fa-stack-2x"></i>
-                        <i class="fas fa-home fa-inverse fa-stack-1x"></i>
-                    </span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-page="/Recent" title="Recently added">
+                <a class="nav-link" asp-page="/Recent" title="Recently added content">
                     <span class="fa-stack fa-2x">
                         <i class="fas fa-circle fa-stack-2x"></i>
                         <i class="fas fa-calendar-day fa-inverse fa-stack-1x"></i>
                     </span>
+                    <span class="caption">Recent</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" asp-page="/Highlights" title="Highlights">
+                <a class="nav-link" asp-page="/Highlights" title="Highlights and overview">
                     <span class="fa-stack fa-2x">
                         <i class="fas fa-circle fa-stack-2x"></i>
                         <i class="fas fa-star fa-inverse fa-stack-1x"></i>
                     </span>
+                    <span class="caption">Highlights</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" asp-page="/SiteIndex" title="Site Index List">
+                <a class="nav-link" asp-page="/SiteIndex" title="Index of all site pages">
                     <span class="fa-stack fa-2x">
                         <i class="fas fa-circle fa-stack-2x"></i>
                         <i class="fas fa-list fa-inverse fa-stack-1x"></i>
                     </span>
+                    <span class="caption">Index</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" asp-page="/Tags" title="Site Index by Tag">
+                <a class="nav-link" asp-page="/Tags" title="Index of pages by tags">
                     <span class="fa-stack fa-2x">
                         <i class="fas fa-circle fa-stack-2x"></i>
                         <i class="fas fa-tag fa-inverse fa-stack-1x"></i>
                     </span>
+                    <span class="caption">Tags</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" asp-page="/About" title="About the Site">
+                <a class="nav-link" asp-page="/About" title="About the site and contact info">
                     <span class="fa-stack fa-2x">
                         <i class="fas fa-circle fa-stack-2x"></i>
                         <i class="fas fa-question fa-inverse fa-stack-1x"></i>
                     </span>
+                    <span class="caption">About</span>
                 </a>
             </li>
         </ul>

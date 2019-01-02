@@ -52,58 +52,10 @@
         <p class="lead">Seven generations of the Ide family have worked at the milling trade since 1813. It served us well and we served the hill farmers of Vermont's Northeast Kingdom well for nearly two hundred years.</p>
         <p>The mill was central to our lives and livelihood, and the brightly lit sign was a St. Johnsbury landmark that we never failed to gaze at in passing. The Mill and the Old Man of the Mountain, in nearby Franconia Notch, were contemporaries and a stark reminder that whether built by man or nature, nothing lasts forever. The purpose of this site is to chronicle the remarkable history of E.T. &amp; H. K. Ide and the Ide family in Vermont with the goal of keeping the memories alive.</p>
     </div>
-
-    <nav class="navbar navbar-expand-sm navbar-light bg-light mb-2">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbar-links">
-            <ul class="navbar-nav justify-content-center d-flex flex-fill">
-                <li class="nav-item">
-                    <a class="nav-link" asp-page="/Recent" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Recently added content">
-                        <span class="fa-stack fa-2x">
-                            <i class="fas fa-circle fa-stack-2x"></i>
-                            <i class="fas fa-calendar-day fa-inverse fa-stack-1x"></i>
-                        </span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-page="/Highlights" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Highlights and overview">
-                        <span class="fa-stack fa-2x">
-                            <i class="fas fa-circle fa-stack-2x"></i>
-                            <i class="fas fa-star fa-inverse fa-stack-1x"></i>
-                        </span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-page="/SiteIndex" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Index of all site pages">
-                        <span class="fa-stack fa-2x">
-                            <i class="fas fa-circle fa-stack-2x"></i>
-                            <i class="fas fa-list fa-inverse fa-stack-1x"></i>
-                        </span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-page="/Tags" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Index of pages by tags">
-                        <span class="fa-stack fa-2x">
-                            <i class="fas fa-circle fa-stack-2x"></i>
-                            <i class="fas fa-tag fa-inverse fa-stack-1x"></i>
-                        </span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-page="/About" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="About the site and contact info">
-                        <span class="fa-stack fa-2x">
-                            <i class="fas fa-circle fa-stack-2x"></i>
-                            <i class="fas fa-question fa-inverse fa-stack-1x"></i>
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <div class="row">
+    
+    <partial name="_SiteNavbar" model="true" />
+    
+    <div class="row mt-2">
         <div class="col-md">
             <vc:page-list-card title="Recent additions" count="5" highlights="false"></vc:page-list-card>
         </div>

@@ -48,3 +48,14 @@ i.tag-type {
     .card-body p:last-of-type {
         margin-bottom: 0;
     }
+
+
+@media(min-width: 576px) {
+/* align navbar link captions centered under icons for sm devices and up, must be same breakpoint as navbar-expand-**/
+    #site-navbar #navbar-links ul {
+        text-align: center;
+    }
+    #site-navbar #navbar-links span.caption {
+        display: block;
+    }
+}
