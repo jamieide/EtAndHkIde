@@ -12,6 +12,10 @@ namespace EtAndHkIde.Pages.Articles
             PublishDate = new DateTime(2018, 12, 19);
             IsHighlight = true;
             Tags = new[] { Tag.TimothyIde, Tag.JacobIde, Tag.ElmoreIde, Tag.HoraceIde, Tag.WilliamIde, Tag.Passumpsic, Tag.StJohnsbury };
+            Citation = new Citation(CitationType.Newspaper,
+                @"http://chroniclingamerica.loc.gov/lccn/sn84023253/1913-12-17/ed-1/seq-3/",
+                "St. Johnsbury Caledonian",
+                "December 17 1913");
         }
     }
 }

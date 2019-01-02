@@ -12,5 +12,6 @@ namespace EtAndHkIde.Infrastructure
         public bool IsHighlight { get; set; }
 
         public IEnumerable<Tag> Tags { get; set; } = new List<Tag>();
+        public Citation Citation { get; set; }
     }
 }

@@ -1,13 +1,11 @@
 ﻿using ExifLib;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.FileProviders;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Text.RegularExpressions;
-using Microsoft.AspNetCore.Hosting;
 
 namespace EtAndHkIde.Infrastructure
 {
@@ -51,7 +49,8 @@ namespace EtAndHkIde.Infrastructure
                     Description = sitePageModelInstance.Description,
                     PublishDate = sitePageModelInstance.PublishDate,
                     IsHighlight = sitePageModelInstance.IsHighlight,
-                    Tags = sitePageModelInstance.Tags
+                    Tags = sitePageModelInstance.Tags,
+                    Citation = sitePageModelInstance.Citation
                 };
                 pageMetadataCollection.Add(pageMetadata);
             }
