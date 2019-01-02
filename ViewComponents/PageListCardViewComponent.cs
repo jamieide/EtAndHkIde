@@ -15,11 +15,7 @@ namespace EtAndHkIde.ViewComponents
         public IViewComponentResult Invoke(string title, int? count, bool highlights)
         {
             var pages = highlights ? _metadataRepository.GetHighlightPageMetadatas(count) : _metadataRepository.GetPageMetadatas(count);
-            var vm = new PageListCardViewModel()
-            {
-                Title = title,
-                Pages = pages
-            };
+            var vm = new PageListCardViewModel(title, pages);
             return View(vm);
         }
     }

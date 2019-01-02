@@ -35,7 +35,7 @@
                     <div class="tab-pane fade @(tag.NormalizedName == Model.Tag ? "active show" : "")" id="@tag.NormalizedName">
                         @if (Model.PagesByTag.TryGetValue(tag, out var pageMetadatas))
                         {
-                            var model = new PageListCardViewModel { Pages = pageMetadatas };
+                            var model = new PageListCardViewModel(pageMetadatas);
                             <partial name="_PageListCard" model="model" />
                         }
                         else
