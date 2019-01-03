@@ -16,6 +16,7 @@ namespace EtAndHkIde.Pages.Articles
                 "St. Johnsbury Caledonian",
                 "December 21, 1904");
             Tags = new[] { Tag.Passumpsic };
+            RelatedArticles = new[] { new LargeFire1883Model() };
         }
 
         public void OnGet()

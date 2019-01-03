@@ -13,5 +13,18 @@ namespace EtAndHkIde.Infrastructure
 
         public IEnumerable<Tag> Tags { get; set; } = new List<Tag>();
         public Citation Citation { get; set; }
+        public IEnumerable<SitePageModel> RelatedArticles { get; set; }
+
+        public string Path
+        {
+            get
+            {
+                var fullName = this.GetType().FullName;
+                var pagesIndex = fullName.LastIndexOf("Pages", StringComparison.OrdinalIgnoreCase) + 5;
+                var modelIndex = fullName.LastIndexOf("Model", StringComparison.OrdinalIgnoreCase);
+                return fullName.Remove(modelIndex).Substring(pagesIndex).Replace('.', '/');
+            }
+        }
     }
+
 }

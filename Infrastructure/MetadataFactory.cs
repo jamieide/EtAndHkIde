@@ -22,36 +22,16 @@ namespace EtAndHkIde.Infrastructure
         {
             var pageMetadataCollection = new PageMetadataCollection();
 
-            string GetSitePagePath(string fullName)
-            {
-                var pagesIndex = fullName.LastIndexOf("Pages", StringComparison.OrdinalIgnoreCase) + 5;
-                var modelIndex = fullName.LastIndexOf("Model", StringComparison.OrdinalIgnoreCase);
-                return fullName.Remove(modelIndex).Substring(pagesIndex).Replace('.', '/');
-            }
-
-            // Get all pages that extend ContentPageModel
-            var sitePageModels = Assembly.GetExecutingAssembly().GetTypes()
+            // Get all pages that extend SitePageModel
+            var sitePageModelTypes = Assembly.GetExecutingAssembly().GetTypes()
                 .Where(x => typeof(SitePageModel).IsAssignableFrom(x) && !x.IsAbstract)
-                .Select(x => new
-                {
-                    Type = x,
-                    Path = GetSitePagePath(x.FullName)
-                }).ToList();
+               .ToList();
 
-            foreach (var sitePageModel in sitePageModels)
+            foreach (var sitePageModelType in sitePageModelTypes)
             {
                 // get page
-                var sitePageModelInstance = (SitePageModel)Activator.CreateInstance(sitePageModel.Type);
-                var pageMetadata = new PageMetadata()
-                {
-                    Path = sitePageModel.Path,
-                    Title = sitePageModelInstance.Title,
-                    Description = sitePageModelInstance.Description,
-                    PublishDate = sitePageModelInstance.PublishDate,
-                    IsHighlight = sitePageModelInstance.IsHighlight,
-                    Tags = sitePageModelInstance.Tags,
-                    Citation = sitePageModelInstance.Citation
-                };
+                var sitePageModelInstance = (SitePageModel)Activator.CreateInstance(sitePageModelType);
+                var pageMetadata = new PageMetadata(sitePageModelInstance);
                 pageMetadataCollection.Add(pageMetadata);
             }
 
