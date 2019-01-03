@@ -11,11 +11,11 @@ namespace EtAndHkIde.Infrastructure
 {
     public class MetadataFactory
     {
-        private readonly string _contentsPath;
+        private readonly string _articlesPath;
 
         public MetadataFactory(IHostingEnvironment hostingEnvironment)
         {
-            _contentsPath = Path.Combine(hostingEnvironment.WebRootPath, "articles");
+            _articlesPath = Path.Combine(hostingEnvironment.WebRootPath, "articles");
         }
 
         public PageMetadataCollection BuildPageMetadataCollection()
@@ -27,23 +27,52 @@ namespace EtAndHkIde.Infrastructure
                 .Where(x => typeof(SitePageModel).IsAssignableFrom(x) && !x.IsAbstract)
                .ToList();
 
+            var sitePageModels = new List<SitePageModel>();
             foreach (var sitePageModelType in sitePageModelTypes)
             {
                 // get page
-                var sitePageModelInstance = (SitePageModel)Activator.CreateInstance(sitePageModelType);
-                var pageMetadata = new PageMetadata(sitePageModelInstance);
+                var sitePageModel = (SitePageModel)Activator.CreateInstance(sitePageModelType);
+                sitePageModels.Add(sitePageModel);
+                var pageMetadata = new PageMetadata(sitePageModel);
                 pageMetadataCollection.Add(pageMetadata);
             }
 
+            SetRelatedPages(sitePageModels, pageMetadataCollection);
+
             return pageMetadataCollection;
+        }
+
+        private void SetRelatedPages(IEnumerable<SitePageModel> sitePageModels, PageMetadataCollection pageMetadatas)
+        {
+            foreach (var sitePageModel in sitePageModels)
+            {
+                if (!sitePageModel.RelatedSitePageModels.Any())
+                {
+                    continue;
+                }
+
+                foreach (var relatedSitePageModel in sitePageModel.RelatedSitePageModels)
+                {
+                    var sourcePageMetadata = pageMetadatas[sitePageModel.Path];
+                    var targetPageMetadata = pageMetadatas[relatedSitePageModel.Path];
+                    if (!sourcePageMetadata.RelatedPages.Contains(targetPageMetadata))
+                    {
+                        sourcePageMetadata.RelatedPages.Add(targetPageMetadata);
+                    }
+                    if (!targetPageMetadata.RelatedPages.Contains(sourcePageMetadata))
+                    {
+                        targetPageMetadata.RelatedPages.Add(sourcePageMetadata);
+                    }
+                }
+            }
         }
 
         // todo only indexes jpg
         public FileMetadataCollection BuildFileMetadataCollection()
         {
             var fileMetadataCollection = new FileMetadataCollection();
-            var pathStartIndex = _contentsPath.LastIndexOf("wwwroot", StringComparison.OrdinalIgnoreCase) + 7;
-            PopulateContentItemCollection(_contentsPath, fileMetadataCollection, pathStartIndex);
+            var pathStartIndex = _articlesPath.LastIndexOf("wwwroot", StringComparison.OrdinalIgnoreCase) + 7;
+            PopulateContentItemCollection(_articlesPath, fileMetadataCollection, pathStartIndex);
             return fileMetadataCollection;
         }
 

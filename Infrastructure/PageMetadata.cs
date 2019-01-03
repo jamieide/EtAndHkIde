@@ -5,8 +5,6 @@ namespace EtAndHkIde.Infrastructure
 {
     public class PageMetadata
     {
-        public PageMetadata() { }
-
         public PageMetadata(SitePageModel sitePageModel)
         {
             Path = sitePageModel.Path;
@@ -18,16 +16,16 @@ namespace EtAndHkIde.Infrastructure
             Citation = sitePageModel.Citation;
         }
 
-        public string Path { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public DateTime? PublishDate { get; set; }
-        public bool IsHighlight { get; set; }
+        public string Path { get; }
+        public string Title { get; }
+        public string Description { get; }
+        public DateTime? PublishDate { get; }
+        public bool IsHighlight { get; }
 
-        public IEnumerable<Tag> Tags { get; set; }
+        public IEnumerable<Tag> Tags { get; }
 
-        public Citation Citation { get; set; }
+        public Citation Citation { get; }
 
-        public IEnumerable<PageMetadata> RelatedPages { get; set; }
+        public PageMetadataCollection RelatedPages { get; } = new PageMetadataCollection();
     }
 }
