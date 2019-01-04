@@ -1,16 +1,5 @@
 ﻿@using EtAndHkIde.Infrastructure
 @model EtAndHkIde.Infrastructure.PageMetadata
-@{
-    var citationIcons = new Dictionary<CitationType, string>
-    {
-        {CitationType.Undefined, ""},
-        {CitationType.Book, "<i class=\"fas fa-book mr-1\"></i>"},
-        {CitationType.Magazine, "<i class=\"fas fa-book-open mr-1\"></i>"},
-        {CitationType.Newspaper, "<i class=\"far fa-newspaper mr-1\"></i>"},
-        {CitationType.Pdf, "<i class=\"fa fa-file-pdf mr-1\"></i>"},
-        {CitationType.Website, "<i class=\"fas fa-external-link-square-alt mr-1\"></i>"}
-    };
-}
 <p>
     @if (Model.Tags.Contains(Tag.Featured))
     {
@@ -22,14 +11,7 @@
 @if (Model.Citation != null)
 {
     <p>
-        <a href="@Html.Raw(Model.Citation.Url)" target="_blank">
-            @Html.Raw(citationIcons[Model.Citation.Type])
-            @Html.Raw(Model.Citation.Name)
-            @if (Model.Citation.Description.HasValue())
-            {
-                <br />@Model.Citation.Description
-            }
-        </a>
+        <partial name="_Citation" model="Model.Citation"/>
     </p>
 }
 <div class="card">
