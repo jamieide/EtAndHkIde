@@ -1,13 +1,13 @@
 ﻿@model bool
 @{
     var isHomePage = Model;
-    var ulClass = isHomePage ? "justify-content-center d-flex flex-fill" : "ml-auto mr-5";
+    var ulClass = isHomePage ? "justify-content-center d-flex flex-fill" : "ml-auto";
 }
 <nav id="site-navbar" class="navbar navbar-expand-md navbar-light bg-light">
     @if (!isHomePage)
     {
         <a asp-page="/Index" class="navbar-brand">
-            <img src="/images/logo-sm.jpg" alt="E.T. & H.K. Ide" />
+            <img src="/images/logo-sm.jpg" alt="E.T. & H.K. Ide" width="333" height="80" />
         </a>
     }
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links">

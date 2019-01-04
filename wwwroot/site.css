@@ -59,4 +59,25 @@ i.tag-type {
     #site-navbar #navbar-links span.caption {
         display: block;
     }
+
+/* navbar margins for md and up */
+    #site-navbar .navbar-brand {
+        margin-left: 1.5rem;
+    }
+
+    #site-navbar .navbar-nav {
+        margin-right: 0.5rem;
+    }
+}
+
+@media(min-width: 992px) {
+    /* navbar margins for lg and up */
+
+    #site-navbar .navbar-brand {
+        margin-left: 3rem;
+    }
+
+    #site-navbar .navbar-nav {
+        margin-right: 2rem;
+    }
 }
