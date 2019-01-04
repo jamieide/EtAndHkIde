@@ -5,9 +5,8 @@ namespace EtAndHkIde.Pages.Articles.LettersFromFlorida
 {
     public class SavannahModel : SitePageModel
     {
-        public SavannahModel()
+        public SavannahModel() : base("Savannah")
         {
-            Title = "Savannah";
             Description = "Correspondence from Horace K. Ide to The Caledonian newspaper in 1876.";
             PublishDate = new DateTime(2018, 12, 14); ;
         }

@@ -3,11 +3,11 @@
     var isHomePage = Model;
     var ulClass = isHomePage ? "justify-content-center d-flex flex-fill" : "ml-auto mr-5";
 }
-<nav id="site-navbar" class="navbar navbar-expand-sm navbar-light bg-light">
+<nav id="site-navbar" class="navbar navbar-expand-md navbar-light bg-light">
     @if (!isHomePage)
     {
-        <a asp-page="/Index" class="navbar-brand ml-5">
-            <img src="/images/logo-sm.jpg" alt="E.T. & H.K. Ide"/>
+        <a asp-page="/Index" class="navbar-brand">
+            <img src="/images/logo-sm.jpg" alt="E.T. & H.K. Ide" />
         </a>
     }
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links">
@@ -27,24 +27,6 @@
                     </a>
                 </li>
             }
-            <li class="nav-item">
-                <a class="nav-link" asp-page="/Recent" title="Recently added content">
-                    <span class="fa-stack fa-2x">
-                        <i class="fas fa-circle fa-stack-2x"></i>
-                        <i class="fas fa-calendar-day fa-inverse fa-stack-1x"></i>
-                    </span>
-                    <span class="caption">Recent</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-page="/Highlights" title="Highlights and overview">
-                    <span class="fa-stack fa-2x">
-                        <i class="fas fa-circle fa-stack-2x"></i>
-                        <i class="fas fa-star fa-inverse fa-stack-1x"></i>
-                    </span>
-                    <span class="caption">Highlights</span>
-                </a>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" asp-page="/SiteIndex" title="Index of all site pages">
                     <span class="fa-stack fa-2x">

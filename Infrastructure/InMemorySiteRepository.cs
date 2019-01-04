@@ -7,19 +7,42 @@ namespace EtAndHkIde.Infrastructure
     /// <summary>
     /// In memory implementation of IContentsRepository. Register as singleton.
     /// </summary>
-    public class InMemoryMetadataRepository : IMetadataRepository
+    public class InMemorySiteRepository : ISiteRepository
     {
         private readonly PageMetadataCollection _pageMetadataCollection;
         private readonly FileMetadataCollection _fileMetadataCollection;
         private readonly IEnumerable<TagType> _tagTypes;
         private readonly IEnumerable<Tag> _tags;
 
-        public InMemoryMetadataRepository(MetadataFactory factory)
+        public InMemorySiteRepository(MetadataFactory factory)
         {
             _pageMetadataCollection = factory.BuildPageMetadataCollection();
             _fileMetadataCollection = factory.BuildFileMetadataCollection();
             _tagTypes = factory.GetTagTypes();
             _tags = factory.GetTags();
+        }
+
+        public IEnumerable<PageMetadata> GetPages()
+        {
+            return _pageMetadataCollection
+                .Where(x => x.PublishDate.HasValue)
+                .OrderByDescending(x => x.PublishDate.Value);
+        }
+
+        public IEnumerable<PageMetadata> GetDraftPages()
+        {
+            return _pageMetadataCollection
+                .Where(x => !x.PublishDate.HasValue);
+        }
+
+        public PageMetadata GetPage(string path)
+        {
+            if (_pageMetadataCollection.TryGetValue(path, out var pageMetadata))
+            {
+                return pageMetadata;
+            }
+
+            return null;
         }
 
         public IEnumerable<PageMetadata> GetPageMetadatas(int? count)
@@ -32,17 +55,6 @@ namespace EtAndHkIde.Infrastructure
             }
 
             return query.OrderByDescending(x => x.PublishDate).ToList();
-        }
-
-        public IEnumerable<PageMetadata> GetHighlightPageMetadatas(int? count)
-        {
-            var query = _pageMetadataCollection.Where(x => x.IsHighlight);
-            if (count.HasValue)
-            {
-                query = query.Take(count.Value);
-            }
-
-            return query;
         }
 
         public IDictionary<Tag, IEnumerable<PageMetadata>> GetPagesByTag()

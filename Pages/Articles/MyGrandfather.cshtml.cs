@@ -5,9 +5,8 @@ namespace EtAndHkIde.Pages.Articles
 {
     public class MyGrandfatherModel : SitePageModel
     {
-        public MyGrandfatherModel()
+        public MyGrandfatherModel() : base("My Grandfather")
         {
-            Title = "My Grandfather";
             Description = "The author of this biographical sketch of E. T. Ide, possibly a school project, is unknown but it may be Katherine Ide Sprague. Katherine was the daughter of Fanny Knights and Oliver Mitchell Wentworth Sprague. She was born in Tokyo, Japan, and lived in Cambridge, Massachusetts as a girl.";
             PublishDate = new DateTime(2018, 12, 17);
             Tags = new[] { Tag.ElmoreIde };

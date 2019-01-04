@@ -27,44 +27,23 @@ namespace EtAndHkIde.Infrastructure
                 .Where(x => typeof(SitePageModel).IsAssignableFrom(x) && !x.IsAbstract)
                .ToList();
 
-            var sitePageModels = new List<SitePageModel>();
             foreach (var sitePageModelType in sitePageModelTypes)
             {
-                // get page
+                var path = GetPageModelPath(sitePageModelType);
                 var sitePageModel = (SitePageModel)Activator.CreateInstance(sitePageModelType);
-                sitePageModels.Add(sitePageModel);
-                var pageMetadata = new PageMetadata(sitePageModel);
+                var pageMetadata = new PageMetadata(path, sitePageModel);
                 pageMetadataCollection.Add(pageMetadata);
             }
-
-            SetRelatedPages(sitePageModels, pageMetadataCollection);
-
             return pageMetadataCollection;
         }
 
-        private void SetRelatedPages(IEnumerable<SitePageModel> sitePageModels, PageMetadataCollection pageMetadatas)
+        private static string GetPageModelPath(Type sitePageModelType)
         {
-            foreach (var sitePageModel in sitePageModels)
-            {
-                if (!sitePageModel.RelatedSitePageModels.Any())
-                {
-                    continue;
-                }
-
-                foreach (var relatedSitePageModel in sitePageModel.RelatedSitePageModels)
-                {
-                    var sourcePageMetadata = pageMetadatas[sitePageModel.Path];
-                    var targetPageMetadata = pageMetadatas[relatedSitePageModel.Path];
-                    if (!sourcePageMetadata.RelatedPages.Contains(targetPageMetadata))
-                    {
-                        sourcePageMetadata.RelatedPages.Add(targetPageMetadata);
-                    }
-                    if (!targetPageMetadata.RelatedPages.Contains(sourcePageMetadata))
-                    {
-                        targetPageMetadata.RelatedPages.Add(sourcePageMetadata);
-                    }
-                }
-            }
+            // should be same as IActionDescriptorCollectionProvider.ViewEnginePath, which could be used to check
+            var fullName = sitePageModelType.FullName;
+            var pagesIndex = fullName.LastIndexOf("Pages", StringComparison.OrdinalIgnoreCase) + 5;
+            var modelIndex = fullName.LastIndexOf("Model", StringComparison.OrdinalIgnoreCase);
+            return fullName.Remove(modelIndex).Substring(pagesIndex).Replace('.', '/');
         }
 
         // todo only indexes jpg

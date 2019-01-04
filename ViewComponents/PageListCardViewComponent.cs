@@ -1,20 +1,29 @@
-﻿using EtAndHkIde.Infrastructure;
+﻿using System.Linq;
+using EtAndHkIde.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EtAndHkIde.ViewComponents
 {
     public class PageListCardViewComponent : ViewComponent
     {
-        private readonly IMetadataRepository _metadataRepository;
+        private readonly ISiteRepository _siteRepository;
 
-        public PageListCardViewComponent(IMetadataRepository metadataRepository)
+        public PageListCardViewComponent(ISiteRepository siteRepository)
         {
-            _metadataRepository = metadataRepository;
+            _siteRepository = siteRepository;
         }
 
-        public IViewComponentResult Invoke(string title, int? count, bool highlights)
+        public IViewComponentResult Invoke(string title, int? count, bool isFeatured)
         {
-            var pages = highlights ? _metadataRepository.GetHighlightPageMetadatas(count) : _metadataRepository.GetPageMetadatas(count);
+            var pages = _siteRepository.GetPages();
+            if (isFeatured)
+            {
+                pages = pages.Where(x => x.Tags.Contains(Tag.Featured));
+            }
+            if (count.HasValue)
+            {
+                pages = pages.Take(count.Value);
+            }
             var vm = new PageListCardViewModel(title, pages);
             return View(vm);
         }

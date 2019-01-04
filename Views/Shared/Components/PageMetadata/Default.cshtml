@@ -2,19 +2,19 @@
 @model EtAndHkIde.Infrastructure.PageMetadata
 @{
     var citationIcons = new Dictionary<CitationType, string>
-{
-{CitationType.Undefined, ""},
-{CitationType.Book, "<i class=\"fas fa-book mr-1\"></i>"},
-{CitationType.Magazine, "<i class=\"fas fa-book-open mr-1\"></i>"},
-{CitationType.Newspaper, "<i class=\"far fa-newspaper mr-1\"></i>"},
-{CitationType.Pdf, "<i class=\"fa fa-file-pdf mr-1\"></i>"},
-{CitationType.Website, "<i class=\"fas fa-external-link-square-alt mr-1\"></i>"}
-};
+    {
+        {CitationType.Undefined, ""},
+        {CitationType.Book, "<i class=\"fas fa-book mr-1\"></i>"},
+        {CitationType.Magazine, "<i class=\"fas fa-book-open mr-1\"></i>"},
+        {CitationType.Newspaper, "<i class=\"far fa-newspaper mr-1\"></i>"},
+        {CitationType.Pdf, "<i class=\"fa fa-file-pdf mr-1\"></i>"},
+        {CitationType.Website, "<i class=\"fas fa-external-link-square-alt mr-1\"></i>"}
+    };
 }
 <p>
-    @if (Model.IsHighlight)
+    @if (Model.Tags.Contains(Tag.Featured))
     {
-        <i class="fas fa-star mr-1" title="Highlight page"></i>
+        <i class="tag-type @Tag.Featured.TagType.Icon" title="Featured page"></i>
     }
     @Model.Description
 </p>

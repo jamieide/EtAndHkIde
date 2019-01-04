@@ -37,9 +37,9 @@ i.tag-type {
     color: #ce2029;
 }
 
-.fas.fa-star {
-    color: #ffd700;
-}
+    i.tag-type.fas.fa-star {
+        color: #ffd700;
+    }
 
 .card-body {
     padding: 0.5rem 1rem;
@@ -50,11 +50,12 @@ i.tag-type {
     }
 
 
-@media(min-width: 576px) {
-/* align navbar link captions centered under icons for sm devices and up, must be same breakpoint as navbar-expand-**/
+@media(min-width: 768px) {
+    /* align navbar link captions centered under icons for md devices and up, must be same breakpoint as navbar-expand-**/
     #site-navbar #navbar-links ul {
         text-align: center;
     }
+
     #site-navbar #navbar-links span.caption {
         display: block;
     }

@@ -7,18 +7,18 @@ namespace EtAndHkIde.Pages
 {
     public class SiteIndexModel : PageModel
     {
-        private readonly IMetadataRepository _metadataRepository;
+        private readonly ISiteRepository _siteRepository;
 
-        public SiteIndexModel(IMetadataRepository metadataRepository)
+        public SiteIndexModel(ISiteRepository siteRepository)
         {
-            _metadataRepository = metadataRepository;
+            _siteRepository = siteRepository;
         }
 
         public IEnumerable<IEnumerable<PageMetadata>> PageMetadataPages { get; set; }
 
         public void OnGet()
         {
-            var pageMetadatas = _metadataRepository.GetPageMetadatas(null);
+            var pageMetadatas = _siteRepository.GetPageMetadatas(null);
             PageMetadataPages = Partition(pageMetadatas, 10);
         }
 

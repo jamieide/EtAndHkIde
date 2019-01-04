@@ -18,7 +18,7 @@ namespace EtAndHkIde
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddSingleton<IMetadataRepository, InMemoryMetadataRepository>();
+            services.AddSingleton<ISiteRepository, InMemorySiteRepository>();
             services.AddSingleton<MetadataFactory>();
         }
 

@@ -7,18 +7,18 @@ namespace EtAndHkIde.ViewComponents
     public class PageMetadataViewComponent : ViewComponent
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IMetadataRepository _metadataRepository;
+        private readonly ISiteRepository _siteRepository;
 
-        public PageMetadataViewComponent(IHttpContextAccessor httpContextAccessor, IMetadataRepository metadataRepository)
+        public PageMetadataViewComponent(IHttpContextAccessor httpContextAccessor, ISiteRepository siteRepository)
         {
             _httpContextAccessor = httpContextAccessor;
-            _metadataRepository = metadataRepository;
+            _siteRepository = siteRepository;
         }
 
         public IViewComponentResult Invoke()
         {
             var path = _httpContextAccessor.HttpContext.Request.Path;
-            var pageMetadata = _metadataRepository.GetPageMetadata(path);
+            var pageMetadata = _siteRepository.GetPageMetadata(path);
             return View(pageMetadata);
         }
     }

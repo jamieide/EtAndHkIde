@@ -6,9 +6,8 @@ namespace EtAndHkIde.Pages.Articles
     public class BigFireAtPassumpsicModel : SitePageModel
     {
 
-        public BigFireAtPassumpsicModel()
+        public BigFireAtPassumpsicModel() : base("Big Fire at Passumpsic")
         {
-            Title = "Big Fire at Passumpsic";
             Description = "A newspaper article describing the 1904 fire that engulfed the second Passumpsic mill.";
             PublishDate = new DateTime(2019, 1, 2);
             Citation = new Citation(CitationType.Newspaper,
@@ -16,13 +15,6 @@ namespace EtAndHkIde.Pages.Articles
                 "St. Johnsbury Caledonian",
                 "December 21, 1904");
             Tags = new[] { Tag.Passumpsic };
-            // todo bad idea to new up instances here because it will happen at runtime
-            RelatedSitePageModels = new[] { new LargeFire1883Model() };
-        }
-
-        public void OnGet()
-        {
-
         }
     }
 }

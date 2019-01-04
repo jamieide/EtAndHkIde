@@ -7,11 +7,11 @@ namespace EtAndHkIde.Pages
 {
     public class TagsModel : PageModel
     {
-        private readonly IMetadataRepository _metadataRepository;
+        private readonly ISiteRepository _siteRepository;
 
-        public TagsModel(IMetadataRepository metadataRepository)
+        public TagsModel(ISiteRepository siteRepository)
         {
-            _metadataRepository = metadataRepository;
+            _siteRepository = siteRepository;
         }
 
         public IEnumerable<Tag> Tags { get; set; }
@@ -22,8 +22,8 @@ namespace EtAndHkIde.Pages
 
         public void OnGet()
         {
-            Tags = _metadataRepository.GetTags();
-            PagesByTag = _metadataRepository.GetPagesByTag();
+            Tags = _siteRepository.GetTags();
+            PagesByTag = _siteRepository.GetPagesByTag();
         }
     }
 }
