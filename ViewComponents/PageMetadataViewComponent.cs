@@ -18,7 +18,7 @@ namespace EtAndHkIde.ViewComponents
         public IViewComponentResult Invoke()
         {
             var path = _httpContextAccessor.HttpContext.Request.Path;
-            var pageMetadata = _siteRepository.GetPageMetadata(path);
+            var pageMetadata = _siteRepository.GetPage(path);
             return View(pageMetadata);
         }
     }

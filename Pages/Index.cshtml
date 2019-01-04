@@ -2,65 +2,42 @@
 @model IndexModel
 @{
     Layout = "Shared/_BaseLayout";
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "E.T. & H.K. Ide";
 }
-@section Head
-    {
-    <style>
-        body {
-            background-color: #d8d8d8;
-        }
 
-        .jumbotron {
-            background-color: white;
-        }
-
-        div#logo {
-            margin-top: 20px;
-            background-color: black;
-        }
-
-            div#logo img {
-                display: block;
-                margin: auto;
-            }
-
-        .card-title {
-            color: #DA4453;
-        }
-    </style>
-}
-<div id="logo">
-    <img src="~/images/logo.jpg" />
-</div>
-<div id="banner" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img class="d-block img-fluid w-100" src="~/images/banner1.jpg" />
-        </div>
-        <div class="carousel-item">
-            <img class="d-block img-fluid w-100" src="~/images/banner2.jpg" />
-        </div>
-        <div class="carousel-item">
-            <img class="d-block img-fluid w-100" src="images/banner3.jpg" />
+<div id="home-page">
+    <div id="logo">
+        <img src="~/images/logo.jpg"/>
+    </div>
+    <div id="banner" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block img-fluid w-100" src="~/images/banner1.jpg"/>
+            </div>
+            <div class="carousel-item">
+                <img class="d-block img-fluid w-100" src="~/images/banner2.jpg"/>
+            </div>
+            <div class="carousel-item">
+                <img class="d-block img-fluid w-100" src="images/banner3.jpg"/>
+            </div>
         </div>
     </div>
-</div>
-<div class="container mt-3 mb-5">
-    <div class="jumbotron">
-        <h1 class="display-4">The Mill</h1>
-        <p class="lead">Seven generations of the Ide family have worked at the milling trade since 1813. It served us well and we served the hill farmers of Vermont's Northeast Kingdom well for nearly two hundred years.</p>
-        <p>The mill was central to our lives and livelihood, and the brightly lit sign was a St. Johnsbury landmark that we never failed to gaze at in passing. The Mill and the Old Man of the Mountain, in nearby Franconia Notch, were contemporaries and a stark reminder that whether built by man or nature, nothing lasts forever. The purpose of this site is to chronicle the remarkable history of E.T. &amp; H. K. Ide and the Ide family in Vermont with the goal of keeping the memories alive.</p>
-    </div>
-
-    <partial name="_SiteNavbar" model="true" />
-
-    <div class="row mt-2">
-        <div class="col-md">
-            <vc:page-list-card title="Recent additions" count="5" is-featured="false"></vc:page-list-card>
+    <div class="container mt-3 mb-5">
+        <div class="jumbotron">
+            <h1 class="display-4">The Mill</h1>
+            <p class="lead">Seven generations of the Ide family have worked at the milling trade since 1813. It served us well and we served the hill farmers of Vermont's Northeast Kingdom well for nearly two hundred years.</p>
+            <p>The mill was central to our lives and livelihood, and the brightly lit sign was a St. Johnsbury landmark that we never failed to gaze at in passing. The Mill and the Old Man of the Mountain, in nearby Franconia Notch, were contemporaries and a stark reminder that whether built by man or nature, nothing lasts forever. The purpose of this site is to chronicle the remarkable history of E.T. &amp; H. K. Ide and the Ide family in Vermont with the goal of keeping the memories alive.</p>
         </div>
-        <div class="col-md">
-            <vc:page-list-card title="Features" count="null" is-featured="true"></vc:page-list-card>
+
+        <partial name="_SiteNavbar" model="true"/>
+
+        <div class="row mt-2">
+            <div class="col-md">
+                <vc:page-list-card title="Recent additions" count="5" is-featured="false"></vc:page-list-card>
+            </div>
+            <div class="col-md">
+                <vc:page-list-card title="Features" count="null" is-featured="true"></vc:page-list-card>
+            </div>
         </div>
     </div>
 </div>

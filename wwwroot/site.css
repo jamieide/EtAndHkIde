@@ -17,6 +17,20 @@ div#sidebar {
     border-radius: 8px;
 }
 
+#home-page #logo {
+    margin-top: 20px;
+    background-color: black;
+}
+
+    #home-page #logo img {
+        display: block;
+        margin: auto;
+    }
+
+#home-page .jumbotron {
+    background-color: white;
+}
+
 h1 {
     color: #ce2029;
 }
@@ -40,6 +54,10 @@ i.tag-type {
     i.tag-type.fas.fa-star {
         color: #ffd700;
     }
+
+.card-title {
+    color: #ce2029;
+}
 
 .card-body {
     padding: 0.5rem 1rem;

@@ -18,12 +18,7 @@ namespace EtAndHkIde.Infrastructure
         PageMetadata GetPage(string path);
 
 
-        IEnumerable<PageMetadata> GetPageMetadatas(int? count);
-
         IDictionary<Tag, IEnumerable<PageMetadata>> GetPagesByTag();
-        IEnumerable<PageMetadata> GetPageMetadatasForTag(Tag tag);
-
-        PageMetadata GetPageMetadata(string path);
 
         IEnumerable<FileMetadata> GetImages(string path);
         FileMetadata GetImage(string path, string name);

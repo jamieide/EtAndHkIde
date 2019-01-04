@@ -14,12 +14,12 @@ namespace EtAndHkIde.Pages
             _siteRepository = siteRepository;
         }
 
-        public IEnumerable<IEnumerable<PageMetadata>> PageMetadataPages { get; set; }
+        public IEnumerable<IEnumerable<PageMetadata>> Pages { get; set; }
 
         public void OnGet()
         {
-            var pageMetadatas = _siteRepository.GetPageMetadatas(null);
-            PageMetadataPages = Partition(pageMetadatas, 10);
+            var pages = _siteRepository.GetPages();
+            Pages = Partition(pages, 10);
         }
 
         // https://stackoverflow.com/a/438208/12752

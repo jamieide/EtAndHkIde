@@ -37,24 +37,7 @@ namespace EtAndHkIde.Infrastructure
 
         public PageMetadata GetPage(string path)
         {
-            if (_pageMetadataCollection.TryGetValue(path, out var pageMetadata))
-            {
-                return pageMetadata;
-            }
-
-            return null;
-        }
-
-        public IEnumerable<PageMetadata> GetPageMetadatas(int? count)
-        {
-            var query = _pageMetadataCollection
-                .Where(x => x.PublishDate.HasValue);
-            if (count.HasValue)
-            {
-                query = query.Take(count.Value);
-            }
-
-            return query.OrderByDescending(x => x.PublishDate).ToList();
+            return _pageMetadataCollection.TryGetValue(path, out var pageMetadata) ? pageMetadata : null;
         }
 
         public IDictionary<Tag, IEnumerable<PageMetadata>> GetPagesByTag()
@@ -68,21 +51,6 @@ namespace EtAndHkIde.Infrastructure
                     }).GroupBy(k => k.Tag)
                 .ToDictionary(k => k.Key, v => v.Select(x => x.Page));
 
-        }
-
-        public IEnumerable<PageMetadata> GetPageMetadatasForTag(Tag tag)
-        {
-            return _pageMetadataCollection.Where(x => x.Tags.Contains(tag));
-        }
-
-        public PageMetadata GetPageMetadata(string path)
-        {
-            if (_pageMetadataCollection.TryGetValue(path, out var pageMetadata))
-            {
-                return pageMetadata;
-            }
-
-            return null;
         }
 
         public IEnumerable<FileMetadata> GetImages(string path)
