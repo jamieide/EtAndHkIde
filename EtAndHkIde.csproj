@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\articles\VermontLifeWinter1977\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>
