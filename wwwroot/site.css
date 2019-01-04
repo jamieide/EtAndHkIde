@@ -49,6 +49,17 @@ i.tag-type {
         margin-bottom: 0;
     }
 
+#navbar-links .fa-circle {
+    color: #ce2029;
+}
+
+#navbar-links a:hover .fas.fa-circle {
+    color: white;
+}
+
+#navbar-links a:hover .fa-inverse {
+    color: #ce2029;
+}
 
 @media(min-width: 768px) {
     /* align navbar link captions centered under icons for md devices and up, must be same breakpoint as navbar-expand-**/
@@ -60,7 +71,7 @@ i.tag-type {
         display: block;
     }
 
-/* navbar margins for md and up */
+    /* navbar margins for md and up */
     #site-navbar .navbar-brand {
         margin-left: 1.5rem;
     }
