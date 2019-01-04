@@ -19,7 +19,11 @@ namespace EtAndHkIde
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddSingleton<ISiteRepository, InMemorySiteRepository>();
-            services.AddSingleton<MetadataFactory>();
+            services.AddSingleton<MetadataFactory>(factory =>
+            {
+                var hostingEnvironment = factory.GetRequiredService<IHostingEnvironment>();
+                return new MetadataFactory(hostingEnvironment.WebRootPath);
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

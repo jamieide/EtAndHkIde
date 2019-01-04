@@ -10,14 +10,14 @@ namespace EtAndHkIde.Infrastructure
     public class InMemorySiteRepository : ISiteRepository
     {
         private readonly PageMetadataCollection _pageMetadataCollection;
-        private readonly FileMetadataCollection _fileMetadataCollection;
+        private readonly ImageMetadataCollection _imageMetadataCollection;
         private readonly IEnumerable<TagType> _tagTypes;
         private readonly IEnumerable<Tag> _tags;
 
         public InMemorySiteRepository(MetadataFactory factory)
         {
             _pageMetadataCollection = factory.BuildPageMetadataCollection();
-            _fileMetadataCollection = factory.BuildFileMetadataCollection();
+            _imageMetadataCollection = factory.BuildImageMetadataCollection();
             _tagTypes = factory.GetTagTypes();
             _tags = factory.GetTags();
         }
@@ -53,19 +53,20 @@ namespace EtAndHkIde.Infrastructure
 
         }
 
-        public IEnumerable<FileMetadata> GetImages(string path)
+        public IEnumerable<ImageMetadata> GetImages(string path)
         {
-            return _fileMetadataCollection.Where(x => x.Path.StartsWith(path, StringComparison.OrdinalIgnoreCase));
+            return _imageMetadataCollection.Where(x => x.Path.StartsWith(path, StringComparison.OrdinalIgnoreCase));
         }
 
-        public FileMetadata GetImage(string path, string name)
+        public ImageMetadata GetImage(string path, string name)
         {
-            if (_fileMetadataCollection.TryGetValue($"{path}/{name}", out var contentItem))
-            {
-                return contentItem;
-            }
+            throw new NotImplementedException();
+            //if (_fileMetadataCollection.TryGetValue($"{path}/{name}", out var contentItem))
+            //{
+            //    return contentItem;
+            //}
 
-            return null;
+            //return null;
         }
 
         public IEnumerable<TagType> GetTagTypes() => _tagTypes;

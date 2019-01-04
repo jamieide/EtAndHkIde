@@ -1,5 +1,4 @@
 ﻿using ExifLib;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.FileProviders;
 using System;
 using System.Collections.Generic;
@@ -11,11 +10,11 @@ namespace EtAndHkIde.Infrastructure
 {
     public class MetadataFactory
     {
-        private readonly string _articlesPath;
+        private readonly string _webRootPath;
 
-        public MetadataFactory(IHostingEnvironment hostingEnvironment)
+        public MetadataFactory(string webRootPath)
         {
-            _articlesPath = Path.Combine(hostingEnvironment.WebRootPath, "articles");
+            _webRootPath = webRootPath;
         }
 
         public PageMetadataCollection BuildPageMetadataCollection()
@@ -29,7 +28,7 @@ namespace EtAndHkIde.Infrastructure
 
             foreach (var sitePageModelType in sitePageModelTypes)
             {
-                var path = GetPageModelPath(sitePageModelType);
+                var path = GetViewEnginePath(sitePageModelType);
                 var sitePageModel = (SitePageModel)Activator.CreateInstance(sitePageModelType);
                 var pageMetadata = new PageMetadata(path, sitePageModel);
                 pageMetadataCollection.Add(pageMetadata);
@@ -37,7 +36,7 @@ namespace EtAndHkIde.Infrastructure
             return pageMetadataCollection;
         }
 
-        private static string GetPageModelPath(Type sitePageModelType)
+        private static string GetViewEnginePath(Type sitePageModelType)
         {
             // should be same as IActionDescriptorCollectionProvider.ViewEnginePath, which could be used to check
             var fullName = sitePageModelType.FullName;
@@ -47,48 +46,67 @@ namespace EtAndHkIde.Infrastructure
         }
 
         // todo only indexes jpg
-        public FileMetadataCollection BuildFileMetadataCollection()
+        public ImageMetadataCollection BuildImageMetadataCollection()
         {
-            var fileMetadataCollection = new FileMetadataCollection();
-            var pathStartIndex = _articlesPath.LastIndexOf("wwwroot", StringComparison.OrdinalIgnoreCase) + 7;
-            PopulateContentItemCollection(_articlesPath, fileMetadataCollection, pathStartIndex);
-            return fileMetadataCollection;
+            var pathsToIndex = new[] { "articles", "images" };
+            var imageCollection = new ImageMetadataCollection();
+            var thumbnailPahts = new HashSet<string>();
+            foreach (var pathToIndex in pathsToIndex)
+            {
+                var path = Path.Combine(_webRootPath, pathToIndex);
+                var pathStartIndex = path.LastIndexOf("wwwroot", StringComparison.OrdinalIgnoreCase) + 7;
+                PopulateImageMetadataCollection(path, imageCollection, thumbnailPahts, pathStartIndex);
+            }
+            LinkImageThumbnails(imageCollection, thumbnailPahts);
+            return imageCollection;
         }
 
-        private static void PopulateContentItemCollection(string physicalPath, FileMetadataCollection fileMetadataCollection, int pathStartIndex)
+        private static void PopulateImageMetadataCollection(string physicalPath, ImageMetadataCollection imageCollection, ISet<string> thumbnailPaths, int pathStartIndex)
         {
             var fileProvider = new PhysicalFileProvider(physicalPath);
             foreach (var directoryContent in fileProvider.GetDirectoryContents(""))
             {
                 if (directoryContent.IsDirectory)
                 {
-                    PopulateContentItemCollection(directoryContent.PhysicalPath, fileMetadataCollection, pathStartIndex);
+                    PopulateImageMetadataCollection(directoryContent.PhysicalPath, imageCollection, thumbnailPaths, pathStartIndex);
                 }
                 else
                 {
-                    if (directoryContent.Name.EndsWith(".jpg"))
+                    if (directoryContent.Name.EndsWith("-thumb.jpg", StringComparison.OrdinalIgnoreCase))
                     {
-                        var fileMetadata = new FileMetadata()
+                        thumbnailPaths.Add(directoryContent.PhysicalPath.Substring(pathStartIndex).Replace('\\', '/'));
+                    }
+                    else if (directoryContent.Name.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase))
+                    {
+                        var imageMetadata = new ImageMetadata()
                         {
-                            FileName = directoryContent.Name,
                             Path = directoryContent.PhysicalPath.Substring(pathStartIndex).Replace('\\', '/')
                         };
                         try
                         {
                             using (var exifReader = new ExifReader(directoryContent.PhysicalPath))
                             {
-                                fileMetadata.Title = GetImageMetadata(exifReader, ExifTags.XPTitle);
-                                fileMetadata.Description = GetImageMetadata(exifReader, ExifTags.XPComment);
-                                fileMetadata.Copyright = GetImageMetadata(exifReader, ExifTags.Copyright);
+                                imageMetadata.Title = GetImageMetadata(exifReader, ExifTags.XPTitle);
+                                imageMetadata.Description = GetImageMetadata(exifReader, ExifTags.XPComment);
+                                imageMetadata.Copyright = GetImageMetadata(exifReader, ExifTags.Copyright);
                             }
                         }
                         catch (ExifLibException)
                         {
                             // swallow the exception that occurs when there is no EXIF data
                         }
-                        fileMetadataCollection.Add(fileMetadata);
+                        imageCollection.Add(imageMetadata);
                     }
                 }
+            }
+        }
+
+        private static void LinkImageThumbnails(ImageMetadataCollection imageCollection, ISet<string> thumbnailPaths)
+        {
+            foreach (var image in imageCollection)
+            {
+                var thumbPath = image.Path.Replace(".jpg", "-thumb.jpg");
+                image.ThumbnailPath = thumbnailPaths.Contains(thumbPath) ? thumbPath : image.Path;
             }
         }
 

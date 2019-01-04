@@ -1,0 +1,24 @@
+﻿@using EtAndHkIde.Infrastructure
+@model IEnumerable<EtAndHkIde.Infrastructure.ImageMetadata>
+@{
+    // todo improve unique key
+    var lightboxId = Guid.NewGuid().ToString().Substring(0, 8);
+}
+
+<div class="card-deck">
+    @foreach (var image in Model)
+    {
+        <div class="card">
+            <a href="@image.Path" data-lightbox="@lightboxId">
+                <img class="card-img-top" src="@image.ThumbnailPath" alt="@image.Description" />
+            </a>
+            <div class="card-body">
+                <p class="card-text">@image.Description</p>
+                @if (image.Copyright.HasValue())
+                {
+                    <p><cite>@image.Copyright</cite></p>
+                }
+            </div>
+        </div>
+    }
+</div>

@@ -1,6 +1,7 @@
-﻿@model IEnumerable<EtAndHkIde.Infrastructure.FileMetadata>
+﻿@model IEnumerable<EtAndHkIde.Infrastructure.ImageMetadata>
 @{
-    var carouselId = Guid.NewGuid();
+    // todo improve unique key
+    var carouselId = Guid.NewGuid().ToString();
     var imageCount = Model.Count();
 }
 

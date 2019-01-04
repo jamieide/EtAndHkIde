@@ -19,14 +19,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\articles\RandallArmorPhotos\armor_101231-6151.jpg" />
-    <None Include="wwwroot\articles\RandallArmorPhotos\armor_101231-6230.jpg" />
-    <None Include="wwwroot\articles\RandallArmorPhotos\armor_101231-6243.jpg" />
+    <None Include="wwwroot\images\RandallArmorPhotos\armor_101231-6151.jpg" />
+    <None Include="wwwroot\images\RandallArmorPhotos\armor_101231-6230.jpg" />
+    <None Include="wwwroot\images\RandallArmorPhotos\armor_101231-6243.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\articles\VermontLifeWinter1977\" />
-    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

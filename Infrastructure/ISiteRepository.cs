@@ -17,11 +17,13 @@ namespace EtAndHkIde.Infrastructure
 
         PageMetadata GetPage(string path);
 
-
+        /// <summary>
+        /// Get pages grouped by tag
+        /// </summary>
         IDictionary<Tag, IEnumerable<PageMetadata>> GetPagesByTag();
 
-        IEnumerable<FileMetadata> GetImages(string path);
-        FileMetadata GetImage(string path, string name);
+        IEnumerable<ImageMetadata> GetImages(string path);
+        ImageMetadata GetImage(string path, string name);
 
         IEnumerable<TagType> GetTagTypes();
         IEnumerable<Tag> GetTags();
