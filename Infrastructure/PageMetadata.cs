@@ -23,5 +23,7 @@ namespace EtAndHkIde.Infrastructure
         public IEnumerable<Tag> Tags { get; }
 
         public Citation Citation { get; }
+
+        public override string ToString() => Title;
     }
 }

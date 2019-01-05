@@ -3,10 +3,10 @@ using System;
 
 namespace EtAndHkIde.Pages.Articles
 {
-    public class BigFireAtPassumpsicModel : SitePageModel
+    public class BigFireAtPassumpsic1904Model : SitePageModel
     {
 
-        public BigFireAtPassumpsicModel() : base("Big Fire at Passumpsic")
+        public BigFireAtPassumpsic1904Model() : base("Big Fire at Passumpsic")
         {
             Description = "A newspaper article describing the 1904 fire that engulfed the second Passumpsic mill.";
             PublishDate = new DateTime(2019, 1, 2);

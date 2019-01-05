@@ -55,18 +55,17 @@ namespace EtAndHkIde.Infrastructure
 
         public IEnumerable<ImageMetadata> GetImages(string path)
         {
-            return _imageMetadataCollection.Where(x => x.Path.StartsWith(path, StringComparison.OrdinalIgnoreCase));
+            return _imageMetadataCollection
+                .Where(x => x.Path.StartsWith(path, StringComparison.OrdinalIgnoreCase));
         }
 
         public ImageMetadata GetImage(string path, string name)
         {
-            throw new NotImplementedException();
-            //if (_fileMetadataCollection.TryGetValue($"{path}/{name}", out var contentItem))
-            //{
-            //    return contentItem;
-            //}
-
-            //return null;
+            if (_imageMetadataCollection.TryGetValue($"{path}/{name}", out var file))
+            {
+                return file;
+            }
+            return null;
         }
 
         public IEnumerable<TagType> GetTagTypes() => _tagTypes;
