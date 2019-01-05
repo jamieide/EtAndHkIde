@@ -29,6 +29,11 @@ namespace EtAndHkIde.Infrastructure
 
         public Citation Citation { get; set; }
 
+        /// <summary>
+        /// Set using index-relatedPages.json
+        /// </summary>
+        public IEnumerable<string> RelatedPagePaths { get; set; }
+
         public override string ToString() => Title;
     }
 }

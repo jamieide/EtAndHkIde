@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.FileProviders;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -11,6 +13,9 @@ namespace EtAndHkIde.Infrastructure
 {
     public class JsonSiteIndexFactory : ISiteIndexFactory
     {
+        private const string IndexFileName = "index.json";
+        private const string RelatedPagesFileName = "index-relatedPages.json";
+
         private readonly IHostingEnvironment _hostingEnvironment;
 
         public JsonSiteIndexFactory(IHostingEnvironment hostingEnvironment)
@@ -24,8 +29,10 @@ namespace EtAndHkIde.Infrastructure
             BuildPageIndex(siteIndex);
             BuildImageIndex(siteIndex);
 
+            AddRelatedPages(siteIndex);
+
             // write index.json to wwwroot
-            var path = Path.Combine(_hostingEnvironment.WebRootPath, "index.json");
+            var path = Path.Combine(_hostingEnvironment.WebRootPath, IndexFileName);
             var jsonSiteIndex = JsonConvert.SerializeObject(siteIndex);
             File.WriteAllText(path, jsonSiteIndex);
         }
@@ -133,6 +140,28 @@ namespace EtAndHkIde.Infrastructure
         private static string GetImageMetadata(ExifReader exifReader, ExifTags exifTag)
         {
             return exifReader.GetTagValue<string>(exifTag, out var result) ? result : "";
+        }
+
+        // Could get fancy and define an interface for post-build processors but no need to be enterprisey
+        // todo just set paths in SitePageModel??
+        private void AddRelatedPages(SiteIndex siteIndex)
+        {
+            var path = Path.Combine(_hostingEnvironment.WebRootPath, RelatedPagesFileName);
+            if (!File.Exists(path))
+            {
+                return;
+            }
+
+            var contents = File.ReadAllText(path);
+            var relatedPageSets = JsonConvert.DeserializeObject<IEnumerable<IEnumerable<string>>>(contents);
+            foreach (var relatedPageSet in relatedPageSets)
+            {
+                var pageMetadatas = siteIndex.Pages.Where(x => relatedPageSet.Contains(x.Path));
+                foreach (var pageMetadata in pageMetadatas)
+                {
+                    pageMetadata.RelatedPagePaths = relatedPageSet.Where(x => !string.Equals(x, pageMetadata.Path, StringComparison.OrdinalIgnoreCase));
+                }
+            }
         }
 
     }
