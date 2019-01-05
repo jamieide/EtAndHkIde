@@ -4,6 +4,11 @@ namespace EtAndHkIde.Infrastructure
 {
     public class Tag
     {
+        public Tag()
+        {
+            // needed for JSON deserialization
+        }
+
         private Tag(string name, TagType tagType, [CallerMemberName] string caller = null)
         {
             Name = name;
@@ -11,11 +16,36 @@ namespace EtAndHkIde.Infrastructure
             TagType = tagType;
         }
 
-        public string Name { get; }
-        public string NormalizedName { get; }
-        public TagType TagType { get; }
+        public string Name { get; set; }
+        public string NormalizedName { get; set; }
+        public TagType TagType { get; set; }
 
         public override string ToString() => Name;
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != this.GetType())
+            {
+                return false;
+            }
+
+            return string.Equals(Name, ((Tag) obj).Name);
+        }
+
+        public override int GetHashCode()
+        {
+            return (Name != null ? Name.GetHashCode() : 0);
+        }
 
         // System
         public static Tag Featured = new Tag("Featured", TagType.Featured);

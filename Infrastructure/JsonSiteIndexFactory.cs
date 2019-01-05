@@ -1,0 +1,139 @@
+﻿using ExifLib;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.FileProviders;
+using Newtonsoft.Json;
+using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+
+namespace EtAndHkIde.Infrastructure
+{
+    public class JsonSiteIndexFactory : ISiteIndexFactory
+    {
+        private readonly IHostingEnvironment _hostingEnvironment;
+
+        public JsonSiteIndexFactory(IHostingEnvironment hostingEnvironment)
+        {
+            _hostingEnvironment = hostingEnvironment;
+        }
+
+        public void BuildIndex()
+        {
+            var siteIndex = new SiteIndex();
+            BuildPageIndex(siteIndex);
+            BuildImageIndex(siteIndex);
+
+            // write index.json to wwwroot
+            var path = Path.Combine(_hostingEnvironment.WebRootPath, "index.json");
+            var jsonSiteIndex = JsonConvert.SerializeObject(siteIndex);
+            File.WriteAllText(path, jsonSiteIndex);
+        }
+
+        private static void BuildPageIndex(SiteIndex siteIndex)
+        {
+            string GetViewEnginePath(Type sitePageModelType)
+            {
+                // should be same as IActionDescriptorCollectionProvider.ViewEnginePath, which could be used to check validity
+                var fullName = sitePageModelType.FullName;
+                var pagesIndex = fullName.LastIndexOf("Pages", StringComparison.OrdinalIgnoreCase) + 5;
+                var modelIndex = fullName.LastIndexOf("Model", StringComparison.OrdinalIgnoreCase);
+                return fullName.Remove(modelIndex).Substring(pagesIndex).Replace('.', '/');
+            }
+
+            // Get all pages that extend SitePageModel
+            var sitePageModelTypes = Assembly.GetExecutingAssembly().GetTypes()
+                .Where(x => typeof(SitePageModel).IsAssignableFrom(x) && !x.IsAbstract)
+                .ToList();
+
+            foreach (var sitePageModelType in sitePageModelTypes)
+            {
+                var path = GetViewEnginePath(sitePageModelType);
+                var sitePageModel = (SitePageModel)Activator.CreateInstance(sitePageModelType);
+                var pageMetadata = new PageMetadata(path, sitePageModel);
+                siteIndex.Pages.Add(pageMetadata);
+            }
+        }
+
+        private void BuildImageIndex(SiteIndex siteIndex)
+        {
+            // todo could move to json, e.g. indexSettings.json
+            var imageDirectories = new[] { "articles", "images" };
+            foreach (var imageDirectory in imageDirectories)
+            {
+                var path = Path.Combine(_hostingEnvironment.WebRootPath, imageDirectory);
+                if (!Directory.Exists(path))
+                {
+                    throw new Exception($"Invalid directory '{path}'.");
+                }
+                var fileProvider = new PhysicalFileProvider(path);
+                CrawlImageDirectory(fileProvider, siteIndex);
+            }
+        }
+
+        private void CrawlImageDirectory(IFileProvider fileProvider, SiteIndex siteIndex)
+        {
+            string GetRelativePath(string physicalPath)
+            {
+                return "/" + Path.GetRelativePath(_hostingEnvironment.WebRootPath, physicalPath).Replace('\\', '/');
+            }
+
+            // crawl images
+            var images = fileProvider.GetDirectoryContents("")
+                .Where(x => !x.IsDirectory && x.Name.EndsWith(".jpg"))
+                .ToDictionary(k => k.Name, StringComparer.OrdinalIgnoreCase);
+            foreach (var image in images.Values)
+            {
+                if (image.Name.EndsWith("-thumb.jpg"))
+                {
+                    continue;
+                }
+
+                var imageMetadata = new ImageMetadata()
+                {
+                    Path = GetRelativePath(image.PhysicalPath)
+                };
+
+                try
+                {
+                    using (var exifReader = new ExifReader(image.PhysicalPath))
+                    {
+                        imageMetadata.Title = GetImageMetadata(exifReader, ExifTags.XPTitle);
+                        imageMetadata.Description = GetImageMetadata(exifReader, ExifTags.XPComment);
+                        imageMetadata.Copyright = GetImageMetadata(exifReader, ExifTags.Copyright);
+                    }
+                }
+                catch (ExifLibException)
+                {
+                    // swallow the exception that occurs when there is no EXIF data
+                }
+
+                var thumbnailName = image.Name.Replace(".jpg", "-thumb.jpg");
+                if (images.TryGetValue(thumbnailName, out var thumbnail))
+                {
+                    imageMetadata.ThumbnailPath = GetRelativePath(thumbnail.PhysicalPath);
+                }
+                else
+                {
+                    imageMetadata.ThumbnailPath = imageMetadata.Path;
+                }
+                siteIndex.Images.Add(imageMetadata);
+            }
+
+            // crawl subdirectories
+            var subDirectories = fileProvider.GetDirectoryContents("")
+                .Where(x => x.IsDirectory);
+            foreach (var subDirectory in subDirectories)
+            {
+                var subFileProvider = new PhysicalFileProvider(subDirectory.PhysicalPath);
+                CrawlImageDirectory(subFileProvider, siteIndex);
+            }
+        }
+
+        private static string GetImageMetadata(ExifReader exifReader, ExifTags exifTag)
+        {
+            return exifReader.GetTagValue<string>(exifTag, out var result) ? result : "";
+        }
+
+    }
+}

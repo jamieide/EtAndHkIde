@@ -2,6 +2,11 @@
 {
     public class Citation
     {
+        public Citation()
+        {
+            // needed for JSON deserialization
+        }
+
         public Citation(CitationType type, string url)
         {
             Type = type;

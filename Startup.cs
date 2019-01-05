@@ -18,15 +18,11 @@ namespace EtAndHkIde
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddSingleton<ISiteRepository, InMemorySiteRepository>();
-            services.AddSingleton<MetadataFactory>(factory =>
-            {
-                var hostingEnvironment = factory.GetRequiredService<IHostingEnvironment>();
-                return new MetadataFactory(hostingEnvironment.WebRootPath);
-            });
+            services.AddTransient<ISiteIndexFactory, JsonSiteIndexFactory>();
+            services.AddSingleton<ISiteRepository, JsonSiteRepository>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ISiteIndexFactory siteIndexFactory)
         {
             if (env.IsDevelopment())
             {
@@ -42,6 +38,8 @@ namespace EtAndHkIde
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseMvc();
+
+            siteIndexFactory.BuildIndex();
         }
     }
 }

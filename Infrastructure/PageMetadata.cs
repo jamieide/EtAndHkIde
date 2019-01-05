@@ -5,6 +5,11 @@ namespace EtAndHkIde.Infrastructure
 {
     public class PageMetadata
     {
+        public PageMetadata()
+        {
+            // needed for JSON deserialization
+        }
+
         public PageMetadata(string path, SitePageModel sitePageModel)
         {
             Path = path;
@@ -15,14 +20,14 @@ namespace EtAndHkIde.Infrastructure
             Citation = sitePageModel.Citation;
         }
 
-        public string Path { get; }
-        public string Title { get; }
-        public string Description { get; }
-        public DateTime? PublishDate { get; }
+        public string Path { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public DateTime? PublishDate { get; set; }
 
-        public IEnumerable<Tag> Tags { get; }
+        public IEnumerable<Tag> Tags { get; set; }
 
-        public Citation Citation { get; }
+        public Citation Citation { get; set; }
 
         public override string ToString() => Title;
     }
