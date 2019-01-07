@@ -108,6 +108,11 @@ namespace EtAndHkIde.Infrastructure
                         imageMetadata.Title = GetImageMetadata(exifReader, ExifTags.XPTitle);
                         imageMetadata.Description = GetImageMetadata(exifReader, ExifTags.XPComment);
                         imageMetadata.Copyright = GetImageMetadata(exifReader, ExifTags.Copyright);
+                        var tags = GetImageMetadata(exifReader, ExifTags.XPKeywords);
+                        if (!string.IsNullOrWhiteSpace(tags))
+                        {
+                            imageMetadata.Tags = tags.Split(';', ',').Select(x => x.Trim()).ToArray();
+                        }
                     }
                 }
                 catch (ExifLibException)

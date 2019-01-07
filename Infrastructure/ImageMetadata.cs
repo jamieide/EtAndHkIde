@@ -10,6 +10,7 @@ namespace EtAndHkIde.Infrastructure
         public string Title { get; set; } = "";
         public string Description { get; set; } = "";
         public string Copyright { get; set; } = "";
+        public string[] Tags { get; set; } = new string[0];
 
         public override string ToString() => Path;
     }
