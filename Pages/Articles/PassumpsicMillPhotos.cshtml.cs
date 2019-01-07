@@ -9,7 +9,7 @@ namespace EtAndHkIde.Pages.Articles
         {
             Description = "A collection of photographs of the original and rebuilt mills in Passumpsic";
             PublishDate = new DateTime(2018, 12, 16);
-            Tags = new[] {Tag.Passumpsic};
+            Tags = new[] {TagValues.Passumpsic};
         }
     }
 }

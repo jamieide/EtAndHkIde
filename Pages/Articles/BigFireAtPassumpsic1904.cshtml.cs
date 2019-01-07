@@ -14,7 +14,7 @@ namespace EtAndHkIde.Pages.Articles
                 "http://chroniclingamerica.loc.gov/lccn/sn84023253/1904-12-21/ed-1/seq-1/",
                 "St. Johnsbury Caledonian",
                 "December 21, 1904");
-            Tags = new[] { Tag.Passumpsic };
+            Tags = new[] { TagValues.Passumpsic };
         }
     }
 }

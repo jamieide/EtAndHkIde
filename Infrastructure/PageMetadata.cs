@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EtAndHkIde.Infrastructure
 {
@@ -16,7 +17,7 @@ namespace EtAndHkIde.Infrastructure
             Title = sitePageModel.Title;
             Description = sitePageModel.Description;
             PublishDate = sitePageModel.PublishDate;
-            Tags = sitePageModel.Tags ?? new List<Tag>();
+            Tags = sitePageModel.Tags ?? Enumerable.Empty<string>();
             Citation = sitePageModel.Citation;
         }
 
@@ -25,7 +26,7 @@ namespace EtAndHkIde.Infrastructure
         public string Description { get; set; }
         public DateTime? PublishDate { get; set; }
 
-        public IEnumerable<Tag> Tags { get; set; }
+        public IEnumerable<string> Tags { get; set; }
 
         public Citation Citation { get; set; }
 

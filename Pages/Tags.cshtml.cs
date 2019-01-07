@@ -1,7 +1,7 @@
 ﻿using EtAndHkIde.Infrastructure;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
 
 namespace EtAndHkIde.Pages
 {
@@ -14,8 +14,8 @@ namespace EtAndHkIde.Pages
             _siteRepository = siteRepository;
         }
 
-        public IEnumerable<Tag> Tags { get; set; }
-        public IDictionary<Tag, IEnumerable<PageMetadata>> PagesByTag { get; set; }
+        public IEnumerable<string> Tags { get; set; }
+        public IDictionary<string, IEnumerable<PageMetadata>> PagesByTag { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string Tag { get; set; }

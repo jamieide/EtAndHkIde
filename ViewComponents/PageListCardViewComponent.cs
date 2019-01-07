@@ -18,7 +18,7 @@ namespace EtAndHkIde.ViewComponents
             var pages = _siteRepository.GetPages();
             if (isFeatured)
             {
-                pages = pages.Where(x => x.Tags.Contains(Tag.Featured));
+                pages = pages.Where(x => x.Tags.Contains(TagValues.Featured));
             }
             if (count.HasValue)
             {

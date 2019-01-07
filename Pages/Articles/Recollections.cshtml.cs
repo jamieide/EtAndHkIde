@@ -11,17 +11,17 @@ namespace EtAndHkIde.Pages.Articles
             PublishDate = new DateTime(2018, 12, 17);
             Tags = new[]
             {
-                Tag.Featured,
-                Tag.TimothyIde,
-                Tag.JacobIde,
-                Tag.ElmoreIde,
-                Tag.HoraceIde,
-                Tag.WilliamIde,
-                Tag.RichardIde,
-                Tag.TimIde,
-                Tag.GeorgeGray,
-                Tag.Passumpsic,
-                Tag.StJohnsbury
+                TagValues.Featured,
+                TagValues.TimothyIde,
+                TagValues.JacobIde,
+                TagValues.ElmoreIde,
+                TagValues.HoraceIde,
+                TagValues.WilliamIde,
+                TagValues.RichardIde,
+                TagValues.TimIde,
+                TagValues.GeorgeGray,
+                TagValues.Passumpsic,
+                TagValues.StJohnsbury
             };
             Citation = new Citation(CitationType.Pdf, @"/articles/Recollections/Recollections.pdf");
         }

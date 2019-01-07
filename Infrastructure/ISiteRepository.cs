@@ -20,12 +20,11 @@ namespace EtAndHkIde.Infrastructure
         /// <summary>
         /// Get pages grouped by tag
         /// </summary>
-        IDictionary<Tag, IEnumerable<PageMetadata>> GetPagesByTag();
+        IDictionary<string, IEnumerable<PageMetadata>> GetPagesByTag();
 
         IEnumerable<ImageMetadata> GetImages(string path);
         ImageMetadata GetImage(string path, string name);
 
-        IEnumerable<TagType> GetTagTypes();
-        IEnumerable<Tag> GetTags();
+        IEnumerable<string> GetTags();
     }
 }

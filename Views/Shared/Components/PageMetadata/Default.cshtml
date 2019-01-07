@@ -1,9 +1,9 @@
 ﻿@using EtAndHkIde.Infrastructure
 @model EtAndHkIde.ViewComponents.PageMetadataViewModel
 <p>
-    @if (Model.Page.Tags.Contains(Tag.Featured))
+    @if (Model.Page.Tags.Contains(TagValues.Featured))
     {
-        <i class="tag-type @Tag.Featured.TagType.Icon" title="Featured page"></i>
+        <i class="@TagValues.TagIcon(TagValues.Featured) mr-1" title="Featured page"></i>
     }
     @Model.Page.Description
 </p>
@@ -39,8 +39,8 @@
             @foreach (var tag in Model.Page.Tags)
             {
                 <li class="list-group-item">
-                    <a asp-page="/Tags" asp-route-tag="@tag.NormalizedName">
-                        <i class="@tag.TagType.Icon mr-1 tag-type"></i>@tag.Name
+                    <a asp-page="/Tags" asp-route-tag="@tag">
+                        <i class="@TagValues.TagIcon(tag) mr-1"></i>@tag
                     </a>
                 </li>
             }

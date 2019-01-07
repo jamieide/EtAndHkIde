@@ -10,8 +10,7 @@ namespace EtAndHkIde.Infrastructure
     public class JsonSiteRepository : ISiteRepository
     {
         private readonly SiteIndex _siteIndex;
-        private readonly IEnumerable<Tag> _tags;
-        private readonly IEnumerable<TagType> _tagTypes;
+        private readonly IEnumerable<string> _tags;
 
         public JsonSiteRepository(IHostingEnvironment hostingEnvironment)
         {
@@ -20,7 +19,6 @@ namespace EtAndHkIde.Infrastructure
 
             // todo sort tags
             _tags = _siteIndex.Pages.SelectMany(x => x.Tags).Distinct();
-            _tagTypes = _tags.Select(x => x.TagType).Distinct();
         }
 
         public IEnumerable<PageMetadata> GetPages()
@@ -40,7 +38,7 @@ namespace EtAndHkIde.Infrastructure
             return _siteIndex.Pages.TryGetValue(path, out var page) ? page : null;
         }
 
-        public IDictionary<Tag, IEnumerable<PageMetadata>> GetPagesByTag()
+        public IDictionary<string, IEnumerable<PageMetadata>> GetPagesByTag()
         {
             return (from p in _siteIndex.Pages
                     from t in p.Tags
@@ -67,8 +65,6 @@ namespace EtAndHkIde.Infrastructure
             return null;
         }
 
-        public IEnumerable<TagType> GetTagTypes() => _tagTypes;
-
-        public IEnumerable<Tag> GetTags() => _tags;
+        public IEnumerable<string> GetTags() => _tags;
     }
 }

@@ -47,13 +47,17 @@ blockquote, .blockquote {
     font-style: italic;
 }
 
-i.tag-type {
+.tag {
     color: #ce2029;
 }
 
-    i.tag-type.fas.fa-star {
-        color: #ffd700;
-    }
+.list-group-item.active .tag {
+    color: white;
+}
+
+.tag.fas.fa-star {
+    color: #ffd700;
+}
 
 .card-title {
     color: #ce2029;
