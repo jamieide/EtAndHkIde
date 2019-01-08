@@ -21,10 +21,10 @@ namespace EtAndHkIde.Infrastructure
             _tags = _siteIndex.Pages.SelectMany(x => x.Tags).Distinct();
         }
 
-        public IEnumerable<PageMetadata> GetPages()
+        public IEnumerable<PageMetadata> GetPages(string path)
         {
             return _siteIndex.Pages
-                .Where(x => x.PublishDate.HasValue);
+                .Where(x => x.PublishDate.HasValue && x.Path.StartsWith(path, StringComparison.OrdinalIgnoreCase));
         }
 
         public IEnumerable<PageMetadata> GetDraftPages()

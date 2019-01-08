@@ -15,7 +15,7 @@ namespace EtAndHkIde.ViewComponents
 
         public IViewComponentResult Invoke(string title, int? count, bool isFeatured)
         {
-            var pages = _siteRepository.GetPages();
+            var pages = _siteRepository.GetPages("/Articles");
             if (isFeatured)
             {
                 pages = pages.Where(x => x.Tags.Contains(TagValues.Featured));

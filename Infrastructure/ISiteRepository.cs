@@ -7,12 +7,11 @@ namespace EtAndHkIde.Infrastructure
         /// <summary>
         /// Get published pages sorted by publish date descending.
         /// </summary>
-        IEnumerable<PageMetadata> GetPages();
+        IEnumerable<PageMetadata> GetPages(string path);
 
         /// <summary>
         /// Get draft (null publish date) pages.
         /// </summary>
-        /// <returns></returns>
         IEnumerable<PageMetadata> GetDraftPages();
 
         PageMetadata GetPage(string path);
