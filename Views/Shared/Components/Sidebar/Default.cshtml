@@ -8,19 +8,33 @@
     }
     @Model.Page.Description
 </p>
-<p>Published @Model.Page.PublishDate?.ToShortDateString()</p>
+<p>
+    @if (Model.Page.PublishDate.HasValue)
+    {
+        @:Published @Model.Page.PublishDate?.ToShortDateString()
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <i class="fas fa-edit mr-1"></i>Unpublished
+        </div>
+    }
+</p>
 @if (Model.Page.Citation != null)
 {
     <p>
         <partial name="_Citation" model="Model.Page.Citation" />
     </p>
 }
-<p>
-    @* Note this won't work on localhost *@
-    <a href="https://www.facebook.com/sharer/sharer.php?u=@Context.Request.GetEncodedUrl()">
-        <i class="fab fa-facebook-square mr-1"></i>Share on Facebook
-    </a>
-</p>
+@if (Model.Page.PublishDate.HasValue)
+{
+    <p>
+        @* Note this won't work on localhost *@
+        <a href="https://www.facebook.com/sharer/sharer.php?u=@Context.Request.GetEncodedUrl()">
+            <i class="fab fa-facebook-square mr-1"></i>Share on Facebook
+        </a>
+    </p>
+}
 @if (Model.RelatedPages.Any())
 {
     <div class="card mb-2">

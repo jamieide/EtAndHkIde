@@ -3,7 +3,7 @@
 @using EtAndHkIde.ViewComponents
 @model EtAndHkIde.Pages.TagsModel
 @{
-    Layout = "Shared/_NoSidebarLayout";
+    Layout = "Shared/_NavbarLayout";
     ViewData["Title"] = "Pages by tag";
 }
 <div class="container">
@@ -41,8 +41,8 @@
                     <div class="tab-pane fade @isActive" id="tag-@i">
                         @if (Model.PagesByTag.TryGetValue(tag, out var pageMetadatas))
                         {
-                            var model = new PageListCardViewModel(pageMetadatas);
-                            <partial name="_PageListCard" model="model" />
+                            @*var model = new PageListCardViewModel(pageMetadatas);
+                            <partial name="_PageListCard" model="model" />*@
                         }
                         else
                         {

@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "_BaseLayout";
+    Layout = "_Layout";
 }
 @RenderSection("Head", false)
 
@@ -8,15 +8,14 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-3">
-            <div id="sidebar">
-                @RenderSection("Sidebar", false)
-                <vc:page-metadata></vc:page-metadata>
-            </div>
+            <section class="sidebar">
+                <vc:sidebar></vc:sidebar>
+            </section>
         </div>
         <div class="col-lg-9 order-first order-lg-last">
-            <div id="body">
+            <main>
                 @RenderBody()
-            </div>
+            </main>
         </div>
     </div>
 </div>

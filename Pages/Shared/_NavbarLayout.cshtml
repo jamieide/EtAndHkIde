@@ -1,12 +1,10 @@
 ﻿@{
-    Layout = "_BaseLayout";
+    Layout = "_Layout";
 }
 @RenderSection("Head", false)
 
 <partial name="_SiteNavbar" model="false" />
-<div class="container">
-    <div id="body">
-        @RenderBody()
-    </div>
-</div>
 
+<div class="container">
+    @RenderBody()
+</div>

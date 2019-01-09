@@ -3,14 +3,14 @@
     padding-bottom: 5rem;
 }
 
-div#body {
+main {
     background-color: white;
     margin-top: 2rem;
     padding: 2rem 3rem;
     border-radius: 8px;
 }
 
-div#sidebar {
+section.sidebar {
     background-color: white;
     margin-top: 2rem;
     padding: 1rem;

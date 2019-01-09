@@ -3,7 +3,7 @@
     var isHomePage = Model;
     var ulClass = isHomePage ? "justify-content-center d-flex flex-fill" : "ml-auto";
 }
-<nav id="site-navbar" class="navbar navbar-expand-md navbar-light bg-light">
+<nav id="site-navbar" class="navbar navbar-expand-md navbar-light bg-light mb-2">
     @if (!isHomePage)
     {
         <a asp-page="/Index" class="navbar-brand">
@@ -29,13 +29,23 @@
                 </li>
             }
             <li class="nav-item">
-                <a class="nav-link" asp-page="/SiteIndex" title="Index of all site pages">
+                <a class="nav-link" asp-page="/Blog" title="Blog">
                     <span class="fa-stack fa-2x">
                         <i class="fas fa-circle fa-stack-2x"></i>
                         <i class="far fa-circle fa-stack-2x"></i>
-                        <i class="fas fa-list fa-inverse fa-stack-1x"></i>
+                        <i class="fas fas fa-bullhorn fa-inverse fa-stack-1x"></i>
                     </span>
-                    <span class="caption">Index</span>
+                    <span class="caption">Blog</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-page="/Articles" title="Articles">
+                    <span class="fa-stack fa-2x">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="far fa-circle fa-stack-2x"></i>
+                        <i class="fas fas fa-newspaper fa-inverse fa-stack-1x"></i>
+                    </span>
+                    <span class="caption">Articles</span>
                 </a>
             </li>
             <li class="nav-item">

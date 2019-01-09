@@ -2,16 +2,15 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace EtAndHkIde.ViewComponents
 {
-    public class PageMetadataViewComponent : ViewComponent
+    public class SidebarViewComponent : ViewComponent
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ISiteRepository _siteRepository;
 
-        public PageMetadataViewComponent(IHttpContextAccessor httpContextAccessor, ISiteRepository siteRepository)
+        public SidebarViewComponent(IHttpContextAccessor httpContextAccessor, ISiteRepository siteRepository)
         {
             _httpContextAccessor = httpContextAccessor;
             _siteRepository = siteRepository;

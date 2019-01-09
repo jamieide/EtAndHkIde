@@ -1,4 +1,5 @@
-﻿using EtAndHkIde.Infrastructure;
+﻿using System.Collections.Generic;
+using EtAndHkIde.Infrastructure;
 using EtAndHkIde.ViewComponents;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -13,12 +14,11 @@ namespace EtAndHkIde.Pages
             _siteRepository = siteRepository;
         }
 
-        public PageListCardViewModel PageList { get; set; }
+        public IEnumerable<PageMetadata> Drafts { get; set; }
 
         public void OnGet()
         {
-            var pages = _siteRepository.GetDraftPages();
-            PageList = new PageListCardViewModel("Drafts", pages);
+            Drafts = _siteRepository.GetDraftPages();
         }
     }
 }
