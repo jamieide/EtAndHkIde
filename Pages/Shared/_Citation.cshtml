@@ -14,7 +14,7 @@
 
 @if (Model != null)
 {
-    <a href="@Html.Raw(Model.Url)" target="_blank" rel="noopener noreferrer">
+    <a href="@Html.Raw(Model.Url)" target="_blank">
         @Html.Raw(citationIcons[Model.Type])
         @Html.Raw(Model.Name)
         @if (Model.Description.HasValue())
