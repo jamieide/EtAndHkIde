@@ -35,7 +35,10 @@
             <div class="col-md">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Recent Articles</h4>
+                        <h4 class="card-title d-flex justify-content-between">
+                            <span>Recent Articles</span>
+                            <i class="fas fa-newspaper"></i>
+                        </h4>
                         <partial name="_ArticleList" for="RecentArticles" />
                     </div>
                 </div>
@@ -43,17 +46,25 @@
             <div class="col-md">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Recent Blog Entries</h4>
+                        <h4 class="card-title d-flex justify-content-between">
+                            <span>Recent Blog Entries</span>
+                            <i class="fas fa-bullhorn"></i>
+                        </h4>
                         <partial name="_BlogList" for="RecentBlogEntries" />
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-2">
             <div class="col">
-                <div class="card-body">
-                    <h4 class="card-title">Featured Articles</h4>
-                    <partial name="_ArticleList" for="FeaturedArticles" />
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title d-flex justify-content-between">
+                            <span>Featured</span>
+                            <i class="fas fa-award"></i>
+                        </h4>
+                        <partial name="_ArticleList" for="FeaturedArticles" />
+                    </div>
                 </div>
             </div>
         </div>

@@ -7,6 +7,8 @@ using Newtonsoft.Json;
 
 namespace EtAndHkIde.Infrastructure
 {
+    // todo ToList? Return IQueryable?
+
     public class JsonSiteRepository : ISiteRepository
     {
         private readonly SiteIndex _siteIndex;
@@ -23,8 +25,13 @@ namespace EtAndHkIde.Infrastructure
 
         public IEnumerable<PageMetadata> GetPages(string path)
         {
-            return _siteIndex.Pages
-                .Where(x => x.PublishDate.HasValue && x.Path.StartsWith(path, StringComparison.OrdinalIgnoreCase));
+            var query = _siteIndex.Pages.Where(x => x.PublishDate.HasValue);
+            if (path.HasValue())
+            {
+                query = query.Where(x => x.Path.StartsWith(path + '/', StringComparison.OrdinalIgnoreCase));
+            }
+
+            return query;
         }
 
         public IEnumerable<PageMetadata> GetDraftPages()
@@ -40,6 +47,7 @@ namespace EtAndHkIde.Infrastructure
 
         public IDictionary<string, IEnumerable<PageMetadata>> GetPagesByTag()
         {
+            // todo currently includes all pages
             return (from p in _siteIndex.Pages
                     from t in p.Tags
                     select new

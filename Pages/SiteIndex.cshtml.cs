@@ -18,7 +18,7 @@ namespace EtAndHkIde.Pages
 
         public void OnGet()
         {
-            var pages = _siteRepository.GetPages("/");
+            var pages = _siteRepository.GetPages("/Articles");
             Pages = Partition(pages, 10);
         }
 

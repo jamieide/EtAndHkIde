@@ -22,7 +22,7 @@ namespace EtAndHkIde.Pages
         {
             RecentArticles = _siteRepository.GetPages("/Articles")
                 .OrderByDescending(x => x.PublishDate)
-                .Take(10);
+                .Take(5);
 
             FeaturedArticles = _siteRepository.GetPages("/Articles")
                 .Where(x => x.Tags.Contains(TagValues.Featured))
@@ -30,7 +30,7 @@ namespace EtAndHkIde.Pages
 
             RecentBlogEntries = _siteRepository.GetPages("/Blog")
                 .OrderByDescending(x => x.PublishDate)
-                .Take(10);
+                .Take(5);
         }
     }
 
