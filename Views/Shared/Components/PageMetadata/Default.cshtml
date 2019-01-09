@@ -1,4 +1,5 @@
 ﻿@using EtAndHkIde.Infrastructure
+@using Microsoft.AspNetCore.Http.Extensions
 @model EtAndHkIde.ViewComponents.PageMetadataViewModel
 <p>
     @if (Model.Page.Tags.Contains(TagValues.Featured))
@@ -11,9 +12,15 @@
 @if (Model.Page.Citation != null)
 {
     <p>
-        <partial name="_Citation" model="Model.Page.Citation"/>
+        <partial name="_Citation" model="Model.Page.Citation" />
     </p>
 }
+<p>
+    @* Note this won't work on localhost *@
+    <a href="https://www.facebook.com/sharer/sharer.php?u=@Context.Request.GetEncodedUrl()">
+        <i class="fab fa-facebook-square mr-1"></i>Share on Facebook
+    </a>
+</p>
 @if (Model.RelatedPages.Any())
 {
     <div class="card mb-2">
@@ -24,7 +31,7 @@
                 {
                     <li class="list-group-item">
                         <a asp-page="@relatedPage.Path">@relatedPage.Title</a>
-                        <br/>
+                        <br />
                         <small>@relatedPage.Description</small>
                     </li>
                 }
