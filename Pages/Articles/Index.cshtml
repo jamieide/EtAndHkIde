@@ -1,20 +1,22 @@
 ﻿@page
-@model EtAndHkIde.Pages.BlogModel
+@model EtAndHkIde.Pages.ArticlesModel
 @{
     Layout = "Shared/_NavbarLayout";
-    ViewData["Title"] = "Blog";
+    ViewData["Title"] = "Articles";
 }
 
 <div class="row">
     <div class="col-md-8 offset-md-2">
         <main>
             <h1 class="d-flex justify-content-between p-2 mb-2">
-                <span>Blog</span>
-                <i class="fas fa-bullhorn"></i>
+                <span>Articles</span>
+                <small>
+                    <i class="fas fa-newspaper"></i>
+                </small>
             </h1>
             <div class="card">
                 <div class="card-body">
-                    <partial name="_BlogList" for="BlogEntries" />
+                    <partial name="_PageList" for="Articles" />
                 </div>
             </div>
         </main>

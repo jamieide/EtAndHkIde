@@ -1,22 +1,22 @@
 ﻿@page
-@model EtAndHkIde.Pages.ArticlesModel
+@model EtAndHkIde.Pages.Galleries.IndexModel
 @{
     Layout = "Shared/_NavbarLayout";
-    ViewData["Title"] = "Articles";
+    ViewData["Title"] = "Galleries";
 }
 
 <div class="row">
     <div class="col-md-8 offset-md-2">
         <main>
             <h1 class="d-flex justify-content-between p-2 mb-2">
-                <span>Articles</span>
+                <span>Galleries</span>
                 <small>
-                    <i class="fas fa-newspaper"></i>
+                    <i class="fas fa-images"></i>
                 </small>
             </h1>
             <div class="card">
                 <div class="card-body">
-                    <partial name="_ArticleList" for="Articles" />
+                    <partial name="_PageList" for="Galleries" />
                 </div>
             </div>
         </main>

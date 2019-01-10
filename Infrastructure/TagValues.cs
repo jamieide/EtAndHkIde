@@ -40,7 +40,7 @@ namespace EtAndHkIde.Infrastructure
         {
             if (tagValue == TagValues.Featured)
             {
-                return "tag fas fa-star";
+                return "tag fas fa-award";
             }
             if (TagValues.PersonTags.Contains(tagValue))
             {
