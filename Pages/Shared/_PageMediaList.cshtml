@@ -1,0 +1,22 @@
+﻿@using EtAndHkIde.Infrastructure
+
+@model IEnumerable<EtAndHkIde.Infrastructure.PageMetadata>
+
+<ul class="list-unstyled">
+    @foreach (var pm in Model)
+    {
+        <li class="media mb-2">
+            <i class="@Icons.Articles fa-3x mr-3"></i>
+            <div class="media-body mt-0 pb-2">
+                <div class="d-flex justify-content-between">
+                    <h5>@pm.Title</h5>
+                    @if (pm.PublishDate.HasValue)
+                    {
+                        <small>@pm.PublishDate.Value.ToShortDateString()</small>
+                    }
+                </div>
+                <p>@pm.Description</p>
+            </div>
+        </li>
+    }
+</ul>
