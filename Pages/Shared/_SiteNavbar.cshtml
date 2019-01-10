@@ -1,4 +1,5 @@
-﻿@model bool
+﻿@using EtAndHkIde.Infrastructure
+@model bool
 @{
     var isHomePage = Model;
     var ulClass = isHomePage ? "justify-content-center d-flex flex-fill" : "ml-auto";
@@ -22,7 +23,7 @@
                         <span class="fa-stack fa-2x">
                             <i class="fas fa-circle fa-stack-2x"></i>
                             <i class="far fa-circle fa-stack-2x"></i>
-                            <i class="fas fa-home fa-inverse fa-stack-1x"></i>
+                            <i class="@Icons.Home fa-inverse fa-stack-1x"></i>
                         </span>
                         <span class="caption">Home</span>
                     </a>
@@ -33,7 +34,7 @@
                     <span class="fa-stack fa-2x">
                         <i class="fas fa-circle fa-stack-2x"></i>
                         <i class="far fa-circle fa-stack-2x"></i>
-                        <i class="fas fas fa-bullhorn fa-inverse fa-stack-1x"></i>
+                        <i class="@Icons.Blog fa-inverse fa-stack-1x"></i>
                     </span>
                     <span class="caption">Blog</span>
                 </a>
@@ -43,7 +44,7 @@
                     <span class="fa-stack fa-2x">
                         <i class="fas fa-circle fa-stack-2x"></i>
                         <i class="far fa-circle fa-stack-2x"></i>
-                        <i class="fas fas fa-newspaper fa-inverse fa-stack-1x"></i>
+                        <i class="@Icons.Articles fa-inverse fa-stack-1x"></i>
                     </span>
                     <span class="caption">Articles</span>
                 </a>
@@ -53,7 +54,7 @@
                     <span class="fa-stack fa-2x">
                         <i class="fas fa-circle fa-stack-2x"></i>
                         <i class="far fa-circle fa-stack-2x"></i>
-                        <i class="fas fas fa-images fa-inverse fa-stack-1x"></i>
+                        <i class="@Icons.Galleries fa-inverse fa-stack-1x"></i>
                     </span>
                     <span class="caption">Galleries</span>
                 </a>
@@ -63,7 +64,7 @@
                     <span class="fa-stack fa-2x">
                         <i class="fas fa-circle fa-stack-2x"></i>
                         <i class="far fa-circle fa-stack-2x"></i>
-                        <i class="fas fa-tag fa-inverse fa-stack-1x"></i>
+                        <i class="@Icons.Tags fa-inverse fa-stack-1x"></i>
                     </span>
                     <span class="caption">Tags</span>
                 </a>
@@ -73,7 +74,7 @@
                     <span class="fa-stack fa-2x">
                         <i class="fas fa-circle fa-stack-2x"></i>
                         <i class="far fa-circle fa-stack-2x"></i>
-                        <i class="fas fa-info fa-inverse fa-stack-1x"></i>
+                        <i class="@Icons.About fa-inverse fa-stack-1x"></i>
                     </span>
                     <span class="caption">About</span>
                 </a>

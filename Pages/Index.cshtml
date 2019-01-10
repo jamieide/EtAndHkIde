@@ -1,4 +1,5 @@
 ﻿@page
+@using EtAndHkIde.Infrastructure
 @model IndexModel
 @{
     Layout = "Shared/_Layout";
@@ -37,7 +38,7 @@
                     <div class="card-body">
                         <h4 class="card-title d-flex justify-content-between p-2 mb-2">
                             <span>Recent Blog Entries</span>
-                            <i class="fas fa-bullhorn"></i>
+                            <i class="@Icons.Blog"></i>
                         </h4>
                         <partial name="_PageList" for="RecentBlogEntries" />
                     </div>
@@ -48,7 +49,7 @@
                     <div class="card-body">
                         <h4 class="card-title d-flex justify-content-between p-2 mb-2">
                             <span>Recent Articles</span>
-                            <i class="fas fa-newspaper"></i>
+                            <i class="@Icons.Articles"></i>
                         </h4>
                         <partial name="_PageList" for="RecentArticles" />
                     </div>

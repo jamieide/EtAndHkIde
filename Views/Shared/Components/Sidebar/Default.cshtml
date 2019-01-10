@@ -4,7 +4,7 @@
 <p>
     @if (Model.Page.Tags.Contains(TagValues.Featured))
     {
-        <i class="@TagValues.TagIcon(TagValues.Featured) mr-1" title="Featured page"></i>
+        <i class="@Icons.ForTag(TagValues.Featured) mr-1" title="Featured page"></i>
     }
     @Model.Page.Description
 </p>
@@ -61,7 +61,7 @@
             {
                 <li class="list-group-item">
                     <a asp-page="/Tags" asp-route-tag="@tag">
-                        <i class="@TagValues.TagIcon(tag) mr-1"></i>@tag
+                        <i class="@Icons.ForTag(tag) mr-1"></i>@tag
                     </a>
                 </li>
             }
