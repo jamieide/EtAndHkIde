@@ -34,6 +34,7 @@ namespace EtAndHkIde
             {
                 app.UseHsts();
             }
+            app.UseStatusCodePagesWithReExecute("/Status{0}");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
