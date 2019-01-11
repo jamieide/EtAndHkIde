@@ -1,9 +1,9 @@
-﻿using EtAndHkIde.Infrastructure;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using EtAndHkIde.Infrastructure;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace EtAndHkIde.Pages.Galleries
+namespace EtAndHkIde.Pages.Images
 {
     public class IndexModel : PageModel
     {
@@ -14,11 +14,11 @@ namespace EtAndHkIde.Pages.Galleries
             _siteRepository = siteRepository;
         }
 
-        public IEnumerable<PageMetadata> Galleries { get; set; }
+        public IEnumerable<PageMetadata> Images { get; set; }
 
         public void OnGet()
         {
-            Galleries = _siteRepository.GetPages("/Galleries")
+            Images = _siteRepository.GetPages("/Images")
                 .OrderByDescending(x => x.PublishDate);
         }
     }

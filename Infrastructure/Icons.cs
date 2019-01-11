@@ -7,7 +7,7 @@ namespace EtAndHkIde.Infrastructure
         public const string Home = "fas fa-home";
         public const string Articles = "fas fa-newspaper";
         public const string Blog = "fas fa-bullhorn";
-        public const string Galleries = "fas fa-images";
+        public const string Images = "fas fa-images";
         public const string Tags = "fas fa-tag";
         public const string About = "fas fa-info";
 

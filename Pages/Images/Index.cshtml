@@ -1,23 +1,23 @@
 ﻿@page
 @using EtAndHkIde.Infrastructure
-@model EtAndHkIde.Pages.Galleries.IndexModel
+@model EtAndHkIde.Pages.Images.IndexModel
 @{
     Layout = "Shared/_NavbarLayout";
-    ViewData["Title"] = "Galleries";
+    ViewData["Title"] = "Images";
 }
 
 <div class="row">
     <div class="col-md-8 offset-md-2">
         <main>
             <h1 class="d-flex justify-content-between p-2 mb-2">
-                <span>Galleries</span>
+                <span>Images</span>
                 <small>
-                    <i class="@Icons.Galleries"></i>
+                    <i class="@Icons.Images"></i>
                 </small>
             </h1>
             <div class="card">
                 <div class="card-body">
-                    <partial name="_PageList" for="Galleries" />
+                    <partial name="_PageList" for="Images" />
                 </div>
             </div>
         </main>

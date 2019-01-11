@@ -1,7 +1,7 @@
-﻿using EtAndHkIde.Infrastructure;
-using System;
+﻿using System;
+using EtAndHkIde.Infrastructure;
 
-namespace EtAndHkIde.Pages.Articles
+namespace EtAndHkIde.Pages.Images
 {
     public class RandallArmorPhotosModel : SitePageModel
     {

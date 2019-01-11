@@ -1,9 +1,9 @@
-﻿using EtAndHkIde.Infrastructure;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using EtAndHkIde.Infrastructure;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace EtAndHkIde.Pages
+namespace EtAndHkIde.Pages.Blog
 {
     public class BlogModel : PageModel
     {
