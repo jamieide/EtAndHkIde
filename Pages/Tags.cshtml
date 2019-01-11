@@ -4,17 +4,20 @@
 @model EtAndHkIde.Pages.TagsModel
 @{
     Layout = "Shared/_NavbarLayout";
-    ViewData["Title"] = "Pages by tag";
+    ViewData["Title"] = "Tags";
 }
-<div class="container">
-    <h1>@ViewData["Title"]</h1>
+<main>
+    <h1 class="d-flex justify-content-between p-2 mb-2">
+        <span>Tags</span>
+        <i class="@Icons.Tags"></i>
+    </h1>
 
     <div class="row">
         <div class="col-md-4">
             <div class="list-group">
-                @for (var i = 0; i < Model.Tags.Count(); i++)
+                @for (var i = 0; i < Model.Tags.Length; i++)
                 {
-                    var tag = Model.Tags.ElementAt(i);
+                    var tag = Model.Tags[i];
                     var isActive = string.Equals(tag, Model.Tag, StringComparison.OrdinalIgnoreCase) ? "active" : "";
 
                     var pageCount = 0;
@@ -33,16 +36,15 @@
         </div>
         <div class="col-md-8">
             <div class="tab-content">
-                @for (var i = 0; i < Model.Tags.Count(); i++)
+                @for (var i = 0; i < Model.Tags.Length; i++)
                 {
-                    var tag = Model.Tags.ElementAt(i);
+                    var tag = Model.Tags[i];
                     var isActive = string.Equals(tag, Model.Tag, StringComparison.OrdinalIgnoreCase) ? "active show" : "";
 
                     <div class="tab-pane fade @isActive" id="tag-@i">
                         @if (Model.PagesByTag.TryGetValue(tag, out var pageMetadatas))
                         {
-                            @*var model = new PageListCardViewModel(pageMetadatas);
-                            <partial name="_PageListCard" model="model" />*@
+                            <partial name="_PageListWithIcons" model="@pageMetadatas" />
                         }
                         else
                         {
@@ -53,4 +55,4 @@
             </div>
         </div>
     </div>
-</div>
+</main>

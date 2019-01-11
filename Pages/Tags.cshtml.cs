@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EtAndHkIde.Pages
 {
@@ -14,7 +15,7 @@ namespace EtAndHkIde.Pages
             _siteRepository = siteRepository;
         }
 
-        public IEnumerable<string> Tags { get; set; }
+        public string[] Tags { get; set; }
         public IDictionary<string, IEnumerable<PageMetadata>> PagesByTag { get; set; }
 
         [BindProperty(SupportsGet = true)]
@@ -22,7 +23,7 @@ namespace EtAndHkIde.Pages
 
         public void OnGet()
         {
-            Tags = _siteRepository.GetTags();
+            Tags = _siteRepository.GetTags().ToArray();
             PagesByTag = _siteRepository.GetPagesByTag();
         }
     }

@@ -4,7 +4,7 @@
 <p>
     @if (Model.Page.Tags.Contains(TagValues.Featured))
     {
-        <i class="@Icons.ForTag(TagValues.Featured) mr-1" title="Featured page"></i>
+        <i class="@Icons.ForTag(TagValues.Featured) mr-1" title="Featured"></i>
     }
     @Model.Page.Description
 </p>
@@ -55,7 +55,10 @@
 }
 <div class="card">
     <div class="card-body">
-        <h5 class="card-title">Tags</h5>
+        <h5 class="card-title d-flex justify-content-between">
+            <span>Tags</span>
+            <i class="@Icons.Tags"></i>
+        </h5>
         <ul class="list-group list-group-flush">
             @foreach (var tag in Model.Page.Tags)
             {

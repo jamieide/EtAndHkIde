@@ -19,8 +19,10 @@ namespace EtAndHkIde.Infrastructure
             var indexPath = Path.Combine(hostingEnvironment.WebRootPath, "index.json");
             _siteIndex = JsonConvert.DeserializeObject<SiteIndex>(File.ReadAllText(indexPath));
 
-            // todo sort tags
-            _tags = _siteIndex.Pages.SelectMany(x => x.Tags).Distinct();
+            _tags = _siteIndex.Pages
+                .SelectMany(x => x.Tags)
+                .Distinct()
+                .OrderBy(x => x, new TagSorter());
         }
 
         public IEnumerable<PageMetadata> GetPages(string path)
@@ -47,9 +49,9 @@ namespace EtAndHkIde.Infrastructure
 
         public IDictionary<string, IEnumerable<PageMetadata>> GetPagesByTag()
         {
-            // todo currently includes all pages
             return (from p in _siteIndex.Pages
                     from t in p.Tags
+                    orderby p.PublishDate descending 
                     select new
                     {
                         Page = p,
@@ -74,5 +76,39 @@ namespace EtAndHkIde.Infrastructure
         }
 
         public IEnumerable<string> GetTags() => _tags;
+
+        private class TagSorter : IComparer<string>
+        {
+            private static int CompareTo(string x, string y, ISet<string> tagGroup)
+            {
+                var containsX = tagGroup.Contains(x);
+                var containsY = tagGroup.Contains(y);
+                if (containsX ^ containsY) //xor
+                {
+                    return containsX ? -1 : 1;
+                }
+
+                return 0;
+            }
+
+            public int Compare(string x, string y)
+            {
+                var compare = CompareTo(x, y, TagValues.SystemTags);
+                if (compare == 0)
+                {
+                    compare = CompareTo(x, y, TagValues.PersonTags);
+                    if (compare == 0)
+                    {
+                        compare = CompareTo(x, y, TagValues.PlaceTags);
+                        if (compare == 0)
+                        {
+                            return string.Compare(x, y);
+                        }
+                    }
+                }
+
+                return compare;
+            }
+        }
     }
 }

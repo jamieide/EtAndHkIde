@@ -27,5 +27,20 @@ namespace EtAndHkIde.Infrastructure
             }
             return "tag fas fa-tag";
         }
+
+        public static string ForPath(string path)
+        {
+            switch (path)
+            {
+                case var p when p.StartsWith("/Articles"):
+                    return Articles;
+                case var p when p.StartsWith("/Blog"):
+                    return Blog;
+                case var p when p.StartsWith("/Images"):
+                    return Images;
+                default:
+                    return "";
+            }
+        }
     }
 }
