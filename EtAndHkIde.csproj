@@ -27,6 +27,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\articles\VermontLifeWinter1977\" />
     <Folder Include="wwwroot\blog\" />
+    <Folder Include="wwwroot\images\ElmoreAndCynthiaFamilyPortrait\" />
   </ItemGroup>
 
 </Project>
