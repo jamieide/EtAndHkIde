@@ -11,14 +11,14 @@ namespace EtAndHkIde.Pages.Articles
             PublishDate = new DateTime(2018, 12, 19);
             Tags = new[]
             {
-                TagValues.Featured,
-                TagValues.TimothyIde,
-                TagValues.JacobIde,
-                TagValues.ElmoreIde,
-                TagValues.HoraceIde,
-                TagValues.WilliamIde,
-                TagValues.Passumpsic,
-                TagValues.StJohnsbury
+                TagValues.System.Featured,
+                TagValues.People.TimothyIde,
+                TagValues.People.JacobIde,
+                TagValues.People.ElmoreIde,
+                TagValues.People.HoraceIde,
+                TagValues.People.WilliamIde,
+                TagValues.Places.Passumpsic,
+                TagValues.Places.StJohnsbury
             };
             Citation = new Citation(CitationType.Newspaper,
                 @"http://chroniclingamerica.loc.gov/lccn/sn84023253/1913-12-17/ed-1/seq-3/",

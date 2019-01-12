@@ -11,14 +11,14 @@ namespace EtAndHkIde.Pages.Articles
             PublishDate = new DateTime(2018, 12, 17);
             Tags = new[]
             {
-                TagValues.TimothyIde,
-                TagValues.JacobIde,
-                TagValues.ElmoreIde,
-                TagValues.HoraceIde,
-                TagValues.WilliamIde,
-                TagValues.RichardIde,
-                TagValues.Passumpsic,
-                TagValues.StJohnsbury
+                TagValues.People.TimothyIde,
+                TagValues.People.JacobIde,
+                TagValues.People.ElmoreIde,
+                TagValues.People.HoraceIde,
+                TagValues.People.WilliamIde,
+                TagValues.People.RichardIde,
+                TagValues.Places.Passumpsic,
+                TagValues.Places.StJohnsbury
             };
             Citation = new Citation(CitationType.Pdf, @"/articles/VermontMillingDynasty/A-Vermont-Milling-Dynasty.pdf");
         }

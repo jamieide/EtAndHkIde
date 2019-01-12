@@ -93,13 +93,13 @@ namespace EtAndHkIde.Infrastructure
 
             public int Compare(string x, string y)
             {
-                var compare = CompareTo(x, y, TagValues.SystemTags);
+                var compare = CompareTo(x, y, TagValues.System.All);
                 if (compare == 0)
                 {
-                    compare = CompareTo(x, y, TagValues.PersonTags);
+                    compare = CompareTo(x, y, TagValues.People.All);
                     if (compare == 0)
                     {
-                        compare = CompareTo(x, y, TagValues.PlaceTags);
+                        compare = CompareTo(x, y, TagValues.Places.All);
                         if (compare == 0)
                         {
                             return string.Compare(x, y);

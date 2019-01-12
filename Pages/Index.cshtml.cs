@@ -23,7 +23,7 @@ namespace EtAndHkIde.Pages
                 .OrderByDescending(x => x.PublishDate)
                 .Take(10);
             FeaturePages = _siteRepository.GetPages(null)
-                .Where(x => x.Tags.Contains(TagValues.Featured));
+                .Where(x => x.Tags.Contains(TagValues.System.Featured));
         }
     }
 

@@ -9,7 +9,7 @@ namespace EtAndHkIde.Pages.Articles
         {
             Description = "A newspaper article describing the fire that consumed the original Passumpsic mill in 1883.";
             PublishDate = new DateTime(2018, 12, 21);
-            Tags = new[] { TagValues.Passumpsic };
+            Tags = new[] { TagValues.Places.Passumpsic };
         }
     }
 }

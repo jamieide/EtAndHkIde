@@ -14,15 +14,15 @@ namespace EtAndHkIde.Infrastructure
 
         public static string ForTag(string tagValue)
         {
-            if (tagValue == TagValues.Featured)
+            if (tagValue == TagValues.System.Featured)
             {
                 return "tag fas fa-award";
             }
-            if (TagValues.PersonTags.Contains(tagValue))
+            if (TagValues.People.All.Contains(tagValue))
             {
                 return "tag fas fa-user";
             }
-            if (TagValues.PlaceTags.Contains(tagValue))
+            if (TagValues.Places.All.Contains(tagValue))
             {
                 return "tag fas fa-map-pin";
             }

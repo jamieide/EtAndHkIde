@@ -11,14 +11,14 @@ namespace EtAndHkIde.Pages.Articles
             PublishDate = new DateTime(2018, 12, 17);
             Tags = new[]
             {
-                TagValues.Featured,
-                TagValues.TimothyIde,
-                TagValues.JacobIde,
-                TagValues.ElmoreIde,
-                TagValues.WilliamIde,
-                TagValues.RichardIde,
-                TagValues.Passumpsic,
-                TagValues.StJohnsbury
+                TagValues.System.Featured,
+                TagValues.People.TimothyIde,
+                TagValues.People.JacobIde,
+                TagValues.People.ElmoreIde,
+                TagValues.People.WilliamIde,
+                TagValues.People.RichardIde,
+                TagValues.Places.Passumpsic,
+                TagValues.Places.StJohnsbury
             };
             Citation = new Citation(CitationType.Pdf, @"/articles/MillersForFiveGenerations/Millers-for-Five-Generations.pdf");
         }

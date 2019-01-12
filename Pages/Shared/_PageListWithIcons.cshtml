@@ -7,9 +7,9 @@
         <a asp-page="@pageMetadata.Path" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">
-                    @if (pageMetadata.Tags.Contains(TagValues.Featured))
+                    @if (pageMetadata.Tags.Contains(TagValues.System.Featured))
                     {
-                        <i class="@Icons.ForTag(TagValues.Featured) mr-1" title="Highlight page"></i>
+                        <i class="@Icons.ForTag(TagValues.System.Featured) mr-1" title="Highlight page"></i>
                     }
                     @pageMetadata.Title
                 </h5>

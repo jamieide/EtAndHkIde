@@ -9,7 +9,7 @@ namespace EtAndHkIde.Pages.Images
         {
             Description = "A family portrait of Elmore and Cynthia Ide circa 1895.";
             PublishDate = new DateTime(2019, 1, 12);
-            Tags = new[] { TagValues.ElmoreIde, TagValues.CynthiaIde };
+            Tags = new[] { TagValues.People.ElmoreIde, TagValues.People.CynthiaIde };
         }
     }
 }

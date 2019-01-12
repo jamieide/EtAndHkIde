@@ -10,7 +10,7 @@ namespace EtAndHkIde.Pages.Articles
             Description = "A 50th anniversary gift from the daughters of Elmore and Cynthia Ide, Katharine, Mary Ellen and Fanny. Illustrated by Fanny Ide.";
             PublishDate = new DateTime(2019, 1, 12);
             Citation = new Citation(CitationType.Pdf, @"/articles/ToFatherAndMother/To Father And Mother.pdf");
-            Tags = new[] { TagValues.Featured, TagValues.ElmoreIde, TagValues.CynthiaIde };
+            Tags = new[] { TagValues.System.Featured, TagValues.People.ElmoreIde, TagValues.People.CynthiaIde };
         }
     }
 }
