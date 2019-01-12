@@ -14,23 +14,16 @@ namespace EtAndHkIde.Pages
             _siteRepository = siteRepository;
         }
 
-        public IEnumerable<PageMetadata> RecentArticles { get; set; }
-        public IEnumerable<PageMetadata> FeaturedArticles { get; set; }
-        public IEnumerable<PageMetadata> RecentBlogEntries { get; set; }
+        public IEnumerable<PageMetadata> RecentPages { get; set; }
+        public IEnumerable<PageMetadata> FeaturePages { get; set; }
 
         public void OnGet()
         {
-            RecentArticles = _siteRepository.GetPages("/Articles")
+            RecentPages = _siteRepository.GetPages(null)
                 .OrderByDescending(x => x.PublishDate)
-                .Take(5);
-
-            FeaturedArticles = _siteRepository.GetPages("/Articles")
-                .Where(x => x.Tags.Contains(TagValues.Featured))
-                .OrderByDescending(x => x.PublishDate);
-
-            RecentBlogEntries = _siteRepository.GetPages("/Blog")
-                .OrderByDescending(x => x.PublishDate)
-                .Take(5);
+                .Take(10);
+            FeaturePages = _siteRepository.GetPages(null)
+                .Where(x => x.Tags.Contains(TagValues.Featured));
         }
     }
 

@@ -37,10 +37,10 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title d-flex justify-content-between p-2 mb-2">
-                            <span>Recent Blog Entries</span>
-                            <i class="@Icons.Blog"></i>
+                            <span>Recent Additions</span>
+                            <i class="@Icons.Recent"></i>
                         </h4>
-                        <partial name="_PageList" for="RecentBlogEntries" />
+                        <partial name="_PageListWithIcons" for="RecentPages" />
                     </div>
                 </div>
             </div>
@@ -48,23 +48,10 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title d-flex justify-content-between p-2 mb-2">
-                            <span>Recent Articles</span>
-                            <i class="@Icons.Articles"></i>
-                        </h4>
-                        <partial name="_PageList" for="RecentArticles" />
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-2">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title d-flex justify-content-between p-2 mb-2">
-                            <span>Featured</span>
+                            <span>Features</span>
                             <i class="fas fa-award"></i>
                         </h4>
-                        <partial name="_PageListWithIcons" for="FeaturedArticles" />
+                        <partial name="_PageListWithIcons" for="FeaturePages" />
                     </div>
                 </div>
             </div>

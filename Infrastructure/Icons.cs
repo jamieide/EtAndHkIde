@@ -10,6 +10,7 @@ namespace EtAndHkIde.Infrastructure
         public const string Images = "fas fa-images";
         public const string Tags = "fas fa-tag";
         public const string About = "fas fa-info";
+        public const string Recent = "fas fa-clock";
 
         public static string ForTag(string tagValue)
         {
