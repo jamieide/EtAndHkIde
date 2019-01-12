@@ -14,6 +14,7 @@ namespace EtAndHkIde.Infrastructure
         public const string TimothyIde = "Timothy Ide";
         public const string JacobIde = "Jacob Ide";
         public const string ElmoreIde = "Elmore Ide";
+        public const string CynthiaIde = "Cynthia Ide";
         public const string HoraceIde = "Horace Ide";
         public const string WilliamIde = "William Ide";
         public const string RichardIde = "Richard Ide";
@@ -24,6 +25,7 @@ namespace EtAndHkIde.Infrastructure
             TimothyIde,
             JacobIde,
             ElmoreIde,
+            CynthiaIde,
             HoraceIde,
             WilliamIde,
             RichardIde,
