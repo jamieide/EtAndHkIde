@@ -30,13 +30,9 @@ namespace EtAndHkIde
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
             }
-            else
-            {
-                app.UseHsts();
-            }
+
             app.UseStatusCodePagesWithReExecute("/Status{0}");
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseMvc();
 
