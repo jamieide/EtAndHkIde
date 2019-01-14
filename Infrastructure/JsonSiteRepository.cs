@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
 
@@ -60,10 +61,17 @@ namespace EtAndHkIde.Infrastructure
                 .ToDictionary(k => k.Key, v => v.Select(x => x.Page));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public IEnumerable<ImageMetadata> GetImages(string path)
         {
+            //Only returns the images in the path, does not include subfolders
+            var pattern = "^" + path + @"/[^/]*\.\S{3}$";
             return _siteIndex.Images
-                .Where(x => x.Path.StartsWith(path, StringComparison.OrdinalIgnoreCase));
+                .Where(x => Regex.IsMatch(x.Path, pattern, RegexOptions.IgnoreCase));
         }
 
         public ImageMetadata GetImage(string path, string name)
