@@ -47,6 +47,8 @@ namespace EtAndHkIde.Infrastructure
             public const string WilliamIde = "William Ide";
             public const string RichardIde = "Richard Ide";
             public const string TimIde = "Tim Ide";
+            public const string RobertIde = "Rob Ide";
+            public const string MaitlandBean = "Maitland Bean";
             public const string GeorgeGray = "George Gray";
        }
 
