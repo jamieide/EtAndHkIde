@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\articles\idemillersofstjohnsburybeganin1813-1.jpg" />
+    <Content Remove="wwwroot\articles\idemillersofstjohnsburybeganin1813-2.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove=".gitattributes" />
     <None Remove=".gitignore" />
   </ItemGroup>
@@ -17,10 +22,6 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\articles\PassumpsicRiverMillEnds152YearCareer\" />
   </ItemGroup>
 
 </Project>
