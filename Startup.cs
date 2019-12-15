@@ -12,7 +12,8 @@ namespace EtAndHkIde
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages().AddNewtonsoftJson();
+            // https://stackoverflow.com/a/58657997/12752
+            services.AddRazorPages().AddRazorRuntimeCompilation().AddNewtonsoftJson();
             services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
             services.AddAntiforgery();
 

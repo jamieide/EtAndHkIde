@@ -1,6 +1,5 @@
 ﻿using System;
 using EtAndHkIde.Infrastructure;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EtAndHkIde.Pages.Articles
 {
@@ -11,7 +10,7 @@ namespace EtAndHkIde.Pages.Articles
             Description = "Describes the closing of the Passumpsic branch office in 1965.";
             PublishDate = new DateTime(2019, 12, 14);
             Citation = new Citation(CitationType.Newspaper,
-                "https://vsara.newspapers.com/image/199368941",
+                null, //"https://vsara.newspapers.com/image/199368941", //link requires sign-in
                 "Burlington Free Press",
                 "April 1, 1965");
             Tags = new[] { TagValues.Places.Passumpsic };

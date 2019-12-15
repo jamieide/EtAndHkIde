@@ -15,9 +15,9 @@ namespace EtAndHkIde.Infrastructure
         private readonly SiteIndex _siteIndex;
         private readonly IEnumerable<string> _tags;
 
-        public JsonSiteRepository(IHostingEnvironment hostingEnvironment)
+        public JsonSiteRepository(IWebHostEnvironment hostEnvironment)
         {
-            var indexPath = Path.Combine(hostingEnvironment.WebRootPath, "index.json");
+            var indexPath = Path.Combine(hostEnvironment.WebRootPath, "index.json");
             _siteIndex = JsonConvert.DeserializeObject<SiteIndex>(File.ReadAllText(indexPath));
 
             _tags = _siteIndex.Pages
@@ -45,6 +45,10 @@ namespace EtAndHkIde.Infrastructure
 
         public PageMetadata GetPage(string path)
         {
+            if (path.EndsWith('/'))
+            {
+                path = path.Substring(0, path.Length - 1);
+            }
             return _siteIndex.Pages.TryGetValue(path, out var page) ? page : null;
         }
 
@@ -61,11 +65,6 @@ namespace EtAndHkIde.Infrastructure
                 .ToDictionary(k => k.Key, v => v.Select(x => x.Page));
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
         public IEnumerable<ImageMetadata> GetImages(string path)
         {
             //Only returns the images in the path, does not include subfolders
@@ -110,7 +109,7 @@ namespace EtAndHkIde.Infrastructure
                         compare = CompareTo(x, y, TagValues.Places.All);
                         if (compare == 0)
                         {
-                            return string.Compare(x, y);
+                            return string.CompareOrdinal(x, y);
                         }
                     }
                 }

@@ -2,7 +2,7 @@
 @model EtAndHkIde.Infrastructure.Citation
 @{
     var citationIcons = new Dictionary<CitationType, string>
-    {
+{
         {CitationType.Undefined, ""},
         {CitationType.Book, "<i class=\"fas fa-book mr-1\"></i>"},
         {CitationType.Magazine, "<i class=\"fas fa-book-open mr-1\"></i>"},
@@ -14,12 +14,19 @@
 
 @if (Model != null)
 {
-    <a href="@Html.Raw(Model.Url)" target="_blank">
-        @Html.Raw(citationIcons[Model.Type])
-        @Html.Raw(Model.Name)
-        @if (Model.Description.HasValue())
-        {
-            <br />@Model.Description
-        }
-    </a>
+    @if (Model.Url.HasValue())
+    {
+        <a href="@Html.Raw(Model.Url)" target="_blank">
+            @Html.Raw(citationIcons[Model.Type]) @Model.Name
+        </a>
+    }
+    else
+    {
+        @Html.Raw(citationIcons[Model.Type]) @Model.Name
+    }
+    @if (Model.Description.HasValue())
+    {
+        <br />
+        @Model.Description
+    }
 }
