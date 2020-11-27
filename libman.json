@@ -15,7 +15,7 @@
       "destination": "wwwroot/lib/lightbox2/"
     },
     {
-      "library": "font-awesome@5.11.2",
+      "library": "font-awesome@5.15.1",
       "destination": "wwwroot/lib/font-awesome/"
     }
   ]
