@@ -17,7 +17,7 @@
     @if (Model.Url.HasValue())
     {
         <a href="@Html.Raw(Model.Url)" target="_blank">
-            @Html.Raw(citationIcons[Model.Type]) @Model.Name
+            @Html.Raw(citationIcons[Model.Type]) @Html.Raw(@Model.Name)
         </a>
     }
     else

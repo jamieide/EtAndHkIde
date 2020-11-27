@@ -11,7 +11,7 @@
         {
             Type = type;
             Url = url;
-            Name = type == CitationType.Pdf ? "Open an Adobe&reg; PDF version of the original" : "Citation link";
+            Name = type == CitationType.Pdf ? "Adobe&reg; PDF" : "Citation link";
         }
 
         public Citation(CitationType type, string url, string name)
