@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Net;
 
 namespace EtAndHkIde
 {
@@ -34,6 +36,14 @@ namespace EtAndHkIde
             app.UseStatusCodePagesWithReExecute("/Status{0}");
 
             app.UseStaticFiles();
+            // site re-org 12/5/20, everything is just a page now
+            // TODO change to permanent when working
+            var redirectStatusCode = (int)HttpStatusCode.Redirect;
+            app.UseRewriter(new RewriteOptions()
+                .AddRedirect("articles/(.*)", "$1", redirectStatusCode)
+                .AddRedirect("blog/(.*)", "$1", redirectStatusCode)
+                .AddRedirect("images/(.*)", "$1", redirectStatusCode)
+            );
             app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapRazorPages());
 
