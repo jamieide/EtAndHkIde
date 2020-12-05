@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace EtAndHkIde.Infrastructure
 {
-    public class PageMetadata
+    public class PageMetadata : IPageMetadata
     {
         public PageMetadata()
         {
@@ -17,6 +17,8 @@ namespace EtAndHkIde.Infrastructure
             Title = sitePageModel.Title;
             Description = sitePageModel.Description;
             PublishDate = sitePageModel.PublishDate;
+            PreviewQuote = sitePageModel.PreviewQuote;
+            PreviewImage = sitePageModel.PreviewImage;
             Tags = sitePageModel.Tags ?? Enumerable.Empty<string>();
             Citation = sitePageModel.Citation;
         }
@@ -25,6 +27,8 @@ namespace EtAndHkIde.Infrastructure
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime? PublishDate { get; set; }
+        public string PreviewQuote { get; set; }
+        public string PreviewImage { get; set; }
 
         public IEnumerable<string> Tags { get; set; }
 

@@ -11,6 +11,8 @@ using System.Reflection;
 
 namespace EtAndHkIde.Infrastructure
 {
+    // TODO Check PreviewImage paths
+
     public class JsonSiteIndexFactory : ISiteIndexFactory
     {
         private const string IndexFileName = "index.json";

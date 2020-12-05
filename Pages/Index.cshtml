@@ -32,6 +32,22 @@
 
         <partial name="_SiteNavbar" model="true" />
 
+        <h2>New Pages</h2>
+        <div class="card-columns">
+            @foreach (var myPage in Model.RecentPages)
+            {
+                <partial name="_PageMetadataCard" model="myPage" />
+            }
+        </div>
+
+        <h2>Featured Pages</h2>
+        <div class="card-columns">
+            @foreach (var myPage in Model.FeaturePages)
+            {
+                <partial name="_PageMetadataCard" model="myPage" />
+            }
+        </div>
+
         <div class="row mt-2">
             <div class="col-md">
                 <div class="card">
