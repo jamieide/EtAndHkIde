@@ -2,7 +2,11 @@
 
 <div class="card">
     <div class="card-header">
-        <h5 class="card-title mb-0">@Model.Title</h5>
+        <h5 class="card-title mb-0">
+            <a asp-page="@Model.Path">
+                @Model.Title
+            </a>
+        </h5>
         <div class="text-muted text-right">
             <small title="publish date">@Model.PublishDate.ToShortDateString()</small>
         </div>

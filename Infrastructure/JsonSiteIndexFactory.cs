@@ -18,11 +18,11 @@ namespace EtAndHkIde.Infrastructure
         private const string IndexFileName = "index.json";
         private const string RelatedPagesFileName = "index-relatedPages.json";
 
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public JsonSiteIndexFactory(IHostingEnvironment hostingEnvironment)
+        public JsonSiteIndexFactory(IWebHostEnvironment hostEnvironment)
         {
-            _hostingEnvironment = hostingEnvironment;
+            _hostingEnvironment = hostEnvironment;
         }
 
         public void BuildIndex()
@@ -44,6 +44,7 @@ namespace EtAndHkIde.Infrastructure
             string GetViewEnginePath(Type sitePageModelType)
             {
                 // should be same as IActionDescriptorCollectionProvider.ViewEnginePath, which could be used to check validity
+                // Gets the path to the page assuming that the namespace is correct and that the class name ends with Model
                 var fullName = sitePageModelType.FullName;
                 var pagesIndex = fullName.LastIndexOf("Pages", StringComparison.OrdinalIgnoreCase) + 5;
                 var modelIndex = fullName.LastIndexOf("Model", StringComparison.OrdinalIgnoreCase);
