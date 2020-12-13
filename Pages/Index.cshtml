@@ -26,49 +26,62 @@
     <div class="container mt-3 mb-5">
         <div class="jumbotron">
             <h1 class="display-4">The Mill</h1>
-            <p class="lead">Seven generations of the Ide family have worked at the milling trade since 1813. It served us well and we served the hill farmers of Vermont's Northeast Kingdom well for nearly two hundred years.</p>
+            <p class="lead text-center"><i class="fas fa-quote-left mr-2"></i>It all began in 1813, when Timothy Ide, son of John Ide, Revolutionary soldier and pioneer, sold his farm in Lyndon and purchased the grist mill in Passumpsic Village on the banks of the Passumpsic River.<i class="fas fa-quote-right ml-2"></i></p>
+            <p class="lead text-center">Seven generations of the Ide family have worked at the milling trade since 1813. It served us well and we served the hill farmers of Vermont's Northeast Kingdom well for nearly two hundred years.</p>
             <p>The mill was central to our lives and livelihood, and the brightly lit sign was a St. Johnsbury landmark that we never failed to gaze at in passing. The Mill and the Old Man of the Mountain, in nearby Franconia Notch, were contemporaries and a stark reminder that whether built by man or nature, nothing lasts forever. The purpose of this site is to chronicle the remarkable history of E.T. &amp; H. K. Ide and the Ide family in Vermont with the goal of keeping the memories alive.</p>
         </div>
 
-        <partial name="_SiteNavbar" model="true" />
+        @*<partial name="_SiteNavbar" model="true" />*@
 
-        <h2>New Pages</h2>
-        <div class="card-columns">
-            @foreach (var myPage in Model.RecentPages)
-            {
-                <partial name="_PageMetadataCard" model="myPage" />
-            }
-        </div>
 
-        <h2>Featured Pages</h2>
-        <div class="card-columns">
-            @foreach (var myPage in Model.FeaturePages)
-            {
-                <partial name="_PageMetadataCard" model="myPage" />
-            }
-        </div>
-
-        <div class="row mt-2">
-            <div class="col-md">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title d-flex justify-content-between p-2 mb-2">
-                            <span>Recent Additions</span>
-                            <i class="@Icons.Recent"></i>
-                        </h4>
-                        <partial name="_PageListWithIcons" for="RecentPages" />
-                    </div>
+        <nav class="nav nav-pills nav-fill nav-justified mb-3">
+            <a class="nav-link active h5" href="#new-pages" data-toggle="pill">
+                <strong>NEW</strong>
+            </a>
+            <a class="nav-link h5" href="#feature-pages" data-toggle="pill">
+                <strong>FEATURES</strong>
+            </a>
+            <a class="nav-link h5" href="#photo-pages" data-toggle="pill">
+                <strong>PHOTOS</strong>
+            </a>
+            <a class="nav-link h5" href="#all-pages" data-toggle="pill">
+                <strong>ALL</strong>
+            </a>
+        </nav>
+        <div class="tab-content">
+            <div id="new-pages" class="tab-pane fade show active">
+                <div class="card-columns">
+                    @foreach (var myPage in Model.RecentPages)
+                    {
+                        <partial name="_PageMetadataCard" model="myPage" />
+                    }
                 </div>
             </div>
-            <div class="col-md">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title d-flex justify-content-between p-2 mb-2">
-                            <span>Features</span>
-                            <i class="fas fa-award"></i>
-                        </h4>
-                        <partial name="_PageListWithIcons" for="FeaturePages" />
-                    </div>
+            <div id="feature-pages" class="tab-pane fade">
+                <div class="card-columns">
+                    @foreach (var myPage in Model.FeaturePages)
+                    {
+                        <partial name="_PageMetadataCard" model="myPage" />
+                    }
+                </div>
+            </div>
+            <div id="photo-pages" class="tab-pane fade">
+                PHOTOS
+            </div>
+            <div id="all-pages" class="tab-pane fade">
+                <ul class="pagination">
+                    @for (int i = 1; i <= Model.AllPagesCount; i++)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="#">@i</a>
+                        </li>
+                    }
+                </ul>
+                <div class="card-columns">
+                    @foreach (var myPage in Model.AllPages)
+                    {
+                        <partial name="_PageMetadataCard" model="myPage" />
+                    }
                 </div>
             </div>
         </div>

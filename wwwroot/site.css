@@ -1,4 +1,9 @@
-﻿body {
+﻿/*
+    color scheme: #BD162C, #1643BD, #BD5F16
+    
+*/
+
+body {
     background-color: #d8d8d8;
     padding-bottom: 5rem;
 }
@@ -31,12 +36,19 @@ section.sidebar {
     background-color: white;
 }
 
+#home-page nav a {
+    /*    color: #BD162C;
+    background: white;
+*/
+}
+
 h1 {
-    color: #ce2029;
+    color: #BD162C;
     font-size: 2.2rem;
 }
 
 h2 {
+    color: #1643BD;
     font-size: 1.8rem;
 }
 
@@ -49,15 +61,23 @@ img {
     height: auto;
 }
 
+a {
+    color: #1643BD;
+}
+
+    a:hover {
+        color: #BD5F16;
+    }
+
 blockquote, .blockquote {
-    margin-left: 3rem;
+    /*    margin-left: 3rem;
     margin-right: 3rem;
-    font-size: 1rem;
+*/ font-size: 1rem;
     font-style: italic;
 }
 
 .tag {
-    color: #ce2029;
+    color: #BD162C;
 }
 
 .list-group-item.active .tag {
@@ -65,7 +85,7 @@ blockquote, .blockquote {
 }
 
 .card-title {
-    color: #ce2029;
+    color: #BD162C;
 }
 
 .card-body {
@@ -77,7 +97,7 @@ blockquote, .blockquote {
     }
 
 #navbar-links .fa-circle {
-    color: #ce2029;
+    color: #BD162C;
 }
 
 #navbar-links a:hover .fas.fa-circle {
@@ -85,7 +105,7 @@ blockquote, .blockquote {
 }
 
 #navbar-links a:hover .fa-inverse {
-    color: #ce2029;
+    color: #BD162C;
 }
 
 #navbar-links a:hover .fas.fa-square {

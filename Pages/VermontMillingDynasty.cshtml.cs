@@ -9,6 +9,7 @@ namespace EtAndHkIde.Pages
         {
             Description = "An article from the September 1958 issue of Eastern Feed Merchant.";
             PublishDate = new DateTime(2018, 12, 17);
+            PreviewQuote = "Determination and resourcefulness best describe the Ide philosophy for building and maintaining a good business. Going was not always easy.";
             Tags = new[]
             {
                 TagValues.People.TimothyIde,

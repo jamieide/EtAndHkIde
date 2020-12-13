@@ -9,6 +9,7 @@ namespace EtAndHkIde.Pages
         {
             Description = "A long newspaper article from The Caledonian published on the occasion of the 100th anniversary in 1913";
             PublishDate = new DateTime(2018, 12, 19);
+            PreviewQuote = "The close of a century’s ownership finds Elmore T. Ide 74 years old but still at his desk giving the business the benefit of his long and successful experience.";
             Tags = new[]
             {
                 TagValues.System.Featured,

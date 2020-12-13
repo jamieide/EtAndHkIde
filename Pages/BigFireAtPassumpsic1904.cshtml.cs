@@ -10,6 +10,7 @@ namespace EtAndHkIde.Pages
         {
             Description = "A newspaper article describing the 1904 fire that engulfed the second Passumpsic mill.";
             PublishDate = new DateTime(2019, 1, 2);
+            PreviewQuote = "The Ide grist mill stood on historic ground.";
             Citation = new Citation(CitationType.Newspaper,
                 "http://chroniclingamerica.loc.gov/lccn/sn84023253/1904-12-21/ed-1/seq-1/",
                 "St. Johnsbury Caledonian",

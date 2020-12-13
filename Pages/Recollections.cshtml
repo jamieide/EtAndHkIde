@@ -1,9 +1,10 @@
 ﻿@page
+@model EtAndHkIde.Pages.RecollectionsModel
 @{
-    ViewData["Title"] = "Recollections";
+    ViewData["Title"] = Model.Title;
 }
 
-<h1>Recollections</h1>
+<h1>@Model.Title</h1>
 <h1 class="small">by William Adams Ide</h1>
 
 <div class="row mb-3">

@@ -1,7 +1,7 @@
 ﻿using System;
 using EtAndHkIde.Infrastructure;
 
-namespace EtAndHkIde.Pages.Articles
+namespace EtAndHkIde.Pages
 {
     public class LargeFire1883Model : SitePageModel
     {
@@ -9,6 +9,7 @@ namespace EtAndHkIde.Pages.Articles
         {
             Description = "A newspaper article describing the fire that consumed the original Passumpsic mill in 1883.";
             PublishDate = new DateTime(2018, 12, 21);
+            PreviewQuote = "The dam was placed there by the one who put rocks into the earth, and gave 23 foot head before it was raised by the hand of man.";
             Tags = new[] { TagValues.Places.Passumpsic };
         }
     }

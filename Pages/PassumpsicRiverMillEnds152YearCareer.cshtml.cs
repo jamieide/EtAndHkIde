@@ -9,6 +9,7 @@ namespace EtAndHkIde.Pages
         {
             Description = "Describes the closing of the Passumpsic branch office in 1965.";
             PublishDate = new DateTime(2019, 12, 14);
+            PreviewQuote = "Last Saturday the firm closed its doors on the banks of the Passumpsic River where it had been a grain supplier and miller for area residents.";
             Citation = new Citation(CitationType.Newspaper,
                 null, //"https://vsara.newspapers.com/image/199368941", //link requires sign-in
                 "Burlington Free Press",

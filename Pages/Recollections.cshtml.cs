@@ -9,6 +9,7 @@ namespace EtAndHkIde.Pages
         {
             Description = "William Adams Ide's Recollections were compiled and published in 1951 as a booklet by his great nephew Donald Powell. They provide a tremendous insight into the history and the people behind the business.";
             PublishDate = new DateTime(2018, 12, 17);
+            PreviewQuote = "I will write down some memories in a rambling manner that may be of interest and amusement in future days.";
             Tags = new[]
             {
                 TagValues.System.Featured,
