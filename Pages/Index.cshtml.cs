@@ -15,27 +15,37 @@ namespace EtAndHkIde.Pages
         }
 
         public const int PageSize = 8;
+
         public IEnumerable<PageMetadata> RecentPages { get; set; }
+
         public IEnumerable<PageMetadata> FeaturePages { get; set; }
-        public IEnumerable<PageMetadata> AllPages { get; set; }
+
         public int AllPagesCount { get; set; }
+        public IDictionary<int, IEnumerable<PageMetadata>> AllPages { get; set; }
 
         public void OnGet()
         {
             RecentPages = _siteRepository.GetPages(null)
                 .OrderByDescending(x => x.PublishDate)
                 .Take(PageSize);
+
             FeaturePages = _siteRepository.GetPages(null)
                 .Where(x => x.Tags.Contains(TagValues.System.Featured));
-            AllPages = _siteRepository.GetPages(null);
-            if (AllPages.Count() == 0)
+
+            var allPages = _siteRepository.GetPages(null);
+            AllPages = BuildPages(allPages);
+        }
+
+        private IDictionary<int, IEnumerable<PageMetadata>> BuildPages(IEnumerable<PageMetadata> allPages)
+        {
+            var pageCount = allPages.Count() % PageSize == 0 ? allPages.Count() / PageSize : allPages.Count() / PageSize + 1;
+            var dict = new Dictionary<int, IEnumerable<PageMetadata>>();
+            for (int i = 0; i < pageCount; i++)
             {
-                AllPagesCount = 1;
+                var pages = allPages.Skip(i * PageSize).Take(PageSize);
+                dict.Add(i + 1, pages);
             }
-            else
-            {
-                AllPagesCount = AllPages.Count() % PageSize == 0 ? AllPages.Count() / PageSize : AllPages.Count() / PageSize + 1;
-            }
+            return dict;
         }
     }
 

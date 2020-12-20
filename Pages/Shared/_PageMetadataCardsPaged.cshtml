@@ -1,0 +1,43 @@
+﻿@model _PageMetadataCardsPagedViewModel
+
+@if (Model.Pages.Count() == 0)
+{
+    <div class="alert alert-info">
+        NO PAGES
+    </div>
+}
+
+@if (Model.Pages.Count() == 1)
+{
+    <div class="card-columns">
+        @foreach (var pageMetadata in Model.Pages.Values)
+        {
+            <partial name="_PageMetadataCard" model="pageMetadata" />
+        }
+    </div>
+}
+
+@if (Model.Pages.Count() > 1)
+{
+    <ul class="nav pagination pagination-lg mb-3">
+        @foreach (var key in Model.Pages.Keys)
+        {
+            <li class="page-item nav-item">
+                <a class="page-link nav-link @(key == 1 ? "active" : "")" data-toggle="tab" href="#@Model.Prefix-@key">@key</a>
+            </li>
+        }
+    </ul>
+    <div class="tab-content">
+        @foreach (var myPage in Model.Pages)
+        {
+            <div class="tab-pane fade @(myPage.Key == 1 ? "show active" : "")" id="@Model.Prefix-@myPage.Key">
+                <div class="card-columns">
+                    @foreach (var pageMetadata in myPage.Value)
+                    {
+                        <partial name="_PageMetadataCard" model="pageMetadata" />
+                    }
+                </div>
+            </div>
+        }
+    </div>
+}

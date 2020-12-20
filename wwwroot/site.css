@@ -96,6 +96,11 @@ blockquote, .blockquote {
         margin-bottom: 0;
     }
 
+.page-link.nav-link.active {
+    /* style page links when used as nav-links */
+    background-color: #0f7864;
+}
+
 #navbar-links .fa-circle {
     color: #BD162C;
 }

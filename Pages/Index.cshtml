@@ -1,5 +1,5 @@
 ﻿@page
-@using EtAndHkIde.Infrastructure
+@using EtAndHkIde.Pages.Shared
 @model IndexModel
 @{
     Layout = "Shared/_Layout";
@@ -69,21 +69,7 @@
                 PHOTOS
             </div>
             <div id="all-pages" class="tab-pane fade">
-                <ul class="pagination">
-                    @for (int i = 1; i <= Model.AllPagesCount; i++)
-                    {
-                        <li class="page-item">
-                            <a class="page-link" href="#">@i</a>
-                        </li>
-                    }
-                </ul>
-                <div class="card-columns">
-                    @foreach (var myPage in Model.AllPages)
-                    {
-                        <partial name="_PageMetadataCard" model="myPage" />
-                    }
-                </div>
+                <partial name="_PageMetadataCardsPaged" model="@(new _PageMetadataCardsPagedViewModel("all-pages", Model.AllPages))" />
             </div>
         </div>
     </div>
-</div>
