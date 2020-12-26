@@ -18,10 +18,8 @@
         }
         @if (Model.PreviewQuote.HasValue())
         {
-            <blockquote class="blockquote m-2">
-                <i class="fas fa-quote-left text-muted mr-2"></i>
-                @Html.Raw(Model.PreviewQuote)
-                <i class="fas fa-quote-right text-muted ml-2"></i>
+            <blockquote class="blockquote m-2 text-center">
+                <i class="fas fa-quote-left fa-xs text-muted mr-2"></i>@Html.Raw(Model.PreviewQuote)<i class="fas fa-quote-right fa-xs text-muted ml-2"></i>
             </blockquote>
         }
     </div>
