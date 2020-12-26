@@ -9,7 +9,7 @@ namespace EtAndHkIde.Pages
         {
             Description = "An article from the September 1958 issue of Eastern Feed Merchant.";
             PublishDate = new DateTime(2018, 12, 17);
-            PreviewImage = "articles/VermontMillingDynasty/vermont-milling-dynasty-preview.jpg";
+            PreviewImage = "pages/VermontMillingDynasty/vermont-milling-dynasty-preview.jpg";
             PreviewQuote = "Determination and resourcefulness best describe the Ide philosophy for building and maintaining a good business. Going was not always easy.";
             Tags = new[]
             {
@@ -22,7 +22,7 @@ namespace EtAndHkIde.Pages
                 TagValues.Places.Passumpsic,
                 TagValues.Places.StJohnsbury
             };
-            Citation = new Citation(CitationType.Pdf, @"/articles/VermontMillingDynasty/A-Vermont-Milling-Dynasty.pdf");
+            Citation = new Citation(CitationType.Pdf, @"/pages/VermontMillingDynasty/A-Vermont-Milling-Dynasty.pdf");
         }
     }
 }

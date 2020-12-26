@@ -24,7 +24,7 @@ namespace EtAndHkIde.Pages
                 TagValues.Places.Passumpsic,
                 TagValues.Places.StJohnsbury
             };
-            Citation = new Citation(CitationType.Pdf, @"/articles/Recollections/Recollections.pdf");
+            Citation = new Citation(CitationType.Pdf, @"/pages/Recollections/Recollections.pdf");
         }
     }
 }

@@ -10,8 +10,8 @@ namespace EtAndHkIde.Pages
             Description = "An article from the Winter 1977 edition of Vermont Life magazine.";
             PublishDate = new DateTime(2019, 1, 18);
             PreviewQuote = "The whole structure is rather like a giant, compartmentalized hour glass, in which the constant flow of grain measures the passage of the working day.";
-            PreviewImage = "articles/VermontLifeWinter1977/vermont-life-winter-1977-preview.jpg";
-            Citation = new Citation(CitationType.Pdf, "/articles/VermontLifeWinter1977/Vermont Life Winter 1977.pdf");
+            PreviewImage = "pages/VermontLifeWinter1977/vermont-life-winter-1977-preview.jpg";
+            Citation = new Citation(CitationType.Pdf, "/pages/VermontLifeWinter1977/Vermont Life Winter 1977.pdf");
             Tags = new[]
             {
                 TagValues.People.RichardIde,

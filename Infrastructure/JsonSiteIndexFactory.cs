@@ -68,7 +68,7 @@ namespace EtAndHkIde.Infrastructure
         private void BuildImageIndex(SiteIndex siteIndex)
         {
             // todo could move to json, e.g. indexSettings.json
-            var imageDirectories = new[] { "articles", "images" };
+            var imageDirectories = new[] { "pages" };
             foreach (var imageDirectory in imageDirectories)
             {
                 var path = Path.Combine(_hostingEnvironment.WebRootPath, imageDirectory);

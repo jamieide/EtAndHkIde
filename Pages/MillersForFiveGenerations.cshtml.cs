@@ -21,7 +21,7 @@ namespace EtAndHkIde.Pages
                 TagValues.Places.Passumpsic,
                 TagValues.Places.StJohnsbury
             };
-            Citation = new Citation(CitationType.Pdf, @"/articles/MillersForFiveGenerations/Millers-for-Five-Generations.pdf");
+            Citation = new Citation(CitationType.Pdf, @"/pages/MillersForFiveGenerations/Millers-for-Five-Generations.pdf");
         }
     }
 }
