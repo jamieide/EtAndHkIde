@@ -58,15 +58,10 @@
                 </div>
             </div>
             <div id="feature-pages" class="tab-pane fade">
-                <div class="card-columns">
-                    @foreach (var myPage in Model.FeaturePages)
-                    {
-                        <partial name="_PageMetadataCard" model="myPage" />
-                    }
-                </div>
+                <partial name="_PageMetadataCardsPaged" model="@(new _PageMetadataCardsPagedViewModel("feature-pages", Model.FeaturePages))" />
             </div>
             <div id="photo-pages" class="tab-pane fade">
-                PHOTOS
+                <partial name="_PageMetadataCardsPaged" model="@(new _PageMetadataCardsPagedViewModel("photo-pages", Model.PhotoPages))" />
             </div>
             <div id="all-pages" class="tab-pane fade">
                 <partial name="_PageMetadataCardsPaged" model="@(new _PageMetadataCardsPagedViewModel("all-pages", Model.AllPages))" />

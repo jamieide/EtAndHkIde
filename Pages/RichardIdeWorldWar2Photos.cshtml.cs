@@ -9,8 +9,8 @@ namespace EtAndHkIde.Pages
         {
             Description = "A collection of snapshots taken by Richard Ide during World War II service. Most and maybe all these photos were taken in Bremen.";
             PublishDate = new DateTime(2019, 1, 12);
-            PreviewImage = "images/RichardIdeWorldWar2/Richard Ide WW2 020.jpg";
-            Tags = new[] { TagValues.People.RichardIde };
+            PreviewImage = "images/RichardIdeWorldWar2/Richard Ide WW2 preview.jpg";
+            Tags = new[] { TagValues.System.Photos, TagValues.People.RichardIde };
         }
     }
 }

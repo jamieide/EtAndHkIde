@@ -3,14 +3,14 @@
 @if (Model.Pages.Count() == 0)
 {
     <div class="alert alert-info">
-        NO PAGES
+        There are no pages available.
     </div>
 }
 
 @if (Model.Pages.Count() == 1)
 {
     <div class="card-columns">
-        @foreach (var pageMetadata in Model.Pages.Values)
+        @foreach (var pageMetadata in Model.Pages.First().Value)
         {
             <partial name="_PageMetadataCard" model="pageMetadata" />
         }

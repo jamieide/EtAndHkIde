@@ -26,7 +26,14 @@ namespace EtAndHkIde.Infrastructure
 
             public static ISet<string> All { get; }
 
+            /// <summary>
+            /// Featured page.
+            /// </summary>
             public const string Featured = "Featured";
+            /// <summary>
+            /// Pages that are primarily photos.
+            /// </summary>
+            public const string Photos = "Photos";
         }
 
         public static class People
