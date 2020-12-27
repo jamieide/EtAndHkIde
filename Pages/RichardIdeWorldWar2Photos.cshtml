@@ -2,6 +2,11 @@
 @model EtAndHkIde.Pages.RichardIdeWorldWar2PhotosModel
 @{
     ViewData["Title"] = Model.Title;
+    var imagePaths = new List<string>();
+    for (int i = 1; i <= 22; i++)
+    {
+        imagePaths.Add($"pages/RichardIdeWorldWar2/Richard Ide WW2 {i.ToString("000")}.jpg");
+    }
 }
 
 <h1>@Model.Title</h1>
@@ -32,5 +37,13 @@
     <figcaption class="figure-caption">St. Stephani Church in 1945 and <a href="https://www.kulturkirche-bremen.de/" target="_blank">today</a>.</figcaption>
 </figure>
 
-
-<vc:image-gallery path="/pages/RichardIdeWorldWar2"></vc:image-gallery>
+<div class="card-columns">
+    @foreach (var imagePath in imagePaths)
+    {
+        <div class="card">
+            <a href="@imagePath" data-lightbox="ww2">
+                <img src="@imagePath" class="card-img-top" />
+            </a>
+        </div>
+    }
+</div>

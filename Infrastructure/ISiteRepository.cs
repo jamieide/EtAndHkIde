@@ -7,7 +7,7 @@ namespace EtAndHkIde.Infrastructure
         /// <summary>
         /// Get published pages sorted by publish date descending.
         /// </summary>
-        IEnumerable<PageMetadata> GetPages(string path);
+        IEnumerable<PageMetadata> GetPages();
 
         /// <summary>
         /// Get draft (null publish date) pages.
@@ -20,9 +20,6 @@ namespace EtAndHkIde.Infrastructure
         /// Get pages grouped by tag
         /// </summary>
         IDictionary<string, IEnumerable<PageMetadata>> GetPagesByTag();
-
-        IEnumerable<ImageMetadata> GetImages(string path);
-        ImageMetadata GetImage(string path, string name);
 
         IEnumerable<string> GetTags();
     }

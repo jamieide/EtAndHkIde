@@ -1,7 +1,6 @@
 ﻿using EtAndHkIde.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace EtAndHkIde.ViewComponents
 {
@@ -20,25 +19,7 @@ namespace EtAndHkIde.ViewComponents
         {
             var path = _httpContextAccessor.HttpContext.Request.Path;
             var page = _siteRepository.GetPage(path);
-            var relatedPages = new List<PageMetadata>();
-            if (page.RelatedPagePaths != null)
-            {
-                foreach (var relatedPagePath in page.RelatedPagePaths)
-                {
-                    var relatedPage = _siteRepository.GetPage(relatedPagePath);
-                    if (relatedPage != null)
-                    {
-                        relatedPages.Add(relatedPage);
-                    }
-                }
-            }
-            var vm = new PageMetadataViewModel()
-            {
-                Page = page,
-                RelatedPages = relatedPages
-            };
-
-            return View(vm);
+            return View(page);
         }
     }
 }

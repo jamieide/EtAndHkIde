@@ -1,17 +1,17 @@
 ﻿@using EtAndHkIde.Infrastructure
 @using Microsoft.AspNetCore.Http.Extensions
-@model EtAndHkIde.ViewComponents.PageMetadataViewModel
+@model EtAndHkIde.Infrastructure.IPageMetadata
 <p>
-    @if (Model.Page.Tags.Contains(TagValues.System.Featured))
+    @if (Model.Tags.Contains(TagValues.System.Featured))
     {
         <i class="@Icons.ForTag(TagValues.System.Featured) mr-1" title="Featured"></i>
     }
-    @Model.Page.Description
+    @Model.Description
 </p>
 <p>
-    @if (Model.Page.PublishDate.HasValue)
+    @if (Model.PublishDate.HasValue)
     {
-        @:Published @Model.Page.PublishDate?.ToShortDateString()
+        @:Published @Model.PublishDate?.ToShortDateString()
     }
     else
     {
@@ -20,38 +20,11 @@
         </div>
     }
 </p>
-@if (Model.Page.Citation != null)
+@if (Model.Citation != null)
 {
     <p>
-        <partial name="_Citation" model="Model.Page.Citation" />
+        <partial name="_Citation" model="Model.Citation" />
     </p>
-}
-@if (Model.Page.PublishDate.HasValue)
-{
-    <p>
-        @* Note this won't work on localhost *@
-        <a href="https://www.facebook.com/sharer/sharer.php?u=@Context.Request.GetEncodedUrl()" target="_blank">
-            <i class="fab fa-facebook-square mr-1"></i>Share on Facebook
-        </a>
-    </p>
-}
-@if (Model.RelatedPages.Any())
-{
-    <div class="card mb-2">
-        <div class="card-body">
-            <h5 class="card-title">Related Pages</h5>
-            <ul class="list-group list-group-flush">
-                @foreach (var relatedPage in Model.RelatedPages)
-                {
-                    <li class="list-group-item">
-                        <a asp-page="@relatedPage.Path">@relatedPage.Title</a>
-                        <br />
-                        <small>@relatedPage.Description</small>
-                    </li>
-                }
-            </ul>
-        </div>
-    </div>
 }
 <div class="card">
     <div class="card-body">
@@ -60,7 +33,7 @@
             <i class="@Icons.Tags"></i>
         </h5>
         <ul class="list-group list-group-flush">
-            @foreach (var tag in Model.Page.Tags)
+            @foreach (var tag in Model.Tags)
             {
                 <li class="list-group-item">
                     <a asp-page="/Tags" asp-route-tag="@tag">

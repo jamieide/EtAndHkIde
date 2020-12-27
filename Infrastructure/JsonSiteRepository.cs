@@ -26,21 +26,14 @@ namespace EtAndHkIde.Infrastructure
                 .OrderBy(x => x, new TagSorter());
         }
 
-        public IEnumerable<PageMetadata> GetPages(string path)
+        public IEnumerable<PageMetadata> GetPages()
         {
-            var query = _siteIndex.Pages.Where(x => x.PublishDate.HasValue);
-            if (path.HasValue())
-            {
-                query = query.Where(x => x.Path.StartsWith(path + '/', StringComparison.OrdinalIgnoreCase));
-            }
-
-            return query;
+            return _siteIndex.Pages.Where(x => x.PublishDate.HasValue).ToList();
         }
 
         public IEnumerable<PageMetadata> GetDraftPages()
         {
-            return _siteIndex.Pages
-                .Where(x => !x.PublishDate.HasValue);
+            return _siteIndex.Pages.Where(x => !x.PublishDate.HasValue).ToList();
         }
 
         public PageMetadata GetPage(string path)
@@ -65,22 +58,6 @@ namespace EtAndHkIde.Infrastructure
                 .ToDictionary(k => k.Key, v => v.Select(x => x.Page));
         }
 
-        public IEnumerable<ImageMetadata> GetImages(string path)
-        {
-            //Only returns the images in the path, does not include subfolders
-            var pattern = "^" + path + @"/[^/]*\.\S{3}$";
-            return _siteIndex.Images
-                .Where(x => Regex.IsMatch(x.Path, pattern, RegexOptions.IgnoreCase));
-        }
-
-        public ImageMetadata GetImage(string path, string name)
-        {
-            if (_siteIndex.Images.TryGetValue($"{path}/{name}", out var file))
-            {
-                return file;
-            }
-            return null;
-        }
 
         public IEnumerable<string> GetTags() => _tags;
 

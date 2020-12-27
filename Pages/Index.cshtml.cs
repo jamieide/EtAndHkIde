@@ -23,9 +23,8 @@ namespace EtAndHkIde.Pages
 
         public void OnGet()
         {
-            var allPages = _siteRepository.GetPages(null)
-                .OrderByDescending(x => x.PublishDate)
-                .ToList();
+            var allPages = _siteRepository.GetPages()
+                .OrderByDescending(x => x.PublishDate);
             AllPages = BuildPages(allPages);
 
             RecentPages = allPages.Take(PageSize);
