@@ -2,13 +2,13 @@
 @using EtAndHkIde.Pages.Shared
 @model IndexModel
 @{
-    Layout = "Shared/_Layout";
+    Layout = "_Layout";
     ViewData["Title"] = "E.T. & H.K. Ide";
 }
 
-<div id="home-page">
-    <div id="logo">
-        <img src="/assets/logo.jpg" />
+<div class="my-3">
+    <div style="background-color: black;">
+        <img src="/assets/logo.jpg" class="d-block m-auto" />
     </div>
     <div id="banner" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -23,48 +23,48 @@
             </div>
         </div>
     </div>
-    <div class="container mt-3 mb-5">
-        <div class="jumbotron">
-            <h1 class="display-4">The Mill</h1>
-            <p class="lead text-center"><i class="fas fa-quote-left mr-2"></i>It all began in 1813, when Timothy Ide, son of John Ide, Revolutionary soldier and pioneer, sold his farm in Lyndon and purchased the grist mill in Passumpsic Village on the banks of the Passumpsic River.<i class="fas fa-quote-right ml-2"></i></p>
-            <p class="lead text-center">Seven generations of the Ide family have worked at the milling trade since 1813. It served us well and we served the hill farmers of Vermont's Northeast Kingdom well for nearly two hundred years.</p>
-            <p>The mill was central to our lives and livelihood, and the brightly lit sign was a St. Johnsbury landmark that we never failed to gaze at in passing. The Mill and the Old Man of the Mountain, in nearby Franconia Notch, were contemporaries and a stark reminder that whether built by man or nature, nothing lasts forever. The purpose of this site is to chronicle the remarkable history of E.T. &amp; H. K. Ide and the Ide family in Vermont with the goal of keeping the memories alive.</p>
+</div>
+
+
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">The Mill</h1>
+        <p class="lead text-center"><i class="fas fa-quote-left mr-2"></i>It all began in 1813, when Timothy Ide, son of John Ide, Revolutionary soldier and pioneer, sold his farm in Lyndon and purchased the grist mill in Passumpsic Village on the banks of the Passumpsic River.<i class="fas fa-quote-right ml-2"></i></p>
+        <p class="lead text-center">Seven generations of the Ide family have worked at the milling trade since 1813. It served us well and we served the hill farmers of Vermont's Northeast Kingdom well for nearly two hundred years.</p>
+        <p>The mill was central to our lives and livelihood, and the brightly lit sign was a St. Johnsbury landmark that we never failed to gaze at in passing. The Mill and the Old Man of the Mountain, in nearby Franconia Notch, were contemporaries and a stark reminder that whether built by man or nature, nothing lasts forever. The purpose of this site is to chronicle the remarkable history of E.T. &amp; H. K. Ide and the Ide family in Vermont with the goal of keeping the memories alive.</p>
+    </div>
+
+    <nav class="nav nav-pills nav-fill nav-justified mb-3">
+        <a class="nav-link active h5" href="#new-pages" data-toggle="pill">
+            <strong>NEW</strong>
+        </a>
+        <a class="nav-link h5" href="#feature-pages" data-toggle="pill">
+            <strong>FEATURES</strong>
+        </a>
+        <a class="nav-link h5" href="#photo-pages" data-toggle="pill">
+            <strong>PHOTOS</strong>
+        </a>
+        <a class="nav-link h5" href="#all-pages" data-toggle="pill">
+            <strong>ALL</strong>
+        </a>
+    </nav>
+    <div class="tab-content">
+        <div id="new-pages" class="tab-pane fade show active">
+            <div class="card-columns">
+                @foreach (var myPage in Model.RecentPages)
+                {
+                    <partial name="_PageMetadataCard" model="myPage" />
+                }
+            </div>
         </div>
-
-        @*<partial name="_SiteNavbar" model="true" />*@
-
-
-        <nav class="nav nav-pills nav-fill nav-justified mb-3">
-            <a class="nav-link active h5" href="#new-pages" data-toggle="pill">
-                <strong>NEW</strong>
-            </a>
-            <a class="nav-link h5" href="#feature-pages" data-toggle="pill">
-                <strong>FEATURES</strong>
-            </a>
-            <a class="nav-link h5" href="#photo-pages" data-toggle="pill">
-                <strong>PHOTOS</strong>
-            </a>
-            <a class="nav-link h5" href="#all-pages" data-toggle="pill">
-                <strong>ALL</strong>
-            </a>
-        </nav>
-        <div class="tab-content">
-            <div id="new-pages" class="tab-pane fade show active">
-                <div class="card-columns">
-                    @foreach (var myPage in Model.RecentPages)
-                    {
-                        <partial name="_PageMetadataCard" model="myPage" />
-                    }
-                </div>
-            </div>
-            <div id="feature-pages" class="tab-pane fade">
-                <partial name="_PageMetadataCardsPaged" model="@(new _PageMetadataCardsPagedViewModel("feature-pages", Model.FeaturePages))" />
-            </div>
-            <div id="photo-pages" class="tab-pane fade">
-                <partial name="_PageMetadataCardsPaged" model="@(new _PageMetadataCardsPagedViewModel("photo-pages", Model.PhotoPages))" />
-            </div>
-            <div id="all-pages" class="tab-pane fade">
-                <partial name="_PageMetadataCardsPaged" model="@(new _PageMetadataCardsPagedViewModel("all-pages", Model.AllPages))" />
-            </div>
+        <div id="feature-pages" class="tab-pane fade">
+            <partial name="_PageMetadataCardsPaged" model="@(new _PageMetadataCardsPagedViewModel("feature-pages", Model.FeaturePages))" />
+        </div>
+        <div id="photo-pages" class="tab-pane fade">
+            <partial name="_PageMetadataCardsPaged" model="@(new _PageMetadataCardsPagedViewModel("photo-pages", Model.PhotoPages))" />
+        </div>
+        <div id="all-pages" class="tab-pane fade">
+            <partial name="_PageMetadataCardsPaged" model="@(new _PageMetadataCardsPagedViewModel("all-pages", Model.AllPages))" />
         </div>
     </div>
+</div>

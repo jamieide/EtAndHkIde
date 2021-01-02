@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using EtAndHkIde.Infrastructure;
-using EtAndHkIde.ViewComponents;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EtAndHkIde.Pages

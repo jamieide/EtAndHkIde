@@ -3,19 +3,20 @@
 }
 @RenderSection("Head", false)
 
-<partial name="_SiteNavbar" model="false" />
+<partial name="_PageBanner" model="false" />
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-3">
-            <section class="sidebar">
-                <vc:sidebar></vc:sidebar>
-            </section>
+<div class="container mt-3">
+    <div class="row mb-3">
+        <div class="col-12">
+            <h1>@ViewData["Title"]</h1>
         </div>
-        <div class="col-lg-9 order-first order-lg-last">
-            <main>
-                @RenderBody()
-            </main>
+    </div>
+    <div class="row">
+        <div class="col-lg-9">
+            @RenderBody()
+        </div>
+        <div class="col-lg-3 mt-md-3">
+            <partial name="_Sidebar" />
         </div>
     </div>
 </div>

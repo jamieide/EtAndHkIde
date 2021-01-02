@@ -3,52 +3,32 @@
     
 */
 
-body {
+/*body {
     background-color: #d8d8d8;
     padding-bottom: 5rem;
 }
 
-main {
+#main {
     background-color: white;
     margin-top: 2rem;
     padding: 2rem 3rem;
     border-radius: 8px;
 }
-
-section.sidebar {
+*/
+/*section.sidebar {
     background-color: white;
     margin-top: 2rem;
     padding: 1rem;
     border-radius: 8px;
 }
-
-#home-page #logo {
-    margin-top: 20px;
-    background-color: black;
-}
-
-    #home-page #logo img {
-        display: block;
-        margin: auto;
-    }
-
-#home-page .jumbotron {
-    background-color: white;
-}
-
-#home-page nav a {
-    /*    color: #BD162C;
-    background: white;
 */
-}
-
 h1 {
     color: #BD162C;
     font-size: 2.2rem;
 }
 
 h2 {
-    color: #1643BD;
+    color: #1643Bd;
     font-size: 1.8rem;
 }
 
@@ -84,6 +64,14 @@ blockquote, .blockquote {
     color: white;
 }
 
+.card {
+    border: 1px solid #1643Bd;
+}
+
+.card-header {
+    border-bottom: 1px dashed #1643Bd;
+}
+
 .card-title {
     color: #BD162C;
 }
@@ -101,46 +89,61 @@ blockquote, .blockquote {
     background-color: #0f7864;
 }
 
-#navbar-links .fa-circle {
-    color: #BD162C;
+
+#navbar-links a.nav-link .svg-inline--fa.fa-circle {
+    color: #bd162c;
 }
 
-#navbar-links a:hover .fas.fa-circle {
+#navbar-links a.nav-link:hover .svg-inline--fa.fa-circle[data-prefix~="far"] {
+    background-color: black;
+}
+
+#navbar-links a.nav-link:hover .svg-inline--fa.fa-circle[data-prefix~="fas"] {
     color: white;
 }
 
-#navbar-links a:hover .fa-inverse {
-    color: #BD162C;
-}
-
-#navbar-links a:hover .fas.fa-square {
+#navbar-links a.nav-link .svg-inline--fa.fa-inverse {
     color: white;
 }
 
-#navbar-links .fa-square.facebook {
+#navbar-links a.nav-link:hover .svg-inline--fa.fa-inverse {
+    color: #bd162c;
+}
+
+#navbar-links a.nav-link:hover .caption {
+    color: #bd162c;
+}
+
+
+/*#navbar-links .fa-square.facebook {
     color: white;
 }
 
 .fa-facebook-square {
     color: #3b5998;
 }
+*/
+.navbar-dark.bg-dark {
+    background-color: black !important;
+}
 
 @media(min-width: 768px) {
+
     /* align navbar link captions centered under icons for md devices and up, must be same breakpoint as navbar-expand-**/
-    #site-navbar #navbar-links ul {
+    #page-banner #navbar-links ul {
         text-align: center;
     }
 
-    #site-navbar #navbar-links span.caption {
+    #page-banner #navbar-links span.caption {
         display: block;
     }
 
     /* navbar margins for md and up */
-    #site-navbar .navbar-brand {
+    #page-banner .navbar-brand {
         margin-left: 1.5rem;
     }
 
-    #site-navbar .navbar-nav {
+    #page-banner .navbar-nav {
         margin-right: 0.5rem;
     }
 }
@@ -148,11 +151,11 @@ blockquote, .blockquote {
 @media(min-width: 992px) {
     /* navbar margins for lg and up */
 
-    #site-navbar .navbar-brand {
+    #page-banner .navbar-brand {
         margin-left: 3rem;
     }
 
-    #site-navbar .navbar-nav {
+    #page-banner .navbar-nav {
         margin-right: 2rem;
     }
 }

@@ -1,0 +1,68 @@
+﻿@model IPageMetadata
+@{
+    var citationIcons = new Dictionary<CitationType, string>
+{
+        {CitationType.Undefined, ""},
+        {CitationType.Book, "<i class=\"fas fa-book mr-1\"></i>"},
+        {CitationType.Magazine, "<i class=\"fas fa-book-open mr-1\"></i>"},
+        {CitationType.Newspaper, "<i class=\"far fa-newspaper mr-1\"></i>"},
+        {CitationType.Pdf, "<i class=\"fa fa-file-pdf mr-1\"></i>"},
+        {CitationType.Website, "<i class=\"fas fa-external-link-square-alt mr-1\"></i>"}
+    };
+}
+
+<div class="card">
+    <div class="card-body">
+        <p class="card-text">
+            @Model.Description
+        </p>
+        <p class="card-text">
+            @if (Model.PublishDate.HasValue)
+            {
+                @:Published @Model.PublishDate?.ToShortDateString()
+            }
+            else
+            {
+                <div class="alert alert-warning">
+                    <i class="fas fa-edit mr-1"></i>Unpublished
+                </div>
+            }
+        </p>
+        @if (Model.Citation != null)
+        {
+            <p class="card-text">
+                @if (Model.Citation != null)
+                {
+                    @if (Model.Citation.Url.HasValue())
+                    {
+                        <a href="@Html.Raw(Model.Citation.Url)" target="_blank">
+                            @Html.Raw(citationIcons[Model.Citation.Type]) @Html.Raw(@Model.Citation.Name)
+                        </a>
+                    }
+                    else
+                    {
+                        @Html.Raw(citationIcons[Model.Citation.Type]) @Model.Citation.Name
+                    }
+                }
+                @if (Model.Citation.Description.HasValue())
+                {
+                    <br />
+                    @Model.Citation.Description
+                }
+            </p>
+        }
+        @if (Model.Tags.Any())
+        {
+            <ul class="list-group list-group-flush mt-3">
+                <li class="list-group-item"><i class="fas fa-tag mr-2"></i>Tags</li>
+                @foreach (var tag in Model.Tags)
+                {
+                    <li class="list-group-item list-group-item-action">
+                        <a asp-page="/Tags" asp-route-tag="@tag">@tag</a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</div>
+

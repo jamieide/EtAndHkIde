@@ -1,0 +1,73 @@
+﻿@using Microsoft.Extensions.Hosting
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment environment
+@{ 
+    var isDevelopment = environment.IsDevelopment();
+}
+<div id="page-banner" class="mt-0 mb-3">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a asp-page="/Index" class="navbar-brand">
+            <img src="/assets/logo-sm.jpg" alt="E.T. & H.K. Ide" width="333" height="80" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar-links">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Index" title="Home">
+                        <span class="fa-stack fa-2x">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="far fa-circle fa-stack-2x"></i>
+                            <i class="@Icons.Home fa-inverse fa-stack-1x"></i>
+                        </span>
+                        <span class="caption">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Tags" title="Index of pages by tags">
+                        <span class="fa-stack fa-2x">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="far fa-circle fa-stack-2x"></i>
+                            <i class="@Icons.Tags fa-inverse fa-stack-1x"></i>
+                        </span>
+                        <span class="caption">Tags</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/About" title="About the site and contact info">
+                        <span class="fa-stack fa-2x">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="far fa-circle fa-stack-2x"></i>
+                            <i class="@Icons.About fa-inverse fa-stack-1x"></i>
+                        </span>
+                        <span class="caption">About</span>
+                    </a>
+                </li>
+                @if (isDevelopment)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Drafts">
+                            <span class="fa-stack fa-2x">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="far fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-edit fa-inverse fa-stack-1x"></i>
+                            </span>
+                            <span class="caption">Drafts</span>
+                        </a>
+                    </li>
+                }
+
+                @*<li class="nav-item ml-5">
+            <a class="nav-link" href="https://www.facebook.com/etandhkide/" target="_blank" title="Follow us on Facebook">
+                <span class="fa-stack fa-2x">
+                    <i class="fas fa-square fa-stack-2x facebook"></i>
+                    <i class="fab fa-facebook-square fa-stack-2x"></i>
+                </span>
+                <span class="caption">Facebook</span>
+            </a>
+        </li>*@
+            </ul>
+        </div>
+    </nav>
+</div>
+
