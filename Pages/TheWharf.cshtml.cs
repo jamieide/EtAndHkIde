@@ -5,7 +5,7 @@ namespace EtAndHkIde.Pages
 {
     public class TheWharfModel : SitePageModel
     {
-        public TheWharfModel() : base()
+        public TheWharfModel()
         {
             Metadata = new PageMetadata
             {

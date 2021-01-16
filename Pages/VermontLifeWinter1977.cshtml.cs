@@ -5,7 +5,7 @@ namespace EtAndHkIde.Pages
 {
     public class VermontLifeWinter1977Model : SitePageModel
     {
-        public VermontLifeWinter1977Model() : base()
+        public VermontLifeWinter1977Model()
         {
             Metadata = new PageMetadata
             {

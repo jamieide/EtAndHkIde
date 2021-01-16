@@ -5,7 +5,7 @@ namespace EtAndHkIde.Pages
 {
     public class LightingTheVillageModel : SitePageModel
     {
-        public LightingTheVillageModel() : base()
+        public LightingTheVillageModel()
         {
             Metadata = new PageMetadata
             {

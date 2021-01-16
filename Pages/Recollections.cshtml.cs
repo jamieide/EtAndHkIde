@@ -5,7 +5,7 @@ namespace EtAndHkIde.Pages
 {
     public class RecollectionsModel : SitePageModel
     {
-        public RecollectionsModel() : base()
+        public RecollectionsModel()
         {
             Metadata = new PageMetadata
             {

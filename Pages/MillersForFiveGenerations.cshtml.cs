@@ -5,7 +5,7 @@ namespace EtAndHkIde.Pages
 {
     public class MillersForFiveGenerationsModel : SitePageModel
     {
-        public MillersForFiveGenerationsModel() : base()
+        public MillersForFiveGenerationsModel()
         {
             Metadata = new PageMetadata
             {

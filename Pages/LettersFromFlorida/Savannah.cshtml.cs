@@ -5,7 +5,7 @@ namespace EtAndHkIde.Pages.LettersFromFlorida
 {
     public class SavannahModel : SitePageModel
     {
-        public SavannahModel() : base()
+        public SavannahModel()
         {
             Metadata = new PageMetadata
             {

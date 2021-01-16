@@ -5,7 +5,7 @@ namespace EtAndHkIde.Pages.LettersFromFlorida
 {
     public class Woodland3Model : SitePageModel
     {
-        public Woodland3Model() : base()
+        public Woodland3Model()
         {
             Metadata = new PageMetadata
             {

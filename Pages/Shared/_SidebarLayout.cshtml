@@ -1,6 +1,15 @@
 ﻿@model SitePageModel
 @{
     Layout = "_Layout";
+    var citationIcons = new Dictionary<CitationType, string>
+{
+        {CitationType.Undefined, ""},
+        {CitationType.Book, "<i class=\"fas fa-book mr-1\"></i>"},
+        {CitationType.Magazine, "<i class=\"fas fa-book-open mr-1\"></i>"},
+        {CitationType.Newspaper, "<i class=\"far fa-newspaper mr-1\"></i>"},
+        {CitationType.Pdf, "<i class=\"fa fa-file-pdf mr-1\"></i>"},
+        {CitationType.Website, "<i class=\"fas fa-external-link-square-alt mr-1\"></i>"}
+    };
 }
 <partial name="_PageBanner" />
 
@@ -15,7 +24,61 @@
             @RenderBody()
         </div>
         <div class="col-lg-3 mt-md-3">
-            <partial name="_Sidebar" for="Metadata"/>
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">
+                        @Model.Metadata.Description
+                    </p>
+                    <p class="card-text">
+                        <span class="text-muted mr-2">Published</span>
+                        @if (Model.Metadata.PublishDate.HasValue)
+                        {
+                            @Model.Metadata.PublishDate.Value.ToShortDateString();
+                        }
+                        else
+                        {
+                            <span class="badge badge-warning">DRAFT</span>
+                        }
+                    </p>
+                    @if (Model.Metadata.Citation != null)
+                    {
+                        <p class="card-text">
+                            @if (Model.Metadata.Citation.Url.HasValue())
+                            {
+                                <a href="@Html.Raw(Model.Metadata.Citation.Url)" target="_blank">
+                                    @Html.Raw(citationIcons[Model.Metadata.Citation.Type]) @Html.Raw(@Model.Metadata.Citation.Name)
+                                </a>
+                            }
+                            else
+                            {
+                                @Html.Raw(citationIcons[Model.Metadata.Citation.Type]) @Model.Metadata.Citation.Name
+                            }
+                            @if (Model.Metadata.Citation.Description.HasValue())
+                            {
+                                <br />
+                                @Model.Metadata.Citation.Description
+                            }
+                        </p>
+                    }
+                    @RenderSection("SidebarContent", false)
+                    @if (Model.Metadata.Tags.Any())
+                    {
+                        <div class="mt-3">
+                            <a href="#tags" data-toggle="collapse" title="click to show/hide tags"><i class="fas fa-tag mr-2"></i>Tags</a>
+                        </div>
+                        <div id="tags" class="collapse">
+                            <ul class="list-group list-group-flush">
+                                @foreach (var tag in Model.Metadata.Tags)
+                                {
+                                    <li class="list-group-item list-group-item-action">
+                                        <a asp-page="/Tags" asp-route-tag="@tag">@tag</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
     </div>
 </div>

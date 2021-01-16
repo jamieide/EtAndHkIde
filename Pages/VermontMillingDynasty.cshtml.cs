@@ -5,7 +5,7 @@ namespace EtAndHkIde.Pages
 {
     public class VermontMillingDynastyModel : SitePageModel
     {
-        public VermontMillingDynastyModel() : base()
+        public VermontMillingDynastyModel()
         {
             Metadata = new PageMetadata
             {

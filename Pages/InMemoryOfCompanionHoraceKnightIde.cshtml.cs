@@ -5,7 +5,7 @@ namespace EtAndHkIde.Pages
 {
     public class InMemoryOfCompanionHoraceKnightIdeModel : SitePageModel
     {
-        public InMemoryOfCompanionHoraceKnightIdeModel() : base()
+        public InMemoryOfCompanionHoraceKnightIdeModel()
         {
             Metadata = new PageMetadata
             {
