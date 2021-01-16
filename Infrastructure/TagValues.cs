@@ -57,7 +57,7 @@ namespace EtAndHkIde.Infrastructure
             public const string RobertIde = "Rob Ide";
             public const string MaitlandBean = "Maitland Bean";
             public const string GeorgeGray = "George Gray";
-       }
+        }
 
         public static class Places
         {

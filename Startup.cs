@@ -19,12 +19,11 @@ namespace EtAndHkIde
             services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
             services.AddAntiforgery();
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddTransient<ISiteIndexFactory, JsonSiteIndexFactory>();
-            services.AddSingleton<ISiteRepository, JsonSiteRepository>();
+            //services.AddTransient<ISiteIndexFactory, JsonSiteIndexFactory>();
+            services.AddSingleton<ISiteRepository, SiteRepository>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ISiteIndexFactory siteIndexFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -34,8 +33,8 @@ namespace EtAndHkIde
             }
 
             app.UseStatusCodePagesWithReExecute("/Status{0}");
-
             app.UseStaticFiles();
+
             // site re-org 12/5/20, everything is just a page now
             // TODO change to permanent when working
             var redirectStatusCode = (int)HttpStatusCode.Redirect;
@@ -46,8 +45,6 @@ namespace EtAndHkIde
             );
             app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapRazorPages());
-
-            siteIndexFactory.BuildIndex();
         }
     }
 }

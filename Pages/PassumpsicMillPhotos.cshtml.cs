@@ -1,15 +1,19 @@
-﻿using System;
-using EtAndHkIde.Infrastructure;
+﻿using EtAndHkIde.Infrastructure;
+using System;
 
 namespace EtAndHkIde.Pages
 {
     public class PassumpsicMillPhotosModel : SitePageModel
     {
-        public PassumpsicMillPhotosModel() : base("Passumpsic Mill Photos")
+        public PassumpsicMillPhotosModel()
         {
-            Description = "A collection of photographs of the original and rebuilt mills in Passumpsic";
-            PublishDate = new DateTime(2018, 12, 16);
-            Tags = new[] { TagValues.Places.Passumpsic };
+            Metadata = new PageMetadata
+            {
+                Title = "Passumpsic Mill Photos",
+                Description = "A collection of photographs of the original and rebuilt mills in Passumpsic",
+                PublishDate = new DateTime(2018, 12, 16),
+                Tags = new[] { TagValues.Places.Passumpsic }
+            };
         }
     }
 }

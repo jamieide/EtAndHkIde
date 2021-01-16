@@ -1,14 +1,18 @@
-using System;
 using EtAndHkIde.Infrastructure;
+using System;
 
 namespace EtAndHkIde.Pages.LettersFromFlorida
 {
     public class Woodland1Model : SitePageModel
     {
-        public Woodland1Model() : base("Woodland 1")
+        public Woodland1Model() : base()
         {
-            Description = "Correspondence from Horace K. Ide to The Caledonian newspaper in 1876.";
-            PublishDate = new DateTime(2018, 12, 14);
+            Metadata = new PageMetadata
+            {
+                Title = "Woodland 1",
+                Description = "Correspondence from Horace K. Ide to The Caledonian newspaper in 1876.",
+                PublishDate = new DateTime(2018, 12, 14)
+            };
         }
     }
 

@@ -4,10 +4,14 @@ namespace EtAndHkIde.Pages
 {
     public class PassumpsicMillsHistoryModel : SitePageModel
     {
-        public PassumpsicMillsHistoryModel() : base("Passumpsic Mills History")
+        public PassumpsicMillsHistoryModel()
         {
-            Description = "A brief history of the Passumpsic Mills";
-            Tags = new[] { TagValues.Places.Passumpsic };
+            Metadata = new PageMetadata
+            {
+                Title = "Passumpsic Mills History",
+                Description = "A brief history of the Passumpsic Mills",
+                Tags = new[] { TagValues.Places.Passumpsic }
+            };
         }
     }
 }

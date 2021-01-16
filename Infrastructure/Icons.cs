@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace EtAndHkIde.Infrastructure
+﻿namespace EtAndHkIde.Infrastructure
 {
     public static class Icons
     {

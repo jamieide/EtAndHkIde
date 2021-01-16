@@ -1,9 +1,8 @@
-﻿@{
+﻿@model SitePageModel
+@{
     Layout = "_Layout";
 }
-@RenderSection("Head", false)
-
-<partial name="_PageBanner" model="false" />
+<partial name="_PageBanner" />
 
 <div class="container mt-3">
     <div class="row mb-3">
@@ -16,7 +15,7 @@
             @RenderBody()
         </div>
         <div class="col-lg-3 mt-md-3">
-            <partial name="_Sidebar" />
+            <partial name="_Sidebar" for="Metadata"/>
         </div>
     </div>
 </div>
