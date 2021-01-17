@@ -1,22 +1,16 @@
 ﻿@page
 @model EtAndHkIde.Pages.DraftsModel
 @{
-    Layout = "Shared/_NavbarLayout";
+    Layout = "_Layout";
     ViewData["Title"] = "Drafts";
 }
 
-<div class="row">
-    <div class="col-md-8 offset-md-2">
-        <main>
-            <h1 class="d-flex justify-content-between p-2 mb-2">
-                <span>Drafts</span>
-                <i class="fas fa-edit"></i>
-            </h1>
-            <div class="card">
-                <div class="card-body">
-                    <partial name="_PageListWithIcons" for="Drafts" />
-                </div>
-            </div>
-        </main>
+<partial name="_PageBanner" />
+<div class="container">
+    <div class="card-columns">
+        @foreach (var draft in Model.Drafts)
+        {
+            <partial name="_PageMetadataCard" model="draft" />
+        }
     </div>
 </div>

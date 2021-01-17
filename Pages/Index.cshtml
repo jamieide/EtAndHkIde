@@ -25,7 +25,6 @@
     </div>
 </div>
 
-
 <div class="container">
     <div class="jumbotron">
         <h1 class="display-4">The Mill</h1>
@@ -47,6 +46,12 @@
         <a class="nav-link h5" href="#all-pages" data-toggle="pill">
             <strong>ALL</strong>
         </a>
+        @if (Model.IsDevelopment)
+        {
+            <a class="nav-link h5" asp-page="Drafts">
+                <strong>DRAFTS</strong>
+            </a>
+        }
     </nav>
     <div class="tab-content">
         <div id="new-pages" class="tab-pane fade show active">

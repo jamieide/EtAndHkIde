@@ -1,5 +1,7 @@
 ﻿using EtAndHkIde.Infrastructure;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,13 +11,15 @@ namespace EtAndHkIde.Pages
     {
         private readonly ISiteRepository _siteRepository;
 
-        public IndexModel(ISiteRepository siteRepository)
+        public IndexModel(ISiteRepository siteRepository, IWebHostEnvironment webHostEnvironment)
         {
             _siteRepository = siteRepository;
+            IsDevelopment = webHostEnvironment.IsDevelopment();
         }
 
         public const int PageSize = 8;
 
+        public bool IsDevelopment { get; set; }
         public IEnumerable<PageMetadata> RecentPages { get; set; }
         public IDictionary<int, IEnumerable<PageMetadata>> FeaturePages { get; set; }
         public IDictionary<int, IEnumerable<PageMetadata>> PhotoPages { get; set; }

@@ -1,8 +1,4 @@
 ﻿@using Microsoft.Extensions.Hosting
-@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment environment
-@{
-    var isDevelopment = environment.IsDevelopment();
-}
 <div id="page-banner" class="mt-0 mb-3">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <a asp-page="/Index" class="navbar-brand">
@@ -43,19 +39,6 @@
                         <span class="caption">About</span>
                     </a>
                 </li>
-                @if (isDevelopment)
-                {
-                    <li class="nav-item">
-                        <a class="nav-link" asp-page="/Drafts">
-                            <span class="fa-stack fa-2x">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="far fa-circle fa-stack-2x"></i>
-                                <i class="fas fa-edit fa-inverse fa-stack-1x"></i>
-                            </span>
-                            <span class="caption">Drafts</span>
-                        </a>
-                    </li>
-                }
             </ul>
         </div>
     </nav>
