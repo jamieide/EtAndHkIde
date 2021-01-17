@@ -1,6 +1,7 @@
 ﻿@model SitePageModel
 @{
     Layout = "_Layout";
+    ViewData["Title"] = Model.Metadata.Title;
     var citationIcons = new Dictionary<CitationType, string>
 {
         {CitationType.Undefined, ""},
@@ -29,17 +30,6 @@
                     <p class="card-text">
                         @Model.Metadata.Description
                     </p>
-                    <p class="card-text">
-                        <span class="text-muted mr-2">Published</span>
-                        @if (Model.Metadata.PublishDate.HasValue)
-                        {
-                            @Model.Metadata.PublishDate.Value.ToShortDateString();
-                        }
-                        else
-                        {
-                            <span class="badge badge-warning">DRAFT</span>
-                        }
-                    </p>
                     @if (Model.Metadata.Citation != null)
                     {
                         <p class="card-text">
@@ -61,6 +51,19 @@
                         </p>
                     }
                     @RenderSection("SidebarContent", false)
+                    <p class="card-text text-muted">
+                        <small>
+                            <span class="mr-2">Published</span>
+                            @if (Model.Metadata.PublishDate.HasValue)
+                            {
+                                @Model.Metadata.PublishDate.Value.ToShortDateString();
+                            }
+                            else
+                            {
+                                <span class="badge badge-warning">DRAFT</span>
+                            }
+                        </small>
+                    </p>
                     @if (Model.Metadata.Tags.Any())
                     {
                         <div class="mt-3">

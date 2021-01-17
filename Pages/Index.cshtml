@@ -51,9 +51,9 @@
     <div class="tab-content">
         <div id="new-pages" class="tab-pane fade show active">
             <div class="card-columns">
-                @foreach (var myPage in Model.RecentPages)
+                @foreach (var pageMetadata in Model.RecentPages)
                 {
-                    <partial name="_PageMetadataCard" model="myPage" />
+                    <partial name="_PageMetadataCard" model="pageMetadata" />
                 }
             </div>
         </div>

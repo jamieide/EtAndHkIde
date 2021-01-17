@@ -1,0 +1,14 @@
+﻿@page
+@model EtAndHkIde.Pages.LettersFromFlorida.IndexModel
+@section SidebarContent{
+    <partial name="_LettersFromFloridaSidebar" />
+}
+
+<p>Horace Ide was an excellent writer and his letters are full of evocative descriptions and wry humor. He wrote many letters to the Caledonian describing several of his trips to Florida for the home town readers. There are several more I have yet to transcribe.</p>
+
+<div class="card-columns">
+    @foreach (var pageMetadata in Model.FloridaPages)
+    {
+        <partial name="_PageMetadataCard" model="pageMetadata" />
+    }
+</div>

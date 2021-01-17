@@ -1,0 +1,34 @@
+﻿@{
+    var path = Context.Request.Path.Value;
+    // special handling for index
+    if (path == "/lettersfromflorida")
+    {
+        path = "/lettersfromflorida/index";
+    }
+    var floridaPages = new (string, string)[] {
+        ("/lettersfromflorida/index", "Letters From Florida"),
+        ("/lettersfromflorida/letterfromflorida-1876-01-21", "New York to Savannah"),
+        ("/lettersfromflorida/letterfromflorida-1876-02-04", "Savannah to Jacksonville"),
+        ("/lettersfromflorida/letterfromflorida-1876-02-18", "Dunn's Lake"),
+        ("/lettersfromflorida/letterfromflorida-1876-02-25", "Hier's Groves"),
+    };
+}
+<p class="card-text">
+    <ul class="list-group list-group-flush">
+        @foreach (var floridaPage in floridaPages)
+        {
+            if (path == floridaPage.Item1)
+            {
+                <li class="list-group-item active">
+                    @floridaPage.Item2
+                </li>
+            }
+            else
+            {
+                <li class="list-group-item">
+                    <a asp-page="@floridaPage.Item1">@floridaPage.Item2</a>
+                </li>
+            }
+        }
+    </ul>
+</p>
