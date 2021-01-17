@@ -5,8 +5,22 @@
     Layout = "_Layout";
     ViewData["Title"] = "E.T. & H.K. Ide";
 }
+@section Head{
+    <script>
+        $(function () {
+            var siteState = etandhkide.getState();
+            if (siteState.home.pagesTab) {
+                $(`#pages-links > a[href="${siteState.home.pagesTab}"]`).tab('show');
+            }
+            $('#pages-links').on('shown.bs.tab', function (e) {
+                siteState.home.pagesTab = $(e.target).attr('href');
+                etandhkide.setState(siteState);
+            })
+        });
+    </script>
+}
 
-<div class="my-3">
+<div class="mb-3">
     <div style="background-color: black;">
         <img src="/assets/logo.jpg" class="d-block m-auto" />
     </div>
@@ -33,7 +47,7 @@
         <p>The mill was central to our lives and livelihood, and the brightly lit sign was a St. Johnsbury landmark that we never failed to gaze at in passing. The Mill and the Old Man of the Mountain, in nearby Franconia Notch, were contemporaries and a stark reminder that whether built by man or nature, nothing lasts forever. The purpose of this site is to chronicle the remarkable history of E.T. &amp; H. K. Ide and the Ide family in Vermont with the goal of keeping the memories alive.</p>
     </div>
 
-    <nav class="nav nav-pills nav-fill nav-justified mb-3">
+    <nav class="nav nav-pills nav-fill nav-justified mb-3" id="pages-links">
         <a class="nav-link active h5" href="#new-pages" data-toggle="pill">
             <strong>NEW</strong>
         </a>
@@ -53,7 +67,7 @@
             </a>
         }
     </nav>
-    <div class="tab-content">
+    <div class="tab-content" id="pages-tabs">
         <div id="new-pages" class="tab-pane fade show active">
             <div class="card-columns">
                 @foreach (var pageMetadata in Model.RecentPages)

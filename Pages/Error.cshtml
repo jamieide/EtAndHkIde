@@ -1,8 +1,15 @@
 ﻿@page
 @{
-    Layout = "Shared/_NavbarLayout";
+    Layout = "_Layout";
     ViewData["Title"] = "Error";
 }
 
-<h2>Error</h2>
+<partial name="_PageBanner" />
+<div class="container">
+    <div class="col-8 offset-2">
+        <h1>Error</h1>
+        <p class="lead">An unexpected error occurred.</p>
+    </div>
+</div>
+<h1>Error</h1>
 

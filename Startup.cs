@@ -17,8 +17,6 @@ namespace EtAndHkIde
             services.AddRazorPages().AddRazorRuntimeCompilation().AddNewtonsoftJson();
             services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
             services.AddAntiforgery();
-
-            //services.AddTransient<ISiteIndexFactory, JsonSiteIndexFactory>();
             services.AddSingleton<ISiteRepository, SiteRepository>();
         }
 
