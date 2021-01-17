@@ -13,9 +13,10 @@ namespace EtAndHkIde.Infrastructure
         public IEnumerable<string> Tags { get; set; } = new string[0];
         public Citation Citation { get; set; }
         /// <summary>
-        /// Flag to indicate if page should be included in lists, e.g. set to false for sub-pages linked from an indexed page.
+        /// Flag to indicate if a page is a primary page theat should be included in lists, 
+        /// e.g. set to false for sub-pages linked from an primary page.
         /// </summary>
-        public bool IsListed { get; set; } = true;
+        public bool IsPrimary { get; set; } = true;
 
         /// <summary>
         /// Set by indexer.

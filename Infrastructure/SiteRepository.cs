@@ -23,9 +23,9 @@ namespace EtAndHkIde.Infrastructure
         IEnumerable<PageMetadata> GetDraftPages();
 
         /// <summary>
-        /// Get pages grouped by tag
+        /// Get pages for a tag
         /// </summary>
-        IDictionary<string, IEnumerable<PageMetadata>> GetPagesByTag();
+        IEnumerable<PageMetadata> GetPagesForTag(string tag);
 
         IEnumerable<string> GetTags();
     }
@@ -34,6 +34,7 @@ namespace EtAndHkIde.Infrastructure
     {
         // pages keyed by path
         private IDictionary<string, PageMetadata> _pages;
+        private IEnumerable<string> _tags;
 
         public SiteRepository()
         {
@@ -54,6 +55,12 @@ namespace EtAndHkIde.Infrastructure
                 pages.Add(pageModel.Metadata);
             }
             _pages = pages.ToDictionary(k => k.Path, StringComparer.OrdinalIgnoreCase);
+
+            var tags = new List<string>();
+            tags.AddRange(TagValues.System.All);
+            tags.AddRange(TagValues.People.All);
+            tags.AddRange(TagValues.Places.All);
+            _tags = tags;
         }
 
         public PageMetadata GetPage(string path)
@@ -68,24 +75,21 @@ namespace EtAndHkIde.Infrastructure
         public IEnumerable<PageMetadata> GetDraftPages()
         {
             // all unpublished pages
-            return _pages.Values.Where(x => x.PublishDate == null);
+            return _pages.Values.Where(x => x.PublishDate == null).ToList();
         }
 
         public IEnumerable<PageMetadata> GetPages()
         {
             // published pages that are listed
-            return _pages.Values.Where(x => x.PublishDate != null && x.IsListed);
+            return _pages.Values.Where(x => x.PublishDate != null && x.IsPrimary).ToList();
         }
 
-        public IDictionary<string, IEnumerable<PageMetadata>> GetPagesByTag()
+        public IEnumerable<PageMetadata> GetPagesForTag(string tag)
         {
-            throw new NotImplementedException();
+            return _pages.Values.Where(x => x.PublishDate != null && x.Tags.Contains(tag)).ToList();
         }
 
-        public IEnumerable<string> GetTags()
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<string> GetTags() => _tags;
 
     }
 }

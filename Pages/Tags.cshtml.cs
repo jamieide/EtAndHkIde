@@ -1,8 +1,6 @@
 ﻿using EtAndHkIde.Infrastructure;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace EtAndHkIde.Pages
 {
@@ -15,16 +13,17 @@ namespace EtAndHkIde.Pages
             _siteRepository = siteRepository;
         }
 
-        public string[] Tags { get; set; }
         public IDictionary<string, IEnumerable<PageMetadata>> PagesByTag { get; set; }
-
-        [BindProperty(SupportsGet = true)]
-        public string Tag { get; set; }
 
         public void OnGet()
         {
-            Tags = _siteRepository.GetTags().ToArray();
-            PagesByTag = _siteRepository.GetPagesByTag();
+            PagesByTag = new Dictionary<string, IEnumerable<PageMetadata>>();
+            var tags = _siteRepository.GetTags();
+            foreach (var tag in tags)
+            {
+                var pagesForTag = _siteRepository.GetPagesForTag(tag);
+                PagesByTag.Add(tag, pagesForTag);
+            }
         }
     }
 }

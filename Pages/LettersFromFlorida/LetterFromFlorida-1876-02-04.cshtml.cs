@@ -17,7 +17,7 @@ namespace EtAndHkIde.Pages.LettersFromFlorida
                 "St. Johnsbury Caledonian",
                 "February 4, 1876"),
                 PreviewQuote = "Arriving at Jacksonville about ten o'clock, P.M., we stopped at the St. John's House, kept by Mrs. Hudnall. Over the door of the dining-room was the motto, \"The Lord will Provide\" and we judged by the appearance of the table, that it was left almost entirely to him.",
-                IsListed = false,
+                IsPrimary = false,
                 Tags = new[] { TagValues.People.HoraceIde }
             };
         }

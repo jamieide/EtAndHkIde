@@ -1,20 +1,17 @@
 ﻿@page
-@using EtAndHkIde.Infrastructure
 @model EtAndHkIde.Pages.AboutModel
 @{
-    Layout = "Shared/_NavbarLayout";
+    Layout = "_Layout";
     ViewData["Title"] = "About";
 }
 
-<div class="row">
-    <div class="col-md-8 offset-md-2">
-        <main>
-            <h1 class="d-flex justify-content-between p-2 mb-2">
-                <span>About</span>
-                <i class="@Icons.About"></i>
-            </h1>
+<partial name="_PageBanner" />
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h1>About</h1>
             <p>The story of the Ide family in Vermont begins shortly after the Revolutionary war and continues to this day. This site exists to gather, present and preserve that story for all to enjoy.</p>
-        </main>
+        </div>
     </div>
 </div>
 

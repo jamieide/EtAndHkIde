@@ -1,15 +1,14 @@
 ﻿@page
 @model EtAndHkIde.Pages.Status404Model
 @{
-    Layout = "Shared/_Layout";
+    Layout = "_Layout";
     ViewData["Title"] = "Not Found";
 }
-
-<partial name="_SiteNavbar" model="false" />
+<partial name="_PageBanner" />
 <img class="img-fluid w-100" src="/assets/notfoundbanner.jpg" alt="Not found" />
-<div class="container">
+<div class="container mt-5">
     <div class="row">
-        <div class="col-md-8 offset-md-2">
+        <div class="col-8 offset-2">
             <main>
                 <h1>Not Found</h1>
                 <p class="lead">We looked everywhere but could not find the page you wanted.</p>

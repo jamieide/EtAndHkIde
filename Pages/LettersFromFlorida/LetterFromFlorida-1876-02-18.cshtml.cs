@@ -17,7 +17,7 @@ namespace EtAndHkIde.Pages.LettersFromFlorida
                 "St. Johnsbury Caledonian",
                 "February 18, 1876"),
                 PreviewQuote = "His apparatus was rather primitive, consisting of two iron rollers set in a wooden frame, and turned by a horse and mule attached to a sweep. The cane was crushed between these rollers, and the juice was caught in a barrel underneath. he gave us some of it to drink, and we found it much sweeter than sap.",
-                IsListed = false,
+                IsPrimary = false,
                 Tags = new[] { TagValues.People.HoraceIde }
             };
         }

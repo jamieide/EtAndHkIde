@@ -17,7 +17,7 @@ namespace EtAndHkIde.Pages.LettersFromFlorida
                 "St. Johnsbury Caledonian",
                 "January 21, 1876"),
                 PreviewQuote = "We arrived at Salisbury about dark, and I tried to get something to eat from an old lady who had a table on the platform of the depot. She had boiled eggs, bread and fried squirrel, and offered to put me up a snack for one for 25 cents, or a snack for two for 50 cents.",
-                IsListed = false,
+                IsPrimary = false,
                 Tags = new[] { TagValues.People.HoraceIde }
             };
         }

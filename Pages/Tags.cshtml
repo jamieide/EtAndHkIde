@@ -1,57 +1,57 @@
-﻿@page "{Tag?}"
-@using EtAndHkIde.Infrastructure
+﻿@page
 @model EtAndHkIde.Pages.TagsModel
 @{
-    Layout = "Shared/_NavbarLayout";
+    Layout = "_Layout";
     ViewData["Title"] = "Tags";
+    int keyIndex;
 }
-<main>
-    <h1 class="d-flex justify-content-between p-2 mb-2">
-        <span>Tags</span>
-        <i class="@Icons.Tags"></i>
-    </h1>
-
+@section Head{
+    <script>
+        $(function () {
+            $('#tags-container').on('show.bs.collapse', function (e) {
+                var $others = $(this).find('.collapse').not(e.target);
+                $others.collapse('hide');
+                $('li.list-group-item.active').removeClass('active');
+                $('li.list-group-item').has('a[href="#' + e.target.id + '"]').addClass('active');
+            });
+        });
+    </script>
+}
+<partial name="_PageBanner" />
+<div class="container mt-3">
     <div class="row">
-        <div class="col-md-4">
-            <div class="list-group">
-                @for (var i = 0; i < Model.Tags.Length; i++)
+        <div class="col-3">
+            <ul class="list-group">
+                @{ keyIndex = 0; }
+                @foreach (var tag in Model.PagesByTag.Keys)
                 {
-                    var tag = Model.Tags[i];
-                    var isActive = string.Equals(tag, Model.Tag, StringComparison.OrdinalIgnoreCase) ? "active" : "";
-
-                    var pageCount = 0;
-                    if (Model.PagesByTag.TryGetValue(tag, out var pageMetadatas))
-                    {
-                        pageCount = pageMetadatas.Count();
-                    }
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center @isActive" data-toggle="list" href="#tag-@i">
-                        <span>
-                            <i class="@Icons.ForTag(tag) mr-1"></i>@tag
-                        </span>
-                        <span class="badge badge-primary badge-pill">@pageCount</span>
-                    </a>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="#tag-@keyIndex" data-toggle="collapse">
+                            @tag
+                        </a>
+                        <span class="badge-primary badge-pill">@Model.PagesByTag[tag].Count()</span>
+                    </li>
+                    keyIndex++;
                 }
-            </div>
+            </ul>
         </div>
-        <div class="col-md-8">
-            <div class="tab-content">
-                @for (var i = 0; i < Model.Tags.Length; i++)
+        <div class="col-9">
+            @{ keyIndex = 0; }
+            <div id="tags-container">
+                @foreach (var tag in Model.PagesByTag.Keys)
                 {
-                    var tag = Model.Tags[i];
-                    var isActive = string.Equals(tag, Model.Tag, StringComparison.OrdinalIgnoreCase) ? "active show" : "";
-
-                    <div class="tab-pane fade @isActive" id="tag-@i">
-                        @if (Model.PagesByTag.TryGetValue(tag, out var pageMetadatas))
-                        {
-                            <partial name="_PageListWithIcons" model="@pageMetadatas" />
-                        }
-                        else
-                        {
-                            <p>There are no pages with this tag.</p>
-                        }
+                    <div id="tag-@keyIndex" class="collapse">
+                        <h2>@tag</h2>
+                        <div class="card-columns">
+                            @foreach (var pageMetadata in Model.PagesByTag[tag])
+                            {
+                                <partial name="_PageMetadataCard" model="pageMetadata" />
+                            }
+                        </div>
                     </div>
+                    keyIndex++;
                 }
             </div>
         </div>
     </div>
-</main>
+</div>
