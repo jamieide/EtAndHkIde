@@ -75,18 +75,18 @@ namespace EtAndHkIde.Infrastructure
         public IEnumerable<PageMetadata> GetDraftPages()
         {
             // all unpublished pages
-            return _pages.Values.Where(x => x.PublishDate == null).ToList();
+            return _pages.Values.Where(x => x.PublishDate == null || x.PublishDate > DateTime.Today).ToList();
         }
 
         public IEnumerable<PageMetadata> GetPages()
         {
             // published pages that are listed
-            return _pages.Values.Where(x => x.PublishDate != null && x.IsPrimary).ToList();
+            return _pages.Values.Where(x => x.PublishDate != null && x.PublishDate.Value <= DateTime.Today && x.IsPrimary).ToList();
         }
 
         public IEnumerable<PageMetadata> GetPagesForTag(string tag)
         {
-            return _pages.Values.Where(x => x.PublishDate != null && x.Tags.Contains(tag)).ToList();
+            return _pages.Values.Where(x => x.PublishDate != null && x.PublishDate <= DateTime.Today && x.Tags.Contains(tag)).ToList();
         }
 
         public IEnumerable<string> GetTags() => _tags;
