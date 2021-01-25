@@ -34,7 +34,7 @@ namespace EtAndHkIde
 
             // site re-org 12/5/20, everything is just a page now
             // TODO change to permanent when working
-            var redirectStatusCode = (int)HttpStatusCode.Redirect;
+            var redirectStatusCode = (int)HttpStatusCode.PermanentRedirect;
             app.UseRewriter(new RewriteOptions()
                 .AddRedirect("articles/(.*)", "$1", redirectStatusCode)
                 .AddRedirect("blog/(.*)", "$1", redirectStatusCode)
