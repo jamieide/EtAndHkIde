@@ -1,6 +1,66 @@
 ﻿/*
     color scheme: #bd162c, #1643bd, #bd5f16
 */
+#navbar-links a.nav-link .svg-inline--fa.fa-circle {
+    color: #bd162c;
+}
+
+#navbar-links a.nav-link:hover .svg-inline--fa.fa-circle[data-prefix~="far"] {
+    background-color: black;
+}
+
+#navbar-links a.nav-link:hover .svg-inline--fa.fa-circle[data-prefix~="fas"] {
+    color: white;
+}
+
+#navbar-links a.nav-link .svg-inline--fa.fa-inverse {
+    color: white;
+}
+
+#navbar-links a.nav-link:hover .svg-inline--fa.fa-inverse {
+    color: #bd162c;
+}
+
+#navbar-links a.nav-link:hover .caption {
+    color: #bd162c;
+}
+
+.navbar-dark.bg-dark {
+    background-color: black !important;
+}
+
+@media(min-width: 768px) {
+
+    /* align navbar link captions centered under icons for md devices and up, must be same breakpoint as navbar-expand-**/
+    #page-banner #navbar-links ul {
+        text-align: center;
+    }
+
+    #page-banner #navbar-links span.caption {
+        display: block;
+    }
+
+    /* navbar margins for md and up */
+    #page-banner .navbar-brand {
+        margin-left: 1.5rem;
+    }
+
+    #page-banner .navbar-nav {
+        margin-right: 0.5rem;
+    }
+}
+
+@media(min-width: 992px) {
+    /* navbar margins for lg and up */
+
+    #page-banner .navbar-brand {
+        margin-left: 3rem;
+    }
+
+    #page-banner .navbar-nav {
+        margin-right: 2rem;
+    }
+}
 
 h1 {
     color: #bd162c;
@@ -64,64 +124,26 @@ blockquote, .blockquote {
     background-color: #0f7864;
 }
 
-
-#navbar-links a.nav-link .svg-inline--fa.fa-circle {
-    color: #bd162c;
+/* 
+    Images are sized to 1, 2/3, 1/2, 1/3, 1/4 of 960px large container.
+    These classes exist to keep figure captions from overrunning the image size.
+*/
+figure.img-1 figcaption {
+    max-width: 960px;
 }
 
-#navbar-links a.nav-link:hover .svg-inline--fa.fa-circle[data-prefix~="far"] {
-    background-color: black;
+figure.img-2 figcaption {
+    max-width: 640px;
 }
 
-#navbar-links a.nav-link:hover .svg-inline--fa.fa-circle[data-prefix~="fas"] {
-    color: white;
+figure.img-3 figcaption {
+    max-width: 480px;
 }
 
-#navbar-links a.nav-link .svg-inline--fa.fa-inverse {
-    color: white;
+figure.img-4 figcaption {
+    max-width: 320px;
 }
 
-#navbar-links a.nav-link:hover .svg-inline--fa.fa-inverse {
-    color: #bd162c;
-}
-
-#navbar-links a.nav-link:hover .caption {
-    color: #bd162c;
-}
-
-.navbar-dark.bg-dark {
-    background-color: black !important;
-}
-
-@media(min-width: 768px) {
-
-    /* align navbar link captions centered under icons for md devices and up, must be same breakpoint as navbar-expand-**/
-    #page-banner #navbar-links ul {
-        text-align: center;
-    }
-
-    #page-banner #navbar-links span.caption {
-        display: block;
-    }
-
-    /* navbar margins for md and up */
-    #page-banner .navbar-brand {
-        margin-left: 1.5rem;
-    }
-
-    #page-banner .navbar-nav {
-        margin-right: 0.5rem;
-    }
-}
-
-@media(min-width: 992px) {
-    /* navbar margins for lg and up */
-
-    #page-banner .navbar-brand {
-        margin-left: 3rem;
-    }
-
-    #page-banner .navbar-nav {
-        margin-right: 2rem;
-    }
+figure.img-5 figcaption {
+    max-width: 240px;
 }
