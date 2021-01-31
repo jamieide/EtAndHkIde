@@ -7,11 +7,12 @@
             // needed for JSON deserialization
         }
 
+        // TODO move to partial
         public Citation(CitationType type, string url)
         {
             Type = type;
             Url = url;
-            Name = type == CitationType.Pdf ? "Adobe&reg; PDF" : "Citation link";
+            Name = type == CitationType.Pdf ? "Open a PDF copy" : "Citation link";
         }
 
         public Citation(CitationType type, string url, string name)
