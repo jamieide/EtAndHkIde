@@ -21,9 +21,5 @@ namespace EtAndHkIde.Pages.LettersFromFlorida
                 Tags = new[] { TagValues.People.HoraceIde }
             };
         }
-
-        public void OnGet()
-        {
-        }
     }
 }

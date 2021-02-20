@@ -8,6 +8,7 @@ namespace EtAndHkIde.Infrastructure
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime? PublishDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
         public string PreviewQuote { get; set; }
         public string PreviewImage { get; set; }
         public IEnumerable<string> Tags { get; set; } = new string[0];

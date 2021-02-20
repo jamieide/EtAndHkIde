@@ -20,10 +20,5 @@ namespace EtAndHkIde.Pages
                 Tags = new[] { TagValues.Places.StJohnsbury, TagValues.People.ElmoreIde }
             };
         }
-
-        public void OnGet()
-        {
-
-        }
     }
 }

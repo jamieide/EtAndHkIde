@@ -16,9 +16,5 @@ namespace EtAndHkIde.Pages
                 Citation = new Citation(CitationType.Pdf, @"/pages/AdamsFelchTaylorIde/William Adams Henry Felch John Taylor Nicholas Ide.pdf")
             };
         }
-
-        public void OnGet()
-        {
-        }
     }
 }

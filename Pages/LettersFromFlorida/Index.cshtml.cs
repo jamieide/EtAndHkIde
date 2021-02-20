@@ -28,8 +28,10 @@ namespace EtAndHkIde.Pages.LettersFromFlorida
             _siteRepository = siteRepository;
         }
 
-        public void OnGet()
+        public override void OnGet()
         {
+            base.OnGet();
+
             // todo have to use underscores...
             var pagePaths = new[]
             {

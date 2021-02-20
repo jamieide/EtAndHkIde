@@ -20,10 +20,5 @@ namespace EtAndHkIde.Pages
                 Tags = new[] { TagValues.Places.Passumpsic }
             };
         }
-
-        public void OnGet()
-        {
-
-        }
     }
 }

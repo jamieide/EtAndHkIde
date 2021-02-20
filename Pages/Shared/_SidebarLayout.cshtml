@@ -62,6 +62,10 @@
                             {
                                 <span class="badge badge-warning">DRAFT</span>
                             }
+                            @if (Model.Metadata.UpdatedDate.HasValue)
+                            {
+                                <br /><span class="mr-2">Updated</span>@Model.Metadata.UpdatedDate.ToShortDateString()
+                            }
                         </small>
                     </p>
                     @if (Model.Metadata.Tags.Any())

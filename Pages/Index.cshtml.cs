@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -31,7 +32,10 @@ namespace EtAndHkIde.Pages
                 .OrderByDescending(x => x.PublishDate);
             AllPages = BuildPages(allPages);
 
-            RecentPages = allPages.Take(PageSize);
+            RecentPages = allPages
+                .OrderByDescending(x => x.UpdatedDate.HasValue && x.UpdatedDate.Value > x.PublishDate ? x.UpdatedDate : x.PublishDate)
+                .ThenByDescending(x => x.UpdatedDate)
+                .Take(PageSize);
 
             var photoPages = allPages.Where(x => x.Tags.Contains(TagValues.System.Photos));
             PhotoPages = BuildPages(photoPages);

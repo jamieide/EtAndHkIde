@@ -19,10 +19,5 @@ namespace EtAndHkIde.Pages
                 Tags = new[] { TagValues.Places.Passumpsic, TagValues.Places.StJohnsbury, TagValues.People.RichardIde }
             };
         }
-
-        public void OnGet()
-        {
-
-        }
     }
 }

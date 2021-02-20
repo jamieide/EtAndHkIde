@@ -13,9 +13,5 @@ namespace EtAndHkIde.Pages
                 Description = "TODO"
             };
         }
-
-        public void OnGet()
-        {
-        }
     }
 }

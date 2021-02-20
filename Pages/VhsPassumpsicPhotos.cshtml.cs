@@ -15,9 +15,5 @@ namespace EtAndHkIde.Pages
                 PreviewImage = "pages/VhsPassumpsicPhotos/vhspassumpsicphotos-preview.jpg"
             };
         }
-
-        public void OnGet()
-        {
-        }
     }
 }

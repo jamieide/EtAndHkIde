@@ -16,5 +16,7 @@ namespace EtAndHkIde.Pages
                 Tags = new[] { TagValues.System.Photos, TagValues.People.RichardIde }
             };
         }
+
+        // todo build up image list in onget
     }
 }

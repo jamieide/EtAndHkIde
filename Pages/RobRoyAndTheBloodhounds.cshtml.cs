@@ -16,9 +16,5 @@ namespace EtAndHkIde.Pages
                 PublishDate = new DateTime(2021, 1, 31)
             };
         }
-
-        public void OnGet()
-        {
-        }
     }
 }
