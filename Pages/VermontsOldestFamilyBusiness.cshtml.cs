@@ -17,6 +17,7 @@ namespace EtAndHkIde.Pages
                 Citation = new Citation(CitationType.Pdf, "pages/VermontsOldestFamilyBusiness/Vermont's Oldest Family Business.pdf"),
                 Tags = new[]
                 {
+                    TagValues.System.Featured,
                     TagValues.People.TimothyIde,
                     TagValues.People.JacobIde,
                     TagValues.People.ElmoreIde,
