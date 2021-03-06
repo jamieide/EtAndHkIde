@@ -7,7 +7,7 @@ namespace EtAndHkIde.Infrastructure
         public PageMetadata Metadata { get; protected set; }
 
         /// <summary>
-        /// Call base.OnGet to set ViewData.
+        /// if overriding, call base.OnGet to set ViewData.
         /// </summary>
         public virtual void OnGet()
         {
