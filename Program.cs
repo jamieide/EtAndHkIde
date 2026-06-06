@@ -1,17 +1,37 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using EtAndHkIde.Infrastructure;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-namespace EtAndHkIde
+
+var builder = WebApplication.CreateBuilder(args);
+
+var razorPages = builder.Services.AddRazorPages();
+
+#if DEBUG
+// todo
+#endif
+
+builder.Services.AddAntiforgery();
+builder.Services.Configure<RouteOptions>(o => o.LowercaseUrls = true);
+// todo refactor
+builder.Services.AddSingleton<ISiteRepository, SiteRepository>();
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateWebHostBuilder(args).Build().Run();
-        }
-
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
-    }
+    app.UseDeveloperExceptionPage();
+    app.UseStatusCodePages();
 }
+else
+{
+    app.UseExceptionHandler("/Error");
+}
+
+app.UseStatusCodePagesWithReExecute("/Status{0}");
+app.UseStaticFiles();
+app.UseRouting();
+app.MapRazorPages();
+app.Run();
