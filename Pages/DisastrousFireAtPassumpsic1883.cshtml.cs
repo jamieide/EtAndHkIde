@@ -5,7 +5,7 @@ namespace EtAndHkIde.Pages
 {
     public class DisastrousFireAtPassumpsic1883Model : SitePageModel
     {
-        public DisastrousFireAtPassumpsic1883Model()
+        public override void DefineMetadata()
         {
             Metadata = new PageMetadata
             {

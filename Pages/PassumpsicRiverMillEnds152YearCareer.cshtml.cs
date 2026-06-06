@@ -5,7 +5,7 @@ namespace EtAndHkIde.Pages
 {
     public class PassumpsicRiverMillEnds152YearCareerModel : SitePageModel
     {
-        public PassumpsicRiverMillEnds152YearCareerModel()
+        public override void DefineMetadata()
         {
             Metadata = new PageMetadata
             {

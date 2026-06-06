@@ -5,7 +5,7 @@ namespace EtAndHkIde.Pages
 {
     public class ToFatherAndMotherModel : SitePageModel
     {
-        public ToFatherAndMotherModel()
+        public override void DefineMetadata()
         {
             Metadata = new PageMetadata
             {

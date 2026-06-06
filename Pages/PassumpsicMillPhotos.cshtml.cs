@@ -5,7 +5,8 @@ namespace EtAndHkIde.Pages
 {
     public class PassumpsicMillPhotosModel : SitePageModel
     {
-        public PassumpsicMillPhotosModel()
+        public PassumpsicMillPhotosModel() { }
+        public override void DefineMetadata()
         {
             Metadata = new PageMetadata
             {

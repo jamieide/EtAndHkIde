@@ -5,7 +5,8 @@ namespace EtAndHkIde.Pages
 {
     public class VhsPassumpsicPhotosModel : SitePageModel
     {
-        public VhsPassumpsicPhotosModel()
+        public VhsPassumpsicPhotosModel() { }
+        public override void DefineMetadata()
         {
             Metadata = new PageMetadata
             {

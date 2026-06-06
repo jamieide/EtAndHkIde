@@ -5,7 +5,8 @@ namespace EtAndHkIde.Pages
 {
     public class ElmoreAndCynthiaFamilyPortraitModel : SitePageModel
     {
-        public ElmoreAndCynthiaFamilyPortraitModel()
+        public ElmoreAndCynthiaFamilyPortraitModel() { }
+        public override void DefineMetadata()
         {
             Metadata = new PageMetadata
             {

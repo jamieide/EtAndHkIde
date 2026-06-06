@@ -5,7 +5,7 @@ namespace EtAndHkIde.Pages
 {
     public class LightingTheVillageModel : SitePageModel
     {
-        public LightingTheVillageModel()
+        public override void DefineMetadata()
         {
             Metadata = new PageMetadata
             {

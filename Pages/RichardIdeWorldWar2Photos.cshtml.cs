@@ -5,7 +5,8 @@ namespace EtAndHkIde.Pages
 {
     public class RichardIdeWorldWar2PhotosModel : SitePageModel
     {
-        public RichardIdeWorldWar2PhotosModel()
+        public RichardIdeWorldWar2PhotosModel() { }
+        public override void DefineMetadata()
         {
             Metadata = new PageMetadata
             {

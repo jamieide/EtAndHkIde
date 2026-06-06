@@ -5,7 +5,8 @@ namespace EtAndHkIde.Pages.LettersFromFlorida
 {
     public class LetterFromFlorida_1876_02_25Model : SitePageModel
     {
-        public LetterFromFlorida_1876_02_25Model()
+        public LetterFromFlorida_1876_02_25Model() { }
+        public override void DefineMetadata()
         {
             Metadata = new PageMetadata
             {

@@ -9,8 +9,7 @@ namespace EtAndHkIde.Pages.LettersFromFlorida
     public class IndexModel : SitePageModel
     {
         private readonly ISiteRepository _siteRepository;
-
-        public IndexModel()
+        public override void DefineMetadata()
         {
             Metadata = new PageMetadata
             {
@@ -22,8 +21,13 @@ namespace EtAndHkIde.Pages.LettersFromFlorida
             };
         }
 
+        // Parameterless constructor required by some runtime hosts that expect a default ctor.
+        public IndexModel()
+        {
+        }
+
         [ActivatorUtilitiesConstructor]
-        public IndexModel(ISiteRepository siteRepository) : this()
+        public IndexModel(ISiteRepository siteRepository)
         {
             _siteRepository = siteRepository;
         }

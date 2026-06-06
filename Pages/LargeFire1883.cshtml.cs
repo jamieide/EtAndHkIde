@@ -5,7 +5,7 @@ namespace EtAndHkIde.Pages
 {
     public class LargeFire1883Model : SitePageModel
     {
-        public LargeFire1883Model()
+        public override void DefineMetadata()
         {
             Metadata = new PageMetadata
             {

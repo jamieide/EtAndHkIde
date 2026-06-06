@@ -5,7 +5,7 @@ namespace EtAndHkIde.Pages
 {
     public class IdeMillersOfStJohnsburyBeganIn1813Model : SitePageModel
     {
-        public IdeMillersOfStJohnsburyBeganIn1813Model()
+        public override void DefineMetadata()
         {
             Metadata = new PageMetadata
             {

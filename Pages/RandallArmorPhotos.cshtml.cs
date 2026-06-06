@@ -5,7 +5,8 @@ namespace EtAndHkIde.Pages
 {
     public class RandallArmorPhotosModel : SitePageModel
     {
-        public RandallArmorPhotosModel()
+        public RandallArmorPhotosModel() { }
+        public override void DefineMetadata()
         {
             Metadata = new PageMetadata
             {

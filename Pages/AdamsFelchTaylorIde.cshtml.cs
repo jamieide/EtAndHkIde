@@ -7,6 +7,9 @@ namespace EtAndHkIde.Pages
     {
         public AdamsFelchTaylorIdeModel()
         {
+        }
+        public override void DefineMetadata()
+        {
             Metadata = new PageMetadata
             {
                 Title = "William Adams, Henry Felch, John Taylor, Nicholas Ide",

@@ -5,7 +5,8 @@ namespace EtAndHkIde.Pages
 {
     public class VermontMillingDynastyModel : SitePageModel
     {
-        public VermontMillingDynastyModel()
+        public VermontMillingDynastyModel() { }
+        public override void DefineMetadata()
         {
             Metadata = new PageMetadata
             {

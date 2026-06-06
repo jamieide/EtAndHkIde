@@ -5,7 +5,7 @@ namespace EtAndHkIde.Pages
 {
     public class VermontsOldestFamilyBusinessModel : SitePageModel
     {
-        public VermontsOldestFamilyBusinessModel()
+        public override void DefineMetadata()
         {
             Metadata = new PageMetadata
             {

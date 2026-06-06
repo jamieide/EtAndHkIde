@@ -5,7 +5,8 @@ namespace EtAndHkIde.Pages
 {
     public class BigFireAtPassumpsic1904Model : SitePageModel
     {
-        public BigFireAtPassumpsic1904Model()
+        public BigFireAtPassumpsic1904Model() { }
+        public override void DefineMetadata()
         {
             Metadata = new PageMetadata
             {

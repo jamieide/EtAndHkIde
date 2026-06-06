@@ -6,6 +6,13 @@ namespace EtAndHkIde.Infrastructure
     {
         public PageMetadata Metadata { get; protected set; }
 
+        public abstract void DefineMetadata();
+
+        public SitePageModel()
+        {
+            DefineMetadata();
+        }
+
         /// <summary>
         /// if overriding, call base.OnGet to set ViewData.
         /// </summary>

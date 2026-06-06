@@ -4,7 +4,8 @@ namespace EtAndHkIde.Pages
 {
     public class PassumpsicMillsHistoryModel : SitePageModel
     {
-        public PassumpsicMillsHistoryModel()
+        public PassumpsicMillsHistoryModel() { }
+        public override void DefineMetadata()
         {
             Metadata = new PageMetadata
             {

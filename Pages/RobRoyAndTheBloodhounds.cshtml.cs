@@ -5,7 +5,8 @@ namespace EtAndHkIde.Pages
 {
     public class RobRoyAndTheBloodhoundsModel : SitePageModel
     {
-        public RobRoyAndTheBloodhoundsModel()
+        public RobRoyAndTheBloodhoundsModel() { }
+        public override void DefineMetadata()
         {
             Metadata = new PageMetadata
             {
