@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace EtAndHkIde.Infrastructure
+namespace EtAndHkIde.Web.Infrastructure
 {
     public abstract class SitePageModel : PageModel
     {

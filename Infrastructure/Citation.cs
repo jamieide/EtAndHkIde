@@ -1,4 +1,4 @@
-﻿namespace EtAndHkIde.Infrastructure
+﻿namespace EtAndHkIde.Web.Infrastructure
 {
     public class Citation
     {

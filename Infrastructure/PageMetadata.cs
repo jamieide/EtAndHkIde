@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EtAndHkIde.Infrastructure
+namespace EtAndHkIde.Web.Infrastructure
 {
     public class PageMetadata
     {

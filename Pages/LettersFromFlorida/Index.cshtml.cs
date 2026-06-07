@@ -1,10 +1,10 @@
-using EtAndHkIde.Infrastructure;
+using EtAndHkIde.Web.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EtAndHkIde.Pages.LettersFromFlorida
+namespace EtAndHkIde.Web.Pages.LettersFromFlorida
 {
     public class IndexModel : SitePageModel
     {

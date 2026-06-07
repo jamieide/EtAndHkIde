@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace EtAndHkIde.Pages
+namespace EtAndHkIde.Web.Pages
 {
     public class Status404Model : PageModel
     {

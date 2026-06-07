@@ -1,7 +1,7 @@
-﻿using EtAndHkIde.Infrastructure;
+﻿using EtAndHkIde.Web.Infrastructure;
 using System;
 
-namespace EtAndHkIde.Pages
+namespace EtAndHkIde.Web.Pages
 {
     public class IdeMillersOfStJohnsburyBeganIn1813Model : SitePageModel
     {

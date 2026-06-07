@@ -1,4 +1,4 @@
-﻿using EtAndHkIde.Infrastructure;
+﻿using EtAndHkIde.Web.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Hosting;
@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EtAndHkIde.Pages
+namespace EtAndHkIde.Web.Pages
 {
     public class IndexModel : PageModel
     {

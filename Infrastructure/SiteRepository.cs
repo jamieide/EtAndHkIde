@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace EtAndHkIde.Infrastructure
+namespace EtAndHkIde.Web.Infrastructure
 {
     public interface ISiteRepository
     {

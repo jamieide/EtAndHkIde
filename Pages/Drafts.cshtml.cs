@@ -1,8 +1,8 @@
-﻿using EtAndHkIde.Infrastructure;
+﻿using EtAndHkIde.Web.Infrastructure;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 
-namespace EtAndHkIde.Pages
+namespace EtAndHkIde.Web.Pages
 {
     public class DraftsModel : PageModel
     {

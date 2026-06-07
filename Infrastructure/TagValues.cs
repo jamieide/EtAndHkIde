@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace EtAndHkIde.Infrastructure
+namespace EtAndHkIde.Web.Infrastructure
 {
     // This was originally implemented as a value type but that caused a lot of duplicate data on serialization.
 

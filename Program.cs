@@ -1,4 +1,5 @@
-﻿using EtAndHkIde.Infrastructure;
+﻿using EtAndHkIde.Web;
+using EtAndHkIde.Web.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +30,8 @@ else
 {
     app.UseExceptionHandler("/Error");
 }
+
+var pages = SiteIndex.Pages;
 
 app.UseStatusCodePagesWithReExecute("/Status{0}");
 app.UseStaticFiles();

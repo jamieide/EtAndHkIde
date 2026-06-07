@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EtAndHkIde.Infrastructure
+namespace EtAndHkIde.Web.Infrastructure
 {
     public static class Utilities
     {

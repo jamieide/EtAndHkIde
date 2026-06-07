@@ -1,7 +1,7 @@
-﻿using EtAndHkIde.Infrastructure;
+﻿using EtAndHkIde.Web.Infrastructure;
 using System.Collections.Generic;
 
-namespace EtAndHkIde.Pages.Shared
+namespace EtAndHkIde.Web.Pages.Shared
 {
     public class _PageMetadataCardsPagedViewModel
     {

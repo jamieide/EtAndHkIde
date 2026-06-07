@@ -1,6 +1,6 @@
-﻿using EtAndHkIde.Infrastructure;
+﻿using EtAndHkIde.Web.Infrastructure;
 
-namespace EtAndHkIde.Pages
+namespace EtAndHkIde.Web.Pages
 {
     public class PassumpsicMillsHistoryModel : SitePageModel
     {
