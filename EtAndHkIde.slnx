@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="EtAndHkIde.CLI/EtAndHkIde.CLI.csproj" Id="a55fb7cb-074b-4496-a49d-75af0a97ba39" />
+  <Project Path="EtAndHkIde.SourceGenerators/EtAndHkIde.SourceGenerators.csproj" />
+  <Project Path="EtAndHkIde.Web/EtAndHkIde.Web.csproj" />
+</Solution>
