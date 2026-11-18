@@ -74,11 +74,6 @@ namespace EtAndHkIde.CLI.Zotero
             Abstract = GetStringValue(data, "abstractNote");
             // Date is a string because some have partial or malformed values. Could be improved.
             Date = GetStringValue(data, "date");
-
-            CollectionKeys = data.GetProperty("collections")
-                .EnumerateArray()
-                .Select(x => x.GetString() ?? throw new ArgumentException("Missing collection key."))
-                .ToList();
         }
 
         public string Abstract { get; }
