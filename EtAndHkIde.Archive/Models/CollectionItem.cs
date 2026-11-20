@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace EtAndHkIde.CLI.Sqlite
+namespace EtAndHkIde.Archive.Models
 {
-    internal class DbCollectionItem
+    public class CollectionItem
     {
         [Key]
         public long Id { get; set; }

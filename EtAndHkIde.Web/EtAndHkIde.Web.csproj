@@ -6,9 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EtAndHkIde.SourceGenerators\EtAndHkIde.SourceGenerators.csproj"
-                      OutputItemType="Analyzer"
-                      ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\EtAndHkIde.Archive\EtAndHkIde.Archive.csproj" />
+    <ProjectReference Include="..\EtAndHkIde.SourceGenerators\EtAndHkIde.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
 </Project>

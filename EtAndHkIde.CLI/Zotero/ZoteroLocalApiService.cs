@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace EtAndHkIde.CLI.Zotero
 {
-    internal class ZoteroLocalApiService
+    public class ZoteroLocalApiService
     {
         private readonly HttpClient _httpClient;
 
@@ -13,46 +13,53 @@ namespace EtAndHkIde.CLI.Zotero
             {
                 BaseAddress = new Uri("http://localhost:23119/")
             };
+#if DEBUG
+            _httpClient.Timeout = TimeSpan.FromMinutes(10);
+#endif
         }
 
-        public async Task<Collection> GetCollection(string collectionKey)
+        public async Task<ZoteroCollection> GetCollectionAsync(string collectionKey)
         {
             using var response = await _httpClient.GetAsync($"api/users/0/collections/{collectionKey}");
             response.EnsureSuccessStatusCode();
-
-            var json = await response.Content.ReadFromJsonAsync<JsonElement>();
-            return new Collection(json);
+            return (await response.Content.ReadFromJsonAsync<ZoteroCollection>())!;
         }
 
-        public async Task<IEnumerable<Collection>> GetSubCollectionsAsync(string collectionKey)
+        public async Task<IEnumerable<ZoteroCollection>> GetSubCollectionsAsync(string collectionKey)
         {
             using var response = await _httpClient.GetAsync($"api/users/0/collections/{collectionKey}/collections");
             response.EnsureSuccessStatusCode();
-
-            var json = await response.Content.ReadFromJsonAsync<JsonElement>();
-            return json.EnumerateArray().Select(x => new Collection(x));
+            return (await response.Content.ReadFromJsonAsync<ZoteroCollection[]>())!;
         }
 
         public async Task<IEnumerable<ZoteroItem>> GetItemsByCollectionAsync(string collectionKey)
         {
             using var response = await _httpClient.GetAsync($"api/users/0/collections/{collectionKey}/items");
             response.EnsureSuccessStatusCode();
-
-            var json = await response.Content.ReadFromJsonAsync<JsonElement>();
-            return json.EnumerateArray().Select(ItemFactory.CreateItem);
+            return (await response.Content.ReadFromJsonAsync<IEnumerable<ZoteroItem>>())!;
         }
 
-        public async Task<IDictionary<string, string>> GetItemFieldsAsync()
+        public async Task<IDictionary<string, string>> GetItemTypesAsync()
         {
-            using var response = await _httpClient.GetAsync($"api/itemFields");
+            using var response = await _httpClient.GetAsync($"api/itemTypes");
             response.EnsureSuccessStatusCode();
 
             var json = await response.Content.ReadFromJsonAsync<JsonElement>();
-            return json.EnumerateArray().Select(x => new
-            {
-                key = x.GetProperty("field").GetString()!,
-                value = x.GetProperty("localized").GetString()!,
-            }).ToDictionary(x => x.key, v => v.value);
+            return json.EnumerateArray()
+                .Select(x => new KeyValuePair<string, string>(x.GetProperty("itemType").GetString()!, x.GetProperty("localized").GetString()!))
+                .ToDictionary();
+
+        }
+
+        public async Task<IDictionary<string, string>> GetItemTypeFieldsAsync(string itemType)
+        {
+            using var response = await _httpClient.GetAsync($"api/itemTypeFields?itemType={itemType}");
+            response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadFromJsonAsync<JsonElement>();
+            return json.EnumerateArray()
+                .Select(x => new KeyValuePair<string, string>(x.GetProperty("field").GetString()!, x.GetProperty("localized").GetString()!))
+                .ToDictionary();
         }
 
     }

@@ -1,7 +1,9 @@
-﻿using EtAndHkIde.Web;
+﻿using EtAndHkIde.Archive;
+using EtAndHkIde.Web;
 using EtAndHkIde.Web.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -15,9 +17,20 @@ var razorPages = builder.Services.AddRazorPages();
 #endif
 
 builder.Services.AddAntiforgery();
-builder.Services.Configure<RouteOptions>(o => o.LowercaseUrls = true);
+builder.Services.Configure<RouteOptions>(options =>
+{
+    options.LowercaseUrls = true;
+    options.LowercaseQueryStrings = true;
+});
+
 // todo refactor
 builder.Services.AddSingleton<ISiteRepository, SiteRepository>();
+
+builder.Services.AddDbContext<ArchiveDbContext>(options =>
+{
+    options.UseSqlite("Data source=C:\\Users\\jamie\\source\\EtAndHkIdeDb\\EtAndHkIde.sqlite");
+});
+builder.Services.AddScoped<ArchiveService>();
 
 var app = builder.Build();
 

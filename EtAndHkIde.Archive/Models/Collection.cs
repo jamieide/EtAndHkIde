@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace EtAndHkIde.CLI.Sqlite
+namespace EtAndHkIde.Archive.Models
 {
-    internal class DbCollection
+    public class Collection
     {
         [Key]
         public string CollectionId { get; set; } = string.Empty;

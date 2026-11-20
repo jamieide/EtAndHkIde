@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EtAndHkIde.CLI.Sqlite
+namespace EtAndHkIde.Archive.Models
 {
-    internal class DbNote
+    public class Note
     {
         [Key]
         public long Id { get; set; }

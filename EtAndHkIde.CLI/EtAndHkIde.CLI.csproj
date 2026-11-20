@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.15" />
+    <ProjectReference Include="..\EtAndHkIde.Archive\EtAndHkIde.Archive.csproj" />
   </ItemGroup>
 
 </Project>
