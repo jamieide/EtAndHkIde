@@ -1,6 +1,5 @@
 ﻿using EtAndHkIde.Archive;
 using EtAndHkIde.Archive.Models;
-using System.Text;
 using System.Text.Json;
 
 namespace EtAndHkIde.CLI.Zotero
@@ -10,23 +9,14 @@ namespace EtAndHkIde.CLI.Zotero
         private readonly ZoteroLocalApiService _zotero;
         private readonly ArchiveDbContext _dbContext;
 
-        private IDictionary<string, string> _itemTypes = new Dictionary<string, string>();
-        private IDictionary<string, IDictionary<string, string>> _itemTypeFields = new Dictionary<string, IDictionary<string, string>>();
-        private IDictionary<string, ItemContentType> _itemContentTypeByTag;
-        private HashSet<string> _processedItemKeys = [];
+        private Dictionary<string, string> _itemTypes = [];
+        private Dictionary<string, string> _itemFields = [];
+        private Dictionary<string, ItemContentType> _itemContentTypeByTag = [];
 
         public ZoteroImportService(ZoteroLocalApiService zotero, ArchiveDbContext dbContext)
         {
             _zotero = zotero;
             _dbContext = dbContext;
-
-            _itemContentTypeByTag = new Dictionary<string, ItemContentType>
-            {
-                { "ict: Feature", ItemContentType.Feature },
-                { "ict: Article", ItemContentType.Article },
-                { "ict: Mention", ItemContentType.Mention },
-                { "ict: Advertising", ItemContentType.Advertising }
-            };
         }
 
         public async Task ExecuteAsync(string zoteroCollectionKey)
@@ -36,6 +26,19 @@ namespace EtAndHkIde.CLI.Zotero
             try
             {
                 _itemTypes = await _zotero.GetItemTypesAsync();
+                _itemFields = await _zotero.GetItemFieldsAsync();
+                // removed ones that should not be attributes
+                _itemFields.Remove("title");
+                _itemFields.Remove("abstractNote");
+                _itemFields.Remove("extra");
+                _itemContentTypeByTag = new Dictionary<string, ItemContentType>()
+                {
+                    { "ict: Feature", ItemContentType.Feature },
+                    { "ict: Article", ItemContentType.Article },
+                    { "ict: Mention", ItemContentType.Mention },
+                    { "ict: Advertising", ItemContentType.Advertising }
+                };
+
                 var zoteroCollection = await _zotero.GetCollectionAsync(zoteroCollectionKey);
                 await ProcessCollection(zoteroCollection);
 
@@ -52,11 +55,11 @@ namespace EtAndHkIde.CLI.Zotero
         {
             var collection = new Collection
             {
-                CollectionId = zoteroCollection.Key,
+                Key = zoteroCollection.Key,
                 Name = GetStringValue(zoteroCollection.Data, "name", true)
             };
             _dbContext.Collection.Add(collection);
-            await ProcessCollectionItems(zoteroCollection);
+            await ProcessCollectionItems(collection);
             _dbContext.SaveChanges();
             _dbContext.ChangeTracker.Clear();
 
@@ -67,62 +70,58 @@ namespace EtAndHkIde.CLI.Zotero
             }
         }
 
-        private async Task ProcessCollectionItems(ZoteroCollection zoteroCollection)
+        private async Task ProcessCollectionItems(Collection collection)
         {
-            var zoteroItems = await _zotero.GetItemsByCollectionAsync(zoteroCollection.Key);
+            var zoteroItems = await _zotero.GetItemsByCollectionAsync(collection.Key);
+            var zoteroTopItems = zoteroItems
+                .Where(x => !x.Data.ContainsKey("parentItem"));
+            var zoteroChildItems = zoteroItems
+                .Except(zoteroTopItems)
+                .ToLookup(x => x.Data["parentItem"].GetString());
+            // Remove stand-alone notes from top items
+            zoteroTopItems = zoteroTopItems.Where(x => x.Data["itemType"].GetString() != "note");
 
-            foreach (var zoteroItem in zoteroItems)
+            var zoteroTopItemKeys = zoteroTopItems.Select(x => x.Key).ToArray();
+            var existingItems = _dbContext.Item
+                .Where(x => zoteroTopItemKeys.Contains(x.Key))
+                .ToDictionary(k => k.Key, v => v);
+
+            foreach (var zoteroTopItem in zoteroTopItems)
             {
-                var itemType = GetStringValue(zoteroItem.Data, "itemType", true);
-                if (!_itemTypeFields.ContainsKey(itemType))
+                CollectionItem collectionItem = new()
                 {
-                    var itemTypeFields = await _zotero.GetItemTypeFieldsAsync(itemType);
-                    _itemTypeFields.Add(itemType, itemTypeFields);
-                }
+                    Collection = collection
+                };
+                _dbContext.CollectionItem.Add(collectionItem);
 
-                switch (itemType)
+                if (existingItems.TryGetValue(zoteroTopItem.Key, out var existingItem))
                 {
-                    case "note":
-                        ProcessNote(zoteroItem);
-                        break;
-                    case "attachment":
-                        ProcessAttachment(zoteroItem);
-                        break;
-                    default:
-                        ProcessItem(zoteroCollection, zoteroItem, itemType);
-                        ProcessItemAttributes(zoteroItem, itemType);
-                        break;
+                    collectionItem.Item = existingItem;
+                }
+                else
+                {
+                    collectionItem.Item = BuildItem(zoteroTopItem, zoteroChildItems[zoteroTopItem.Key]);
                 }
             }
         }
 
-        private void ProcessItem(ZoteroCollection zoteroCollection, ZoteroItem zoteroItem, string itemType)
+        private Item BuildItem(ZoteroItem zoteroTopItem, IEnumerable<ZoteroItem> zoteroChildItems)
         {
-            // Add relationship to collection
-            var collectionItem = new CollectionItem
-            {
-                CollectionId = zoteroCollection.Key,
-                ItemId = zoteroItem.Key
-            };
-            _dbContext.CollectionItem.Add(collectionItem);
-
-            if (_processedItemKeys.Contains(zoteroItem.Key))
-            {
-                return;
-            }
-            _processedItemKeys.Add(zoteroItem.Key);
+            var itemType = GetStringValue(zoteroTopItem.Data, "itemType", true);
 
             var item = new Item
             {
-                ItemId = zoteroItem.Key,
+                Key = zoteroTopItem.Key,
                 ItemType = _itemTypes[itemType],
-                Title = GetStringValue(zoteroItem.Data, "title"),
-                Abstract = GetStringValue(zoteroItem.Data, "abstractNote")
+                Title = GetStringValue(zoteroTopItem.Data, "title"),
+                Abstract = GetStringValue(zoteroTopItem.Data, "abstractNote")
             };
+
+            AttachChildren(item, zoteroChildItems);
 
             // set creators
             var creators = new List<string>();
-            foreach (var entry in zoteroItem.Data["creators"].EnumerateArray())
+            foreach (var entry in zoteroTopItem.Data["creators"].EnumerateArray())
             {
                 // These can be in the form { name, creatorType } or { firstName, lastName, creatorType }
                 if (entry.GetPropertyCount() == 2)
@@ -137,15 +136,15 @@ namespace EtAndHkIde.CLI.Zotero
             item.Creators = string.Join(", ", creators);
 
             // set dates
-            if (zoteroItem.Data.TryGetValue("date", out var dateElement) && DateTime.TryParse(dateElement.GetString(), out var dt))
+            if (zoteroTopItem.Data.TryGetValue("date", out var dateElement) && DateTime.TryParse(dateElement.GetString(), out var dt))
             {
                 item.Date = DateOnly.FromDateTime(dt);
             }
-            item.DateAdded = zoteroItem.Data["dateAdded"].GetDateTime();
-            item.DateModified = zoteroItem.Data["dateModified"].GetDateTime();
+            item.DateAdded = zoteroTopItem.Data["dateAdded"].GetDateTime();
+            item.DateModified = zoteroTopItem.Data["dateModified"].GetDateTime();
 
             // process tags
-            if (zoteroItem.Data.TryGetValue("tags", out var tagsElement))
+            if (zoteroTopItem.Data.TryGetValue("tags", out var tagsElement))
             {
                 var itemContentTypeTag = tagsElement.EnumerateArray()
                     .Select(x => x.GetProperty("tag").GetString()!)
@@ -160,71 +159,54 @@ namespace EtAndHkIde.CLI.Zotero
                 }
             }
 
-            _dbContext.Add(item);
-        }
-
-        private void ProcessItemAttributes(ZoteroItem zoteroItem, string itemType)
-        {
-            var skipItemFields = new HashSet<string>() { "title", "abstractNote", "extra" };
-            var itemTypeFields = _itemTypeFields[itemType];
-            foreach (var field in itemTypeFields)
+            // attach attributes
+            foreach (var entry in zoteroTopItem.Data)
             {
-                if (skipItemFields.Contains(field.Key))
+                if (_itemFields.TryGetValue(entry.Key, out var localized))
                 {
-                    continue;
-                }
-                var value = GetStringValue(zoteroItem.Data, field.Key);
-                if (value != string.Empty)
-                {
-                    var itemAttribute = new ItemAttribute
+                    var attribute = new Archive.Models.ItemAttribute
                     {
-                        ItemId = zoteroItem.Key,
-                        Name = itemTypeFields[field.Key],
-                        Value = value
+                        Name = localized,
+                        Value = entry.Value.GetString()!
                     };
-                    _dbContext.ItemAttribute.Add(itemAttribute);
+                    item.Attributes.Add(attribute);
                 }
             }
+
+            return item;
         }
 
-        private void ProcessNote(ZoteroItem zoteroItem)
+        private void AttachChildren(Item item, IEnumerable<ZoteroItem> zoteroChildItems)
         {
-            // Ignore stand-alone and already processed notes
-            var parentItemKey = GetStringValue(zoteroItem.Data, "parentItem");
-            if (parentItemKey == string.Empty || _processedItemKeys.Contains(zoteroItem.Key))
+            // attachments and notes
+            foreach (var zoteroChildItem in zoteroChildItems)
             {
-                return;
+                var itemType = zoteroChildItem.Data["itemType"].GetString()!;
+
+                switch (itemType)
+                {
+                    case "attachment":
+                        var attachment = new Attachment
+                        {
+                            Key = zoteroChildItem.Key,
+                            LinkMode = GetStringValue(zoteroChildItem.Data, "linkMode", true),
+                            ContentType = GetStringValue(zoteroChildItem.Data, "contentType", true),
+                            Path = GetStringValue(zoteroChildItem.Data, "path") // not for linked_url
+                        };
+                        item.Attachments.Add(attachment);
+                        break;
+                    case "note":
+                        var note = new Note
+                        {
+                            Key = zoteroChildItem.Key,
+                            Content = GetStringValue(zoteroChildItem.Data, "note", true)
+                        };
+                        item.Notes.Add(note);
+                        break;
+                    default:
+                        throw new Exception($"Unhandled item type '{itemType}'.");
+                }
             }
-            _processedItemKeys.Add(zoteroItem.Key);
-
-            var note = new Note
-            {
-                NoteId = zoteroItem.Key,
-                ItemId = parentItemKey,
-                Content = GetStringValue(zoteroItem.Data, "note", true) // TODO will an empty note cause this to fail?
-            };
-            // TODO remove div surrounding content if it exists.
-            // Apparently it exists when styles are used.
-            _dbContext.Add(note);
-        }
-
-        private void ProcessAttachment(ZoteroItem zoteroItem)
-        {
-            if (_processedItemKeys.Contains(zoteroItem.Key))
-            {
-                return;
-            }
-            _processedItemKeys.Add(zoteroItem.Key);
-
-            var attachment = new Attachment
-            {
-                AttachmentId = zoteroItem.Key,
-                ItemId = GetStringValue(zoteroItem.Data, "parentItem", true),
-                LinkMode = GetStringValue(zoteroItem.Data, "linkMode", true),
-                ContentType = GetStringValue(zoteroItem.Data, "contentType", true),
-                Path = GetStringValue(zoteroItem.Data, "path") // not for linked_url
-            };
-            _dbContext.Attachment.Add(attachment);
         }
 
         private string GetStringValue(IDictionary<string, JsonElement> data, string key, bool required = false)

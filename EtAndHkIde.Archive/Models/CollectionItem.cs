@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace EtAndHkIde.Archive.Models
 {
@@ -7,7 +6,10 @@ namespace EtAndHkIde.Archive.Models
     {
         [Key]
         public long Id { get; set; }
-        public string CollectionId { get; set; } = string.Empty;
-        public string ItemId { get; set; } = string.Empty;
+        public long CollectionId { get; set; }
+        public Collection Collection { get; set; } = null!;
+
+        public long ItemId { get; set; }
+        public Item Item { get; set; } = null!;
     }
 }

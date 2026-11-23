@@ -9,10 +9,9 @@ namespace EtAndHkIde.Archive
 
         public DbSet<Collection> Collection => Set<Collection>();
         public DbSet<Item> Item => Set<Item>();
-        public DbSet<ItemAttribute> ItemAttribute => Set<ItemAttribute>();
+        public DbSet<Models.ItemAttribute> ItemAttribute => base.Set<Models.ItemAttribute>();
         public DbSet<CollectionItem> CollectionItem => Set<CollectionItem>();
         public DbSet<Note> Note => Set<Note>();
         public DbSet<Attachment> Attachment => Set<Attachment>();
-
     }
 }

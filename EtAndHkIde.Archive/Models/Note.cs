@@ -6,9 +6,8 @@ namespace EtAndHkIde.Archive.Models
     {
         [Key]
         public long Id { get; set; }
-
-        public string NoteId { get; set; } = string.Empty;
-        public string ItemId { get; set; } = string.Empty;
+        public string Key { get; set; } = string.Empty;
+        public long ItemId { get; set; }
         public string Content { get; set; } = string.Empty;
     }
 }

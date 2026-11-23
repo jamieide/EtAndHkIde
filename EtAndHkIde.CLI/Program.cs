@@ -21,7 +21,7 @@ internal class Program
 
         // demo collection: 7C72VRIF
         // Ide collection: NJVGILN7
-        var collectionKey = "7C72VRIF";
+        var collectionKey = "NJVGILN7";
 
         var zotero = new ZoteroLocalApiService();
 
