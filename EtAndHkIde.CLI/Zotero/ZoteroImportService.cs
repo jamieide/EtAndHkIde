@@ -12,12 +12,21 @@ namespace EtAndHkIde.CLI.Zotero
 
         private IDictionary<string, string> _itemTypes = new Dictionary<string, string>();
         private IDictionary<string, IDictionary<string, string>> _itemTypeFields = new Dictionary<string, IDictionary<string, string>>();
+        private IDictionary<string, ItemContentType> _itemContentTypeByTag;
         private HashSet<string> _processedItemKeys = [];
 
         public ZoteroImportService(ZoteroLocalApiService zotero, ArchiveDbContext dbContext)
         {
             _zotero = zotero;
             _dbContext = dbContext;
+
+            _itemContentTypeByTag = new Dictionary<string, ItemContentType>
+            {
+                { "ict: Feature", ItemContentType.Feature },
+                { "ict: Article", ItemContentType.Article },
+                { "ict: Mention", ItemContentType.Mention },
+                { "ict: Advertising", ItemContentType.Advertising }
+            };
         }
 
         public async Task ExecuteAsync(string zoteroCollectionKey)
@@ -103,9 +112,6 @@ namespace EtAndHkIde.CLI.Zotero
             }
             _processedItemKeys.Add(zoteroItem.Key);
 
-            // map doesn't have abstractNote
-            // letter doesn't have title
-            // ACTUALLY, they are available in the UI but don't come through in JSON unless set
             var item = new Item
             {
                 ItemId = zoteroItem.Key,
@@ -114,6 +120,7 @@ namespace EtAndHkIde.CLI.Zotero
                 Abstract = GetStringValue(zoteroItem.Data, "abstractNote")
             };
 
+            // set creators
             var creators = new List<string>();
             foreach (var entry in zoteroItem.Data["creators"].EnumerateArray())
             {
@@ -129,13 +136,29 @@ namespace EtAndHkIde.CLI.Zotero
             }
             item.Creators = string.Join(", ", creators);
 
-            if (zoteroItem.Data.TryGetValue("date", out var el) && DateTime.TryParse(el.GetString(), out var dt))
+            // set dates
+            if (zoteroItem.Data.TryGetValue("date", out var dateElement) && DateTime.TryParse(dateElement.GetString(), out var dt))
             {
                 item.Date = DateOnly.FromDateTime(dt);
             }
-
             item.DateAdded = zoteroItem.Data["dateAdded"].GetDateTime();
             item.DateModified = zoteroItem.Data["dateModified"].GetDateTime();
+
+            // process tags
+            if (zoteroItem.Data.TryGetValue("tags", out var tagsElement))
+            {
+                var itemContentTypeTag = tagsElement.EnumerateArray()
+                    .Select(x => x.GetProperty("tag").GetString()!)
+                    .FirstOrDefault(x => x.StartsWith("ict:")); // first one wins TODO add logging?
+                if (itemContentTypeTag != null)
+                {
+                    item.ItemContentType = _itemContentTypeByTag[itemContentTypeTag];
+                }
+                else
+                {
+                    item.ItemContentType = ItemContentType.Undefined;
+                }
+            }
 
             _dbContext.Add(item);
         }
