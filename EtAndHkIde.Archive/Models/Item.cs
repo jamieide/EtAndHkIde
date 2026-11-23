@@ -13,5 +13,6 @@ namespace EtAndHkIde.Archive.Models
         public DateOnly? Date { get; set; }
         public DateTime DateAdded { get; set; }
         public DateTime DateModified { get; set; }
+        public ItemContentType ItemContentType { get; set; }
     }
 }
