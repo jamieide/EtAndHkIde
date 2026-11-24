@@ -2,3 +2,12 @@
 @model EtAndHkIde.Web.Pages.Archive.IndexModel
 @{
 }
+
+<ul>
+    @foreach (var collection in Model.Collections)
+    {
+        <li>
+            <a asp-page="Collection" asp-route-key="@collection.Key">@collection.Name</a>
+        </li>
+    }
+</ul>

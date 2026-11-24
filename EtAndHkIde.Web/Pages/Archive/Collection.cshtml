@@ -1,0 +1,23 @@
+﻿@page "{key}"
+@model EtAndHkIde.Web.Pages.Archive.CollectionModel
+@{
+}
+
+<table class="table">
+    <thead>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    <a asp-page="item" asp-route-key="@item.Key">@item.Title</a>
+                </td>
+                <td>@item.Abstract</td>
+                <td>@item.Date</td>
+            </tr>
+            
+        }
+
+    </tbody>
+</table>

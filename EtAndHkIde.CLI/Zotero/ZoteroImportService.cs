@@ -9,6 +9,7 @@ namespace EtAndHkIde.CLI.Zotero
         private readonly ZoteroLocalApiService _zotero;
         private readonly ArchiveDbContext _dbContext;
 
+        public string _rootCollectionKey { get; set; } = string.Empty;
         private Dictionary<string, string> _itemTypes = [];
         private Dictionary<string, string> _itemFields = [];
         private Dictionary<string, ItemContentType> _itemContentTypeByTag = [];
@@ -19,8 +20,10 @@ namespace EtAndHkIde.CLI.Zotero
             _dbContext = dbContext;
         }
 
-        public async Task ExecuteAsync(string zoteroCollectionKey)
+        public async Task ExecuteAsync(string rootCollectionKey)
         {
+            _rootCollectionKey = rootCollectionKey;
+
             using var txn = await _dbContext.Database.BeginTransactionAsync();
 
             try
@@ -39,7 +42,7 @@ namespace EtAndHkIde.CLI.Zotero
                     { "ict: Advertising", ItemContentType.Advertising }
                 };
 
-                var zoteroCollection = await _zotero.GetCollectionAsync(zoteroCollectionKey);
+                var zoteroCollection = await _zotero.GetCollectionAsync(rootCollectionKey);
                 await ProcessCollection(zoteroCollection);
 
                 txn.Commit();
@@ -56,7 +59,8 @@ namespace EtAndHkIde.CLI.Zotero
             var collection = new Collection
             {
                 Key = zoteroCollection.Key,
-                Name = GetStringValue(zoteroCollection.Data, "name", true)
+                Name = GetStringValue(zoteroCollection.Data, "name", true),
+                ParentKey = _rootCollectionKey
             };
             _dbContext.Collection.Add(collection);
             await ProcessCollectionItems(collection);

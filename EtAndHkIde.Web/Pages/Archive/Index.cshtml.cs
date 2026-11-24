@@ -1,21 +1,20 @@
-using EtAndHkIde.Archive;
+using EtAndHkIde.Archive.Models;
+using EtAndHkIde.Web.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EtAndHkIde.Web.Pages.Archive
 {
-    // TODO refactor so SitePageModel isn't required
-    public class IndexModel : PageModel
+    public class IndexModel(ArchiveService archiveService) : PageModel
     {
-        private readonly ArchiveService _archiveService;
-
-        public IndexModel(ArchiveService archiveService)
+        public async Task<IActionResult> OnGetAsync()
         {
-            _archiveService = archiveService;
+            Collections = await archiveService.GetSubCollections("NJVGILN7");
+            return Page();
         }
 
-        public void OnGet()
-        {
-            var collections = _archiveService.GetCollections();
-        }
+        public List<Collection> Collections { get; set; }
     }
 }

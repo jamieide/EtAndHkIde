@@ -1,5 +1,6 @@
 ﻿using EtAndHkIde.Archive;
 using EtAndHkIde.Web;
+using EtAndHkIde.Web.Data;
 using EtAndHkIde.Web.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
